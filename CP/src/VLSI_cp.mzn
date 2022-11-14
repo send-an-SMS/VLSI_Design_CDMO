@@ -22,6 +22,16 @@ var plate_h_min..plate_h_max: h_range ;% possible values for the plate's height
 array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates; % possibili coordinate x in cui è possibile collocare i chip
 array[N_CIRCUITS] of var 0..plate_h_max - min(chip_height): y_coordinates;% possibili coordinate y in cui è possibile collocare i chip
 
+% == FUNCTIONS ==
+% funzione che prende un vettore in input e ritona il valore più grande (fa anche sort)
+%var int: var_largest :: output = largest_chip(t);
+function var int: largest_chip(array[$$E] of $$V: x) =
+  let {
+    any: perm = arg_sort(x);
+  } in x[perm[length(x)]];
+
+
+
 % == CONSTRAINTS ==
 % Check for overlapping circuits
 constraint diffn(x_coordinates, y_coordinates, chip_width, chip_height);
@@ -33,6 +43,22 @@ constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_co
 
 % Symmetry-breaking constraint
 
+% The biggest circuit is always placed under and on the left wrt the second biggest
+constraint symmetry_breaking_constraint(
+  let {
+    %ordinamento array decrescente (5-4-3-2-1)
+    array[N_CIRCUITS] of int : ordered_c = sort_by(N_CIRCUITS, [-chip_height[c]*chip_width[c] | c in N_CIRCUITS]);
+    int: c1 = ordered_c[1], int: c2 = ordered_c[2]
+  } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
+
+
+% rottura del verticale
+%constraint symmetry_breaking_constraint(
+%  let {
+%    forall
+%  } in ;
+
+
 
 % == SOLVE ==
 solve :: seq_search([
@@ -41,7 +67,7 @@ solve :: seq_search([
     int_search([h_range], smallest,indomain_min)])
     minimize h_range;
 
-
+%var of int: h = h_range
 % == OUTPUT ==
 
 output ["x = \(x_coordinates)\n"];
