@@ -5,7 +5,7 @@ from pathlib import Path
 from datetime import timedelta
 from minizinc import Solver, Instance, Model
 
-def data_processing(first_i, last_i, rotation):
+def cp_exec(first_i, last_i, rotation):
     for i in range(first_i, last_i+1):
         ins_path = Path('../CP/instances/ins-' + str(i) + '.txt') # path of the current instance
         f = open(ins_path, 'r')
@@ -70,4 +70,4 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--Rotation', help='Rotation allowed', type=bool, default=False)
     args = parser.parse_args()
 
-    data_processing(first_i=args.First, last_i=args.Last, rotation=args.Rotation)
+    cp_exec(first_i=args.First, last_i=args.Last, rotation=args.Rotation)
