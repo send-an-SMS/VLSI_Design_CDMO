@@ -16,7 +16,7 @@ array[N_CIRCUITS] of int: chip_height;
 int: plate_h_max = sum(chip_height);
 int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞,
                                                                                         %and the nearest integer, respectively.
-var plate_h_min..plate_h_max: h_range ;% possible values for the plate's height
+var plate_h_min..plate_h_max: h ;% possible values for the plate's height
 
 % the origin of the plate is the left-bottom corner!
 array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates; % possibili coordinate x in cui è possibile collocare i chip
@@ -64,15 +64,15 @@ constraint symmetry_breaking_constraint(
 solve :: seq_search([
     int_search(y_coordinates, first_fail,indomain_min),
     int_search(x_coordinates, first_fail,indomain_min),
-    int_search([h_range], smallest,indomain_min)])
-    minimize h_range;
+    int_search([h], smallest,indomain_min)])
+    minimize h;
 
-%var of int: h = h_range
+
 % == OUTPUT ==
 
 output ["x = \(x_coordinates)\n"];
 output ["y = \(y_coordinates)\n"];
-output ["best h value = \(h_range)\n"];
+output ["best h value = \(h)\n"];
 
 %output ["plate_h_max \(plate_h_max)\n"];
 %output ["plate_h_min \(plate_h_min)\n"];
