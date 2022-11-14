@@ -38,6 +38,20 @@ def data_reading(first_i, last_i):
         inst["chip_width"] = x
         inst["chip_height"] = y
 
+        t_start = timer()
+        output = inst.solve(timeout=timedelta(seconds=301), free_search=True)
+        t_solution = timer() - t_start
+
+        x_coord = output.solution.x_coordinates
+        y_coord = output.solution.y_coordinates
+        h = output.solution.h
+
+        with open(f"../CP/out/out.txt", 'w') as f:
+            f.writelines(f"{w} {h}\n")
+            f.writelines(f"{n}\n")
+            for i in range(n):
+                f.writelines(f"{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n")
+
 
 
 if __name__ == '__main__':
