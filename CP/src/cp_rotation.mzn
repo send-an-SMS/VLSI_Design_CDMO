@@ -59,13 +59,13 @@ constraint symmetry_breaking_constraint(
 
 
 % Set rotation to false for the squared circuits
-constraint forall(i in 1..N)(
-      if widths[i] == heights[i] then rot[i]=false endif
+constraint forall(i in N_CIRCUITS)(
+      if w_rotate[i] == h_rotate[i] then rotation_c[i]=false endif
 );
 
 % Set rotation to false for the circuits that cannot be rotated
-constraint forall(i in 1..N)(
-      if heights[i] > W then rot[i]=false endif
+constraint forall(i in N_CIRCUITS)(
+      if h_rotate[i] > w then rotation_c[i]=false endif
 );
 
 

@@ -31,7 +31,7 @@ def cp_exec(first_i, last_i, rotation):
         # print(x) # horizontal dimensions of the circuits
         # print(y) # vertical dimensions of the circuits
 
-        model_path = Path(f'../CP/src/cp{'_rotation' if rotation else ''}.mzn')
+        model_path = Path(f"../CP/src/cp{'_rotation' if rotation else ''}.mzn")
         model = Model(model_path)
         solver = Solver.lookup('chuffed')
 
@@ -55,7 +55,7 @@ def cp_exec(first_i, last_i, rotation):
         y_coord = output.solution.y_coordinates
         h = output.solution.h
 
-        out_path = Path(f'../CP/out/out-' + str(i) + {'_rotation' if rotation else ''}'.txt')
+        out_path = Path("../CP/out/out-" + str(i) + f"{'_rotation' if rotation else ''}.txt")
         with open(out_path, 'w') as f:
             f.writelines(f'{w} {h}\n')
             f.writelines(f'{n}\n')
