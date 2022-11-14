@@ -1,6 +1,9 @@
 import argparse
 import numpy as np
 from pathlib import Path
+from datetime import timedelta
+from timeit import default_timer as timer
+from minizinc import Solver, Instance, Model
 
 def data_reading(first_i, last_i):
     for i in range(first_i, last_i+1):
@@ -46,12 +49,12 @@ def data_reading(first_i, last_i):
         y_coord = output.solution.y_coordinates
         h = output.solution.h
 
-        with open(f"../CP/out/out.txt", 'w') as f:
+        out_path = Path('../CP/out/out' + str(i) + '.txt')
+        with open(out_path, 'w') as f:
             f.writelines(f"{w} {h}\n")
             f.writelines(f"{n}\n")
             for i in range(n):
                 f.writelines(f"{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n")
-
 
 
 if __name__ == '__main__':
