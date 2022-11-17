@@ -51,12 +51,12 @@ constraint forall(i in N_CIRCUITS)(x_coordinates[i] + w_rotate[i] <= w /\ y_coor
 % == SYMMETRY BREAKING CONSTRAINT ==
 
 % The biggest circuit is always placed under and on the left wrt the second biggest
-constraint symmetry_breaking_constraint(
-  let {
+%constraint symmetry_breaking_constraint(
+%  let {
     %ordinamento array decrescente (5-4-3-2-1)
-    array[N_CIRCUITS] of int : ordered_c = sort_by(N_CIRCUITS, [-h_rotate[c]*w_rotate[c] | c in N_CIRCUITS]);
-    int: c1 = ordered_c[1], int: c2 = ordered_c[2]
-  } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
+%    array[N_CIRCUITS] of int : ordered_c = sort_by(N_CIRCUITS, [-h_rotate[c]*w_rotate[c] | c in N_CIRCUITS]);
+%    int: c1 = ordered_c[1], int: c2 = ordered_c[2]
+%  } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
 
 
 % Set rotation to false for the squared circuits
@@ -75,7 +75,16 @@ constraint forall (i in N_CIRCUITS)(
   (w_rotate[i] == chip_height[i] /\ h_rotate[i] == chip_width[i] /\ rotation_c[i] == true)
 );
 
-
+% ROTATION : not rotation for squared chips!
+constraint forall(i in N_CIRCUITS)(
+(if w_rotate[i] == h_rotate[i]
+  then 
+    rotation_c[i] = false
+   else
+   rotation_c[i] = false \/ rotation_c[i] = true
+  endif 
+% rotation_c[i] == false /\ w_rotate[i] == h_rotate[i]
+));
 
 
 % == SOLVE ==
@@ -94,6 +103,4 @@ output ["best h value = \(h)\n"];
 
 %output ["plate_h_max \(plate_h_max)\n"];
 %output ["plate_h_min \(plate_h_min)\n"];
-%output ["\(x)) chip_width \(chip_width[x]) \t chip height \(chip_height[x])\n" | x in C_DIM] ;
-
-
+%output ["\(x)) chip_width \(chip_width[x]) \t chip height \(chip_height[x])\n" | x in C_DIM];
