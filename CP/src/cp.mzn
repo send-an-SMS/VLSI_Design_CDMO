@@ -10,8 +10,6 @@ set of int: N_CIRCUITS = 1..n;  % range for the circuits
 array[N_CIRCUITS] of int: chip_width;
 array[N_CIRCUITS] of int: chip_height;
 
-
-
 % Define the range for the height of the plate (0 --> y) in order to minimize y
 int: plate_h_max = sum(chip_height);
 int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞,
@@ -21,15 +19,6 @@ var plate_h_min..plate_h_max: h ;% possible values for the plate's height
 % the origin of the plate is the left-bottom corner!
 array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates; % possibili coordinate x in cui è possibile collocare i chip
 array[N_CIRCUITS] of var 0..plate_h_max - min(chip_height): y_coordinates;% possibili coordinate y in cui è possibile collocare i chip
-
-% == FUNCTIONS ==
-% funzione che prende un vettore in input e ritona il valore più grande (fa anche sort)
-%var int: var_largest :: output = largest_chip(t);
-%function var int: largest_chip(array[$$E] of $$V: x) =
-%  let {
-%    any: perm = arg_sort(x);
-%  } in x[perm[length(x)]];
-
 
 
 % == CONSTRAINTS ==
@@ -42,7 +31,6 @@ constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_co
 
 
 % == SYMMETRY BREAKING CONSTRAINT ==
-
 % The biggest circuit is always placed under and on the left wrt to the second biggest
 constraint symmetry_breaking_constraint(
   let {
@@ -51,17 +39,6 @@ constraint symmetry_breaking_constraint(
     int: c1 = ordered_c[1];
     int: c2 = ordered_c[2];
   } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
-
-
-%constraint forall (i in ordered_c)(lex_less([y_coordinates[i],x_coordinates[i]], [y_coordinates[i+1],x_coordinates[i+1]]))
-
-% rottura della simmetria 180° rotation
-%constraint symmetry_breaking_constraint(
-%            lex_lesseq(y_coordinates, [ y_coordinates[i] | i in reverse(0..plate_h_max - min(chip_height)) ])
-%        /\  lex_lesseq(x_coordinates, [ x_coordinates[i] | i in reverse(0..w - min(chip_width)) ])
-
-%);
-
 
 
 % == SOLVE ==

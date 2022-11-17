@@ -11,12 +11,10 @@ array[N_CIRCUITS] of int: chip_width;
 array[N_CIRCUITS] of int: chip_height;
 
 
-%commento per Simo <3
 
 % Define the range for the height of the plate (0 --> y) in order to minimize y
 int: plate_h_max = sum(chip_height);
-int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞,
-                                                                                        %and the nearest integer, respectively.
+int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞, and the nearest integer, respectively.
 var plate_h_min..plate_h_max: h ;% possible values for the plate's height
 
 % the origin of the plate is the left-bottom corner!
@@ -28,13 +26,6 @@ array [N_CIRCUITS] of var bool: rotation_c;
 array [N_CIRCUITS] of var 1..max(max(chip_width), max(chip_height)): w_rotate = [if rotation_c[a] then chip_height[a] else chip_width[a] endif | a in N_CIRCUITS];
 array [N_CIRCUITS] of var 1..max(max(chip_width), max(chip_height)): h_rotate = [if rotation_c[a] then chip_width[a] else chip_height[a] endif | a in N_CIRCUITS];
 
-% == FUNCTIONS ==
-% funzione che prende un vettore in input e ritona il valore più grande (fa anche sort)
-%var int: var_largest :: output = largest_chip(t);
-function var int: largest_chip(array[$$E] of $$V: x) =
-  let {
-    any: perm = arg_sort(x);
-  } in x[perm[length(x)]];
 
 
 
@@ -46,6 +37,23 @@ constraint cumulative(y_coordinates, w_rotate, h_rotate, h);
 
 % constraint che controlla se il chip esce dalla plate sia in altezza (plate_h_max) che in larghezza (w)
 constraint forall(i in N_CIRCUITS)(x_coordinates[i] + w_rotate[i] <= w /\ y_coordinates[i] + h_rotate[i]<= plate_h_max) ;
+
+
+% == ROTATION == 
+% constraint che controlla che valgano le condizioni che l'altezza e la larghezza siano scambiate se il booleano è settato a true
+constraint forall (i in N_CIRCUITS)(
+  (w_rotate[i] == chip_width[i] /\ h_rotate[i] == chip_height[i] /\ rotation_c[i] == false) xor
+  (w_rotate[i] == chip_height[i] /\ h_rotate[i] == chip_width[i] /\ rotation_c[i] == true)
+);
+
+% constraint che controlla la rotazione per i circuiti che sono quadrati
+constraint forall(i in N_CIRCUITS)(
+  (if w_rotate[i] == h_rotate[i]
+    then rotation_c[i] = false
+    else rotation_c[i] = false \/ rotation_c[i] = true
+  endif)
+);
+
 
 
 % == SYMMETRY BREAKING CONSTRAINT ==
@@ -69,22 +77,7 @@ constraint forall(i in N_CIRCUITS)(x_coordinates[i] + w_rotate[i] <= w /\ y_coor
 %      if h_rotate[i] > w then rotation_c[i]=false endif
 %);
 
-% == ROTATION == 
-constraint forall (i in N_CIRCUITS)(
-  (w_rotate[i] == chip_width[i] /\ h_rotate[i] == chip_height[i] /\ rotation_c[i] == false) xor
-  (w_rotate[i] == chip_height[i] /\ h_rotate[i] == chip_width[i] /\ rotation_c[i] == true)
-);
 
-% ROTATION : not rotation for squared chips!
-constraint forall(i in N_CIRCUITS)(
-(if w_rotate[i] == h_rotate[i]
-  then 
-    rotation_c[i] = false
-   else
-   rotation_c[i] = false \/ rotation_c[i] = true
-  endif 
-% rotation_c[i] == false /\ w_rotate[i] == h_rotate[i]
-));
 
 
 % == SOLVE ==
