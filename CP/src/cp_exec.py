@@ -6,6 +6,7 @@ from datetime import timedelta
 from minizinc import Solver, Instance, Model
 
 def cp_exec(first_i, last_i, rotation):
+    print(rotation)
     for i in range(first_i, last_i+1):
         ins_path = Path('../CP/instances/ins-' + str(i) + '.txt') # path of the current instance
         f = open(ins_path, 'r')
@@ -55,6 +56,8 @@ def cp_exec(first_i, last_i, rotation):
         y_coord = output.solution.y_coordinates
         h = output.solution.h
 
+        print(type(x_coord))
+
         out_path = Path("../CP/out/out-" + str(i) + f"{'_rotation' if rotation else ''}.txt")
         with open(out_path, 'w') as f:
             f.writelines(f'{w} {h}\n')
@@ -62,12 +65,20 @@ def cp_exec(first_i, last_i, rotation):
             for i in range(n):
                 f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
 
+def plot_solution(w, h, x, y, x_coord, y_coord):
+    # create a matrix of blocks of int
+    np.zeros(w, h)
+
+    
+
+
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--First', help='Number of first instance', type=int, default=1)
-    parser.add_argument('-l', '--Last', help='Number of last instance', type=int, default=40)
-    parser.add_argument('-r', '--Rotation', help='Rotation allowed', type=bool, default=False)
+    parser.add_argument('-f', '--first', help='Number of first instance', type=int, default=1)
+    parser.add_argument('-l', '--last', help='Number of last instance', type=int, default=40)
+    parser.add_argument('-r', '--rotation', help='Allow rotation', action='store_true')
     args = parser.parse_args()
 
-    cp_exec(first_i=args.First, last_i=args.Last, rotation=args.Rotation)
+    cp_exec(first_i=args.first, last_i=args.last, rotation=args.rotation)
