@@ -11,6 +11,7 @@ array[N_CIRCUITS] of int: chip_width;
 array[N_CIRCUITS] of int: chip_height;
 
 
+%commento per Simo <3
 
 % Define the range for the height of the plate (0 --> y) in order to minimize y
 int: plate_h_max = sum(chip_height);
