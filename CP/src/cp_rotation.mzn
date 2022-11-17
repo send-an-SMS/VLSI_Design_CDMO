@@ -48,7 +48,7 @@ constraint cumulative(y_coordinates, w_rotate, h_rotate, h);
 constraint forall(i in N_CIRCUITS)(x_coordinates[i] + w_rotate[i] <= w /\ y_coordinates[i] + h_rotate[i]<= plate_h_max) ;
 
 
-% Symmetry-breaking constraint
+% == SYMMETRY BREAKING CONSTRAINT ==
 
 % The biggest circuit is always placed under and on the left wrt the second biggest
 constraint symmetry_breaking_constraint(
@@ -60,17 +60,23 @@ constraint symmetry_breaking_constraint(
 
 
 % Set rotation to false for the squared circuits
-constraint forall(i in N_CIRCUITS)(
-      if w_rotate[i] == h_rotate[i] then rotation_c[i]=false endif
-);
+%constraint forall(i in N_CIRCUITS)(
+%      if w_rotate[i] == h_rotate[i] then rotation_c[i]=false endif
+%);
 
 % Set rotation to false for the circuits that cannot be rotated
-constraint forall(i in N_CIRCUITS)(
-      if h_rotate[i] > w then rotation_c[i]=false endif
+%constraint forall(i in N_CIRCUITS)(
+%      if h_rotate[i] > w then rotation_c[i]=false endif
+%);
+
+% == ROTATION == 
+constraint forall (i in N_CIRCUITS)(
+  (w_rotate[i] == chip_width[i] /\ h_rotate[i] == chip_height[i] /\ rotation_c[i] == false) xor
+  (w_rotate[i] == chip_height[i] /\ h_rotate[i] == chip_width[i] /\ rotation_c[i] == true)
 );
 
 
-% w - plate_h_max
+
 
 % == SOLVE ==
 solve :: seq_search([

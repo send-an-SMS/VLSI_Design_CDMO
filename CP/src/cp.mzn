@@ -53,6 +53,8 @@ constraint symmetry_breaking_constraint(
   } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
 
 
+%constraint forall (i in ordered_c)(lex_less([y_coordinates[i],x_coordinates[i]], [y_coordinates[i+1],x_coordinates[i+1]]))
+
 % rottura della simmetria 180° rotation
 %constraint symmetry_breaking_constraint(
 %            lex_lesseq(y_coordinates, [ y_coordinates[i] | i in reverse(0..plate_h_max - min(chip_height)) ])

@@ -9,3 +9,7 @@ file utili: https://sofdem.github.io/gccat/gccat/Cdiffn.html
 http://www.cs.unibo.it/gabbri/MaterialeCorsi/minizinc-tute.pdf
 
 https://www.math.unipd.it/~frossi/zeynep2.pdf
+
+per eseguire
+
+python src/cp_exec.py -f 1 -l 3 -r False
