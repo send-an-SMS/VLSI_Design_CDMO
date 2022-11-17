@@ -36,7 +36,10 @@ constraint cumulative(y_coordinates, h_rotate, w_rotate, w);
 constraint cumulative(y_coordinates, w_rotate, h_rotate, h);
 
 % constraint che controlla se il chip esce dalla plate sia in altezza (plate_h_max) che in larghezza (w)
-constraint forall(i in N_CIRCUITS)(x_coordinates[i] + w_rotate[i] <= w /\ y_coordinates[i] + h_rotate[i]<= plate_h_max) ;
+constraint forall(i in N_CIRCUITS)(
+              x_coordinates[i] + w_rotate[i] <= w
+           /\ y_coordinates[i] + h_rotate[i]<= plate_h_max
+);
 
 
 % == ROTATION == 
