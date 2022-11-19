@@ -12,4 +12,6 @@ https://www.math.unipd.it/~frossi/zeynep2.pdf
 
 per eseguire
 
-python src/cp_exec.py -f 1 -l 3 -r False
+python src/cp_exec.py -f 1 -l 3 -r
+
+python src/plot_M.py -f 1 -l 3 -r
