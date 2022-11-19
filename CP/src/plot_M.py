@@ -48,7 +48,8 @@ def plot(first_i, last_i, rotation):
 
         print(board)
 
-        cmap = colors.ListedColormap(['green','red','blue','fuchsia','cyan','lime','magenta','yellow','white','brown'])
+        cmap = colors.ListedColormap(['green','red','blue','fuchsia','cyan','lime','magenta','yellow','white','brown','silver','gray','purple',
+                                      'olive','navy','teal','aqua','beige','blueviolet','chocolate','coral','crimson','darkorange'])
         extent = (0, w, 0, h)     # extent is a 4-element list of scalars (left, right, bottom, top)
         _, ax = plt.subplots()
         ax.imshow(board, interpolation='None', cmap=cmap, extent=extent)
