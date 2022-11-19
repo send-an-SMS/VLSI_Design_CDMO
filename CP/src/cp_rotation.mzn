@@ -38,7 +38,7 @@ constraint cumulative(y_coordinates, w_rotate, h_rotate, h);
 % constraint che controlla se il chip esce dalla plate sia in altezza (plate_h_max) che in larghezza (w)
 constraint forall(i in N_CIRCUITS)(
               x_coordinates[i] + w_rotate[i] <= w
-           /\ y_coordinates[i] + h_rotate[i]<= plate_h_max
+           /\ y_coordinates[i] + h_rotate[i]<= h
 );
 
 
@@ -53,7 +53,7 @@ constraint forall (i in N_CIRCUITS)(
 constraint forall(i in N_CIRCUITS)(
   (if w_rotate[i] == h_rotate[i]
     then rotation_c[i] = false
-    else rotation_c[i] = false \/ rotation_c[i] = true
+    %else rotation_c[i] = false \/ rotation_c[i] = true
   endif)
 );
 
@@ -93,10 +93,11 @@ solve :: seq_search([
 
 % == OUTPUT ==
 
-output ["x = \(x_coordinates)\n"];
-output ["y = \(y_coordinates)\n"];
+%output ["x = \(x_coordinates)\n"];
+%output ["y = \(y_coordinates)\n"];
 output ["best h value = \(h)\n"];
 
 %output ["plate_h_max \(plate_h_max)\n"];
 %output ["plate_h_min \(plate_h_min)\n"];
 %output ["\(x)) chip_width \(chip_width[x]) \t chip height \(chip_height[x])\n" | x in C_DIM];
+output ["\(x)) chip_width: \(w_rotate[x]) chip height: \(h_rotate[x]) --> starting position (\(x_coordinates[x]),\(y_coordinates[x])) \n" | x in N_CIRCUITS] ;

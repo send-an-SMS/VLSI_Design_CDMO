@@ -27,18 +27,18 @@ constraint diffn(x_coordinates, y_coordinates, chip_width, chip_height); %non ov
 constraint cumulative(y_coordinates, chip_height, chip_width, w);
 
 % constraint che controlla se il chip esce dalla plate sia in altezza (plate_h_max) che in larghezza (w)
-constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_coordinates[i] + chip_height[i]<= plate_h_max) ;
+constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_coordinates[i] + chip_height[i]<= h) ;
 
 
 % == SYMMETRY BREAKING CONSTRAINT ==
 % The biggest circuit is always placed under and on the left wrt to the second biggest
-% constraint symmetry_breaking_constraint(
-%  let {
+ constraint symmetry_breaking_constraint(
+  let {
     %ordinamento array decrescente (5-4-3-2-1) in base all'area
-%    array[N_CIRCUITS] of int : ordered_c = sort_by(N_CIRCUITS, [-chip_height[c]*chip_width[c] | c in N_CIRCUITS]);
-%   int: c1 = ordered_c[1];
-%    int: c2 = ordered_c[2];
-%  } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
+    array[N_CIRCUITS] of int : ordered_c = sort_by(N_CIRCUITS, [-chip_height[c]*chip_width[c] | c in N_CIRCUITS]);
+    int: c1 = ordered_c[1];
+    int: c2 = ordered_c[2];
+  } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
 
 
 % == SOLVE ==
@@ -51,12 +51,7 @@ solve :: seq_search([
 
 % == OUTPUT ==
 
-output ["x = \(x_coordinates)\n"];
-output ["y = \(y_coordinates)\n"];
 output ["best h value = \(h)\n"];
-
-%output ["plate_h_max \(plate_h_max)\n"];
-%output ["plate_h_min \(plate_h_min)\n"];
-%output ["\(x)) chip_width \(chip_width[x]) \t chip height \(chip_height[x])\n" | x in C_DIM] ;
+output ["\(x)) chip_width: \(chip_width[x]) chip height: \(chip_height[x]) --> starting position (\(x_coordinates[x]),\(y_coordinates[x])) \n" | x in N_CIRCUITS] ;
 
 
