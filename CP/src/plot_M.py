@@ -11,8 +11,8 @@ def plot(first_i, last_i, rotation):
         file = open(path, 'r')
         lines = file.readlines()
         
-        w = int(lines[0].split(" ")[0])
-        h = int(lines[0].split(" ")[1])
+        w = int(lines[0].split()[0])
+        h = int(lines[0].split()[1])
         n = int(lines[1])
 
         board = np.zeros((w, h))
@@ -49,7 +49,7 @@ def plot(first_i, last_i, rotation):
         print(board)
 
         cmap = colors.ListedColormap(['red','fuchsia','cyan','lime'])
-        extent = (0, w, h, 0)     # extent is a 4-element list of scalars (left, right, bottom, top)
+        extent = (0, w, 0, h)     # extent is a 4-element list of scalars (left, right, bottom, top)
         _, ax = plt.subplots()
         ax.imshow(board, interpolation='None', cmap=cmap, extent=extent)
         ax.grid(color='black', linewidth=0.8, linestyle='--')
