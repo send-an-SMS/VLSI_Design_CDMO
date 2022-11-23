@@ -1,11 +1,16 @@
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
+from random import randint
 from timeit import default_timer as timer
 from pathlib import Path
 from matplotlib import colors
 from datetime import timedelta
 from minizinc import Solver, Instance, Model
+
+# suppress warnings
+import warnings
+warnings.filterwarnings("ignore")
 
 def read_instance(instance):
     ins_path = Path('../CP/instances/ins-' + str(instance) + '.txt') # path of the current instance
@@ -39,48 +44,41 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):
             f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
 
 
-def plot_solution(instance, w, h, n, rotation):       # path of the output file, board weight, board height, total number of circuits to place
-    board = np.zeros((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
+def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):       # path of the output file, board weight, board height, total number of circuits to place
+    board = np.empty((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
                                     # w stands for the width of the board and, as a numpy array, it stands for the number of columns
+    board.fill(n)
 
-    path = out_path = Path("../CP/out/out-" + str(instance) + f"{'_rotation' if rotation else ''}.txt")
-    file = open(path, 'r')
-    lines = file.readlines()
-
-    for i in range(2, n + 2):     # loop on the current circuit
-        block = lines[i].split()
-        block = np.array(block, dtype = np.int32)
-
-        column = block[2]    # position of the circuit on x-axis
-        row = block[3]       # position of the circuit on y-axis
+    for i in range(n):
+        column = x_coord[i]  # position of the circuit on x-axis
+        row = y_coord[i]     # position of the circuit on y-axis
 
         # compute the width and height of the current circuit
-        width = block[0]
-        height = block[1]
-
+        width = x[i]
+        height = y[i]
+        
         for rows in range(row, row + height):
             for columns in range(column, column + width):
-                board[rows][columns] = i - 2
+                board[rows][columns] = i
 
     cmap = build_cmap(n)
-    plt.imshow(board, interpolation='None', cmap=cmap)
+    plt.imshow(board, interpolation='None', cmap=cmap, vmin=0, vmax=n)
     ax = plt.gca()
     ax.invert_yaxis()
-    plt.show()
+    image_path = Path("../CP/out_plots/out-" + str(instance) + f"{'_rotation' if rotation else ''}.png")
+    plt.savefig(image_path)
+    # plt.show()
 
 
 def build_cmap(n):
-    colors_list = ['red','fuchsia','orange','gold','yellow','cyan','dodgerblue','blue','blueviolet','lime']
-    cmap_list = []
-    count = 0
+    colors_list = []
 
-    for i in range(0, n):
-        cmap_list.append(colors_list[count])
-        if count == len(colors_list) - 1:
-            count = 0
-        else: count += 1
+    for i in range(n):
+        colors_list.append('#%06X' % randint(0, 0xFFFFFF))
 
-    return colors.ListedColormap(cmap_list)
+    colors_list.append('#FFFFFF')
+
+    return colors.ListedColormap(colors_list)
 
 
 def cp_exec(first_i, last_i, rotation, plot):
@@ -112,7 +110,7 @@ def cp_exec(first_i, last_i, rotation, plot):
             print(f'Instance: {i}\tExecution time: {(end_time):.03f}s')
             write_solution(i, w, h, n, x, y, x_coord, y_coord, rotation)
             if plot:
-                plot_solution(out_path, w, h, n, rotation)
+                plot_solution(i, w, h, n, x, y, x_coord, y_coord, rotation)
 
 
 if __name__ == '__main__':
