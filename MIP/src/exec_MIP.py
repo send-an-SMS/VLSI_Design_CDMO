@@ -16,7 +16,7 @@ def read_input(index_file):
     w = 0
     n = 0
     
-    ins_path = Path('../CP/instances/ins-' + str(index_file) + '.txt') # path of the current instance
+    ins_path = Path('../MIP/instances/ins-' + str(index_file) + '.txt') # path of the current instance
     f = open(ins_path, 'r')
     text = f.readlines()
 
@@ -44,10 +44,10 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):
             f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
 
 def solver(w,n,x,y, rotation: bool, index_f):
-    print("width plate: {w}\n")
-    print("number of circuits: {n}\n")
+    print(f"width plate: {w}\n")
+    print(f"number of circuits: {n}\n")
     for a in range(n):
-        print("{a}) chip dimension: {x[a]} X {y[a]}\n")
+        print(f"{a}) chip dimension: {x[a]} X {y[a]}\n")
         
     h_Max = sum(y)
     h_min = math.ceil((sum([x[i]*y[i] for i in range(n)]) / w ))
@@ -68,9 +68,9 @@ def solver(w,n,x,y, rotation: bool, index_f):
 #  - name (optional)
 
 
-    x_cord = model.addVars(n, lb=0, up=w, vtype=GRB.INTEGER, name="x_coordinates")
-    y_cord = model.addVars(n, lb=0, up=h_Max, vtype=GRB.INTEGER, name="y_coordinates")
-    h = model.addVars(vtype=GRB.INTEGER, name="height") # our variable to minimize
+    x_cord = model.addVars(n, lb=0, ub=w, vtype=GRB.INTEGER, name="x_coordinates")
+    y_cord = model.addVars(n, lb=0, ub=h_Max, vtype=GRB.INTEGER, name="y_coordinates")
+    h = model.addVar(vtype=GRB.INTEGER, name="height") # our variable to minimize
     s = model.addVars(n, n, 4, vtype=GRB.BINARY, name="s")
     
 # === CONSTRAINT === #
@@ -96,10 +96,10 @@ def solver(w,n,x,y, rotation: bool, index_f):
     areas = [x[i] * y[i] for i in range(n)]
         # m_i_a = max_index_areas
     m_i_a = [areas.index(x) for x in sorted(areas, reverse=True)[:2]] 
-    
+    '''
     model.addConstrs(x_cord[m_i_a[0]] < x_cord[m_i_a[1]],name="biggest_first")
     model.addConstrs(y_cord[m_i_a[0]] < y_cord[m_i_a[1]],name="biggest_first")
-    
+    '''
     
     
     # Objective function
