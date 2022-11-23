@@ -62,7 +62,7 @@ def solver(w,n,x,y, rotation: bool):
     x_cord = model.addVars(n, lb=0, up=w, vtype=GRB.INTEGER, name="x_coordinates")
     y_cord = model.addVars(n, lb=0, up=h_Max, vtype=GRB.INTEGER, name="y_coordinates")
     h = model.addVars(vtype=GRB.INTEGER, name="height") # our variable to minimize
-    
+    s = model.addVars(n, n, 4, vtype=GRB.BINARY, name="s")
     
 # === CONSTRAINT === #
 
@@ -71,11 +71,18 @@ def solver(w,n,x,y, rotation: bool):
 # - name of the constraint
 
     # constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
-    model.addConstrs(((x_cord[i] + x[i] <= w) for i in range(n)), name="inside_plate_x")
+    model.addConstrs(((x_cord[i] + x[i] <= w) for i in range(n)), name="inside_plate_x") # it could be not w the ub --> w- min(h)
     model.addConstrs(((y_cord[i] + y[i]<= h) for i in range(n)), name="inside_plate_y")
     
     
+    # constraint no overlap = https://stackoverflow.com/questions/72941147/overlapping-constraint-in-linear-programming
+    model.addConstrs(((x_cord[i] + x[i] <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "or1")
+    model.addConstrs(((y_cord[i] + y[i] <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "or2")
+    model.addConstrs(((x_cord[j] + x[j] <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "or3")
+    model.addConstrs(((y_cord[j] + y[j] <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "or4")
+    model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
     
+    # constraint 
     
     
         
