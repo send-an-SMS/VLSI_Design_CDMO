@@ -196,8 +196,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         h = model.addVar(lb=h_min,ub= h_Max ,vtype=GRB.INTEGER, name="height") # our variable to minimize
         s = model.addVars(n, n, 4, vtype=GRB.BINARY, name="s") # used for big M method
         
-        w_rotate = model.addVars(n,lb=1,ub=np.amax(np.amax(x),np.amax(y)),vtype=GRB.INTEGER, name="w_rotate")
-        h_rotate = model.addVars(n,lb=1,ub=np.amax(np.amax(x),np.amax(y)),vtype=GRB.INTEGER, name="h_rotate")
+        w_rotate = model.addVars(n,lb=1,ub=max(np.amax(x),np.amax(y)),vtype=GRB.INTEGER, name="w_rotate")
+        h_rotate = model.addVars(n,lb=1,ub=max(np.amax(x),np.amax(y)),vtype=GRB.INTEGER, name="h_rotate")
         rotation_c = model.addVars(n,vtype=GRB.BINARY, name="rotation_c")
         
             # === CONSTRAINTS === #
