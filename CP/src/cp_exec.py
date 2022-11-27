@@ -111,7 +111,7 @@ def cp_exec(first_i, last_i, solver, sym_break, rotation, plot):
         if end_time > 300:
             print(f'Instance: {i}\tTime exceeded')
         else:
-            print(f'Instance: {i}\tExecution time: {(end_time):.03f}s')
+            print(f'Instance: {i}\tExecution time: {(end_time):.03f}s\tBest objective value: {h}')
             write_solution(i, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation)
             if plot:
                 plot_solution(i, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation)
