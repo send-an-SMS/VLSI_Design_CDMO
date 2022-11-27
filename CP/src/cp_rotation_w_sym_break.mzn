@@ -48,6 +48,16 @@ constraint forall(i in N_CIRCUITS)(
 );
 
 
+% == SYMMETRY BREAKING CONSTRAINT ==
+%The biggest circuit is always for first w.r.t. the second biggest one
+constraint symmetry_breaking_constraint(
+  let {
+  %ordinamento array decrescente (5-4-3-2-1)
+    array[N_CIRCUITS] of int : ordered_c = sort_by(N_CIRCUITS, [-chip_height[c]*chip_width[c] | c in N_CIRCUITS]);
+    int: c1 = ordered_c[1], int: c2 = ordered_c[2]
+   } in lex_less([y_coordinates[c1],x_coordinates[c1]], [y_coordinates[c2],x_coordinates[c2]]));
+
+
 % == SOLVE ==
 solve :: seq_search([
     int_search(y_coordinates, first_fail,indomain_min),

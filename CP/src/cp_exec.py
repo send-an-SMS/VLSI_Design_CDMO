@@ -35,8 +35,8 @@ def read_instance(instance):
     return w, n, x, y
 
 
-def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):
-    out_path = Path("../CP/out/out-" + str(instance) + f"{'_rotation' if rotation else ''}.txt")
+def write_solution(instance, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation):
+    out_path = Path("../CP/out/" + solver + f"{'/w_sym_break/' if sym_break else '/wout_sym_break/'}" + "out-" + str(instance) + f"{'_rotation' if rotation else ''}.txt")
     with open(out_path, 'w') as f:
         f.writelines(f'{w} {h}\n')
         f.writelines(f'{n}\n')
@@ -44,7 +44,7 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):
             f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
 
 
-def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):       # path of the output file, board weight, board height, total number of circuits to place
+def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation):       # path of the output file, board weight, board height, total number of circuits to place
     board = np.empty((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
                                     # w stands for the width of the board and, as a numpy array, it stands for the number of columns
     board.fill(n)
@@ -65,7 +65,7 @@ def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):       # 
     plt.imshow(board, interpolation='None', cmap=cmap, vmin=0, vmax=n)
     ax = plt.gca()
     ax.invert_yaxis()
-    image_path = Path("../CP/out_plots/out-" + str(instance) + f"{'_rotation' if rotation else ''}.png")
+    image_path = Path("../CP/out_plots/" + solver + f"{'/w_sym_break/' if sym_break else '/wout_sym_break/'}" + "out-" + str(instance) + f"{'_rotation' if rotation else ''}.png")
     plt.savefig(image_path)
     # plt.show()
 
@@ -74,22 +74,22 @@ def build_cmap(n):
     colors_list = []
 
     for i in range(n):
-        colors_list.append('#%06X' % randint(0, 0xFFFFFF))
+        colors_list.append('#%06X' % randint(0, 0xFFFFF0))
 
     colors_list.append('#FFFFFF')
 
     return colors.ListedColormap(colors_list)
 
 
-def cp_exec(first_i, last_i, rotation, plot):
+def cp_exec(first_i, last_i, solver, sym_break, rotation, plot):
     for i in range(first_i, last_i+1):
         w, n, x, y = read_instance(i)
 
-        model_path = Path(f"../CP/src/cp{'_rotation' if rotation else ''}.mzn")
+        model_path = Path(f"../CP/src/cp{'_rotation' if rotation else ''}{'_w_sym_break' if sym_break else ''}.mzn")
         model = Model(model_path)
-        solver = Solver.lookup('chuffed')
+        solv = Solver.lookup(solver)
 
-        inst = Instance(solver, model)
+        inst = Instance(solv, model)
         inst['w'] = w
         inst['n'] = n
         inst['chip_width'] = x
@@ -105,24 +105,26 @@ def cp_exec(first_i, last_i, rotation, plot):
         h = output.solution.h
 
         if rotation:
-            x = output.solution.w_rotate
-            y = output.solution.h_rotate
+            x = output.solution.w_new
+            y = output.solution.h_new
 
         if end_time > 300:
             print(f'Instance: {i}\tTime exceeded')
         else:
             print(f'Instance: {i}\tExecution time: {(end_time):.03f}s')
-            write_solution(i, w, h, n, x, y, x_coord, y_coord, rotation)
+            write_solution(i, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation)
             if plot:
-                plot_solution(i, w, h, n, x, y, x_coord, y_coord, rotation)
+                plot_solution(i, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--first', help='Number of first instance', type=int, default=1)
     parser.add_argument('-l', '--last', help='Number of last instance', type=int, default=40)
+    parser.add_argument('-s', '--solver', help='Name of the solver', type=str, default='chuffed')
+    parser.add_argument('-sb', '--sym_break', help='Allow symmetry breaking constraints', action='store_true')
     parser.add_argument('-r', '--rotation', help='Allow rotation', action='store_true')
     parser.add_argument('-p', '--plot', help='Plot solution', action='store_true')
     args = parser.parse_args()
 
-    cp_exec(first_i=args.first, last_i=args.last, rotation=args.rotation, plot=args.plot)
+    cp_exec(first_i=args.first, last_i=args.last, solver=args.solver, sym_break=args.sym_break, rotation=args.rotation, plot=args.plot)
