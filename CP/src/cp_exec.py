@@ -104,6 +104,10 @@ def cp_exec(first_i, last_i, rotation, plot):
         y_coord = output.solution.y_coordinates
         h = output.solution.h
 
+        if rotation:
+            x = output.solution.w_rotate
+            y = output.solution.h_rotate
+
         if end_time > 300:
             print(f'Instance: {i}\tTime exceeded')
         else:

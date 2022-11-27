@@ -27,7 +27,7 @@ constraint diffn(x_coordinates, y_coordinates, chip_width, chip_height); %non ov
 constraint cumulative(y_coordinates, chip_height, chip_width, w);
 
 % constraint che controlla se il chip esce dalla plate sia in altezza (plate_h_max) che in larghezza (w)
-constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_coordinates[i] + chip_height[i]<= h) ;
+constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_coordinates[i] + chip_height[i]<= h) ; % metti h_max
 
 
 % == SYMMETRY BREAKING CONSTRAINT ==
