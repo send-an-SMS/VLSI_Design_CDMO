@@ -7,6 +7,9 @@ import numpy as np
 from timeit import default_timer as timer
 import gurobipy as gp
 from gurobipy import GRB
+from matplotlib import colors
+import matplotlib.pyplot as plt
+from random import randint
 
 # READ FROM FILE first_i to file last_i (from the instances folder)
 
@@ -44,6 +47,41 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation,time):
             f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
         
         f.writelines(f"{time}")
+        
+def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):       # path of the output file, board weight, board height, total number of circuits to place
+    board = np.empty((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
+                                    # w stands for the width of the board and, as a numpy array, it stands for the number of columns
+    board.fill(n)
+
+    for i in range(n):
+        column = x_coord[i]  # position of the circuit on x-axis
+        row = y_coord[i]     # position of the circuit on y-axis
+
+        # compute the width and height of the current circuit
+        width = x[i]
+        height = y[i]
+        
+        for rows in range(row, row + height):
+            for columns in range(column, column + width):
+                board[rows][columns] = i
+
+    cmap = build_cmap(n)
+    plt.imshow(board, interpolation='None', cmap=cmap, vmin=0, vmax=n)
+    ax = plt.gca()
+    ax.invert_yaxis()
+    image_path = Path("../MIP/out_plots/out-" + str(instance) + f"{'_rotation' if rotation else ''}.png")
+    plt.savefig(image_path)
+    
+
+def build_cmap(n):
+    colors_list = []
+
+    for i in range(n):
+        colors_list.append('#%06X' % randint(0, 0xFFFFFF))
+
+    colors_list.append('#FFFFFF')
+
+    return colors.ListedColormap(colors_list)
 
 def solver(w,n,x,y, rotation: bool, index_f):
     print(f"width plate: {w}\n")
@@ -133,6 +171,7 @@ def solver(w,n,x,y, rotation: bool, index_f):
 
     # Writing solution
     write_solution(index_f, w, h_sol, n, x, y, x_sol,y_sol,False,solve_time)
+    plot_solution(index_f,w,h_sol,n,x,y,x_sol,y_sol,False)
     
     
     
