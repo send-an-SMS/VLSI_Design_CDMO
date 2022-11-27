@@ -35,13 +35,15 @@ def read_input(index_file):
         
     return w, n, x, y
 
-def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):
+def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation,time):
     out_path = Path("../MIP/out/out-" + str(instance) + f"{'_rotation' if rotation else ''}.txt")
     with open(out_path, 'w') as f:
         f.writelines(f'{w} {h}\n')
         f.writelines(f'{n}\n')
         for i in range(n):
             f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
+        
+        f.writelines(f"{time}")
 
 def solver(w,n,x,y, rotation: bool, index_f):
     print(f"width plate: {w}\n")
@@ -59,32 +61,33 @@ def solver(w,n,x,y, rotation: bool, index_f):
     
 # === VARIABLES === #
 
-# model.addVars(*indices, lb=0.0, ub=float('inf'), obj=0.0, vtype=GRB.CONTINUOUS, name="")
-#  -indices: Indices for accessing the new variables.
-#  - lb (optional): Lower bound(s) for new variables
-#  - ub (optional): Upper bound(s) for new variables
-#  - obj (optional): Objective coefficient(s) for new variables
-#  - vtype (optional): Variable type(s) for new variables
-#  - name (optional)
+    # model.addVars(*indices, lb=0.0, ub=float('inf'), obj=0.0, vtype=GRB.CONTINUOUS, name="")
+    #  -indices: Indices for accessing the new variables.
+    #  - lb (optional): Lower bound(s) for new variables
+    #  - ub (optional): Upper bound(s) for new variables
+    #  - obj (optional): Objective coefficient(s) for new variables
+    #  - vtype (optional): Variable type(s) for new variables
+    #  - name (optional)
 
 
-    x_cord = model.addVars(n, lb=0, ub=w, vtype=GRB.INTEGER, name="x_coordinates")
+    x_cord = model.addVars(n, lb=0, ub=w-np.amin(x), vtype=GRB.INTEGER, name="x_coordinates")
     y_cord = model.addVars(n, lb=0, ub=h_Max, vtype=GRB.INTEGER, name="y_coordinates")
-    h = model.addVar(vtype=GRB.INTEGER, name="height") # our variable to minimize
-    s = model.addVars(n, n, 4, vtype=GRB.BINARY, name="s")
+    h = model.addVar(lb=h_min,ub= h_Max ,vtype=GRB.INTEGER, name="height") # our variable to minimize
+    s = model.addVars(n, n, 4, vtype=GRB.BINARY, name="s") # used for big M method
     
-# === CONSTRAINT === #
+# === CONSTRAINTS === #
 
-# model.addConstrs(constraint, name)
-# - constraint 
-# - name of the constraint
+    # model.addConstrs(constraint, name)
+    # - constraint 
+    # - name of the constraint
 
-    # constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
+    # 1) constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
     model.addConstrs(((x_cord[i] + x[i] <= w) for i in range(n)), name="inside_plate_x") # it could be not w the ub --> w- min(h)
     model.addConstrs(((y_cord[i] + y[i]<= h) for i in range(n)), name="inside_plate_y")
     
     
-    # constraint no overlap = https://stackoverflow.com/questions/72941147/overlapping-constraint-in-linear-programming
+    # 2) constraint no overlap = https://stackoverflow.com/questions/72941147/overlapping-constraint-in-linear-programming
+    # BIG M method:
     model.addConstrs(((x_cord[i] + x[i] <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "or1")
     model.addConstrs(((y_cord[i] + y[i] <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "or2")
     model.addConstrs(((x_cord[j] + x[j] <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "or3")
@@ -129,7 +132,7 @@ def solver(w,n,x,y, rotation: bool, index_f):
     h_sol = int(model.ObjVal)
 
     # Writing solution
-    write_solution(index_f, w, h_sol, n, x, y, x_sol,y_sol,False)
+    write_solution(index_f, w, h_sol, n, x, y, x_sol,y_sol,False,solve_time)
     
     
     
