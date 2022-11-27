@@ -46,7 +46,7 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation,time):
         for i in range(n):
             f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
         
-        f.writelines(f"{time}")
+        #f.writelines(f"{time}")
         
 def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):       # path of the output file, board weight, board height, total number of circuits to place
     board = np.empty((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
