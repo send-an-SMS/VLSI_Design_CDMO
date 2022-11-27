@@ -221,8 +221,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         
         # 3) constraint that check if a chip is rotated or not:
         neg_rotation = np.logical_not(rotation_c)
-        model.addConstrs((w_rotate[i] == x[i]*rotation_c[i] + (y[i]*neg_rotation[i]) ),"rotation_along_x")
-        model.addConstrs((h_rotate[i] == y[i]*rotation_c[i] + (x[i]*neg_rotation[i]) ),"rotation_along_y")
+        model.addConstrs(((w_rotate[i] == x[i]*rotation_c[i] + (y[i]*neg_rotation[i])) for i in range(n)),"rotation_along_x")
+        model.addConstrs(((h_rotate[i] == y[i]*rotation_c[i] + (x[i]*neg_rotation[i])) for i in range(n)),"rotation_along_y")
         
          # Objective function
         model.setObjective(h, GRB.MINIMIZE)
