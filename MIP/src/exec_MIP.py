@@ -48,6 +48,16 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation,time):
             f.writelines(f'{x[i]} {y[i]} {x_coord[i]} {y_coord[i]}\n')
         
         #f.writelines(f"{time}")
+    print(f"For instance {instance} the best h value is {h} | execution_time {time}")
+        
+def write_log(instance: int, best_h: int , rotation: bool,time):
+    path_sol = "../MIP/out/log_file" if rotation else "../MIP/out/log_file_rotation" 
+    out_path = Path(path_sol + ".txt")
+    with open(out_path, 'a') as f:
+        f.writelines(f'{instance} {best_h} {time}\n')
+    
+    
+    
         
 def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):       # path of the output file, board weight, board height, total number of circuits to place
     board = np.empty((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
@@ -130,22 +140,14 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         
         # 2) constraint no overlap = https://stackoverflow.com/questions/72941147/overlapping-constraint-in-linear-programming
         # BIG M method:
-        model.addConstrs(((x_cord[i] + x[i] <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "or1")
-        model.addConstrs(((y_cord[i] + y[i] <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "or2")
-        model.addConstrs(((x_cord[j] + x[j] <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "or3")
-        model.addConstrs(((y_cord[j] + y[j] <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "or4")
+        model.addConstrs(((x_cord[i] + x[i] <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "no_ov1")
+        model.addConstrs(((y_cord[i] + y[i] <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "no_ov2")
+        model.addConstrs(((x_cord[j] + x[j] <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "no_ov3")
+        model.addConstrs(((y_cord[j] + y[j] <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "no_ov4")
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
 
-    # === SIMMETRY BREAKING CONSTRAINT === # 
-        # constraint largest chip --> first allocation on the plate
-        areas = [x[i] * y[i] for i in range(n)]
-            # m_i_a = max_index_areas
-        m_i_a = [areas.index(x) for x in sorted(areas, reverse=True)[:2]] 
-        '''
-        model.addConstrs(x_cord[m_i_a[0]] < x_cord[m_i_a[1]],name="biggest_first")
-        model.addConstrs(y_cord[m_i_a[0]] < y_cord[m_i_a[1]],name="biggest_first")
-        '''
-        
+
+
         # Objective function
         model.setObjective(h, GRB.MINIMIZE)
         
@@ -174,6 +176,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         print(f'\nSolution: {h_sol}\n')
         # Writing solution
         write_solution(index_f, w, h_sol, n, x, y, x_sol,y_sol,False,solve_time)
+        write_log(index_f,h_sol,False,solve_time)
+        
         if plot:
             plot_solution(index_f,  w,  h_sol,  n,  x,  y,  x_sol,  y_sol,  False)
     
@@ -214,16 +218,20 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         
         # 2) constraint no overlap = https://stackoverflow.com/questions/72941147/overlapping-constraint-in-linear-programming
         # BIG M method:
-        model.addConstrs(((x_cord[i] + w_rotate[i] <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "or1")
-        model.addConstrs(((y_cord[i] + h_rotate[i] <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "or2")
-        model.addConstrs(((x_cord[j] + w_rotate[j] <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "or3")
-        model.addConstrs(((y_cord[j] + h_rotate[j] <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "or4")
+        model.addConstrs(((x_cord[i] + w_rotate[i] <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "n_ov1")
+        model.addConstrs(((y_cord[i] + h_rotate[i] <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "n_ov2")
+        model.addConstrs(((x_cord[j] + w_rotate[j] <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "n_ov3")
+        model.addConstrs(((y_cord[j] + h_rotate[j] <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "n_ov4")
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
         
         # 3) constraint that check if a chip is rotated or not:
         neg_rotation = [bool(1 - i) for i in rotation_c]
+        '''
         model.addConstrs(((w_rotate[i] == y[i]*rotation_c[i] + (1- rotation_c[i])*x[i]) for i in range(n)),"rotation_along_x")
         model.addConstrs(((h_rotate[i] == x[i]*rotation_c[i] + (1- rotation_c[i])*y[i]) for i in range(n)),"rotation_along_y")
+        '''
+        model.addConstrs(((w_rotate[i] == y[i]*rotation_c[i] + x[i]*neg_rotation[i]) for i in range(n)),"rotation_along_x")
+        model.addConstrs(((h_rotate[i] == x[i]*rotation_c[i] + y[i]*neg_rotation[i]) for i in range(n)),"rotation_along_y")
         
          # Objective function
         model.setObjective(h, GRB.MINIMIZE)
@@ -259,6 +267,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         print(f'\nSolution: {h_sol}\n')
         # Writing solution
         write_solution(index_f, w, h_sol, n, w_rotate_sol, h_rotate_sol, x_sol,y_sol,True,solve_time)
+        write_log(index_f,h_sol,True,solve_time)
+        
         if plot:
             plot_solution(index_f, w, h_sol, n, w_rotate_sol, h_rotate_sol, x_sol, y_sol, True)
         
