@@ -39,7 +39,8 @@ def read_input(index_file):
     return w, n, x, y
 
 def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation,time):
-    out_path = Path("../MIP/out/out-" + str(instance) + f"{'_rotation' if rotation else ''}.txt")
+    path_sol = "../MIP/out/rotation/out-" if rotation else "../MIP/out/no_rotation/out-"
+    out_path = Path(path_sol + str(instance) + f"{'_rotation' if rotation else ''}.txt")
     with open(out_path, 'w') as f:
         f.writelines(f'{w} {h}\n')
         f.writelines(f'{n}\n')
@@ -69,7 +70,8 @@ def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation):       # 
     plt.imshow(board, interpolation='None', cmap=cmap, vmin=0, vmax=n)
     ax = plt.gca()
     ax.invert_yaxis()
-    image_path = Path("../MIP/out_plots/out-" + str(instance) + f"{'_rotation' if rotation else ''}.png")
+    path_plot = "../MIP/out_plots/rotation/out-" if rotation else "../MIP/out_plots/no_rotation/out-"
+    image_path = Path(path_plot + str(instance) + f"{'_rotation' if rotation else ''}.png")
     plt.savefig(image_path)
     
 
@@ -84,6 +86,7 @@ def build_cmap(n):
     return colors.ListedColormap(colors_list)
 
 def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
+    print(f"\n================================\n\nINSTANCE: {index_f}\n")
     print(f"width plate: {w}\n")
     print(f"number of circuits: {n}\n")
     for a in range(n):
@@ -156,7 +159,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         model.write('MIP.lp')
         
         # Solution
-        print('\nSolution:\n')
+        
 
         x_sol = []
         y_sol = []
@@ -165,12 +168,10 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         for i in range(n):
             x_sol.append(int(model.getVarByName(f"x_coordinates[{i}]").X))
             y_sol.append(int(model.getVarByName(f"y_coordinates[{i}]").X))
-            w_rotate_sol.append(int(model.getVarByName(f"w_rotate[{i}]").X))
-            h_rotate_sol.append(int(model.getVarByName(f"h_rotate[{i}]").X))
-            rotation_c_sol.append(int(model.getVarByName(f"rotation_c[{i}]").X))    
+
             
         h_sol = int(model.ObjVal)
-
+        print(f'\nSolution: {h_sol}\n')
         # Writing solution
         write_solution(index_f, w, h_sol, n, x, y, x_sol,y_sol,False,solve_time)
         if plot:
@@ -220,9 +221,9 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
         
         # 3) constraint that check if a chip is rotated or not:
-        neg_rotation = np.logical_not(rotation_c)
-        model.addConstrs(((w_rotate[i] == x[i]*rotation_c[i] + (y[i]*neg_rotation[i])) for i in range(n)),"rotation_along_x")
-        model.addConstrs(((h_rotate[i] == y[i]*rotation_c[i] + (x[i]*neg_rotation[i])) for i in range(n)),"rotation_along_y")
+        neg_rotation = [bool(1 - i) for i in rotation_c]
+        model.addConstrs(((w_rotate[i] == y[i]*rotation_c[i] + (1- rotation_c[i])*x[i]) for i in range(n)),"rotation_along_x")
+        model.addConstrs(((h_rotate[i] == x[i]*rotation_c[i] + (1- rotation_c[i])*y[i]) for i in range(n)),"rotation_along_y")
         
          # Objective function
         model.setObjective(h, GRB.MINIMIZE)
@@ -239,7 +240,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         
         
         # Solution
-        print('\nSolution:\n')
+        
         
         x_sol = []
         y_sol = []
@@ -255,7 +256,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
             rotation_c_sol.append(int(model.getVarByName(f"rotation_c[{i}]").X))    
             
         h_sol = int(model.ObjVal)
-
+        print(f'\nSolution: {h_sol}\n')
         # Writing solution
         write_solution(index_f, w, h_sol, n, w_rotate_sol, h_rotate_sol, x_sol,y_sol,True,solve_time)
         if plot:
