@@ -96,21 +96,21 @@ def cp_exec(first_i, last_i, solver, sym_break, rotation, plot):
         inst['chip_height'] = y
 
         start_time = timer()     # start timer
-        output = inst.solve(timeout=timedelta(seconds=301), free_search=True)   # timeout: Optional[timedelta] = None   **da documentazione**
+        output = inst.solve(timeout=timedelta(seconds=301), free_search=False)   # timeout: Optional[timedelta] = None   **da documentazione**
                                                                                 # datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0) Returns : Date
         end_time = timer() - start_time     # save the execution time
 
-        x_coord = output.solution.x_coordinates
-        y_coord = output.solution.y_coordinates
-        h = output.solution.h
-
-        if rotation:
-            x = output.solution.w_new
-            y = output.solution.h_new
-
-        if end_time > 300:
-            print(f'Instance: {i}\tTime exceeded')
+        if output.solution is None:
+            print(f'Instance: {i}\tNo solution found\tExecution time: {(end_time):.03f}s')
+        elif end_time > 300:
+            print(f'Instance: {i}\tTime exceeded\tExecution time: {(end_time):.03f}s')
         else:
+            x_coord = output.solution.x_coordinates
+            y_coord = output.solution.y_coordinates
+            h = output.solution.h
+            if rotation:
+                x = output.solution.w_new
+                y = output.solution.h_new
             print(f'Instance: {i}\tExecution time: {(end_time):.03f}s\tBest objective value: {h}')
             write_solution(i, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation)
             if plot:

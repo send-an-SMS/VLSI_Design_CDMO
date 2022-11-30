@@ -1,0 +1,87 @@
+Last login: Mon Nov 28 18:04:55 on ttys000
+claminos@MacBook-Pro-di-Simona CP % python3 src/cp_exec.py -f 1 -l 40 -s gecode -p
+Instance: 1	Execution time: 0.408s	Best objective value: 8
+Instance: 2	Execution time: 0.407s	Best objective value: 9
+Instance: 3	Execution time: 0.419s	Best objective value: 10
+Instance: 4	Execution time: 0.423s	Best objective value: 11
+Instance: 5	Execution time: 0.448s	Best objective value: 12
+Instance: 6	Execution time: 0.428s	Best objective value: 13
+Instance: 7	Execution time: 0.467s	Best objective value: 14
+Instance: 8	Execution time: 0.472s	Best objective value: 15
+Instance: 9	Execution time: 0.413s	Best objective value: 16
+Instance: 10	Execution time: 0.422s	Best objective value: 17
+Instance: 11	Execution time: 188.817s	Best objective value: 18
+Instance: 12	Execution time: 0.539s	Best objective value: 19
+Instance: 13	Execution time: 0.539s	Best objective value: 20
+Instance: 14	Execution time: 0.530s	Best objective value: 21
+Instance: 15	Execution time: 0.560s	Best objective value: 22
+^CTraceback (most recent call last):
+  File "/Users/claminos/Library/Mobile Documents/com~apple~CloudDocs/CDMO/project/VLSI_Design_CDMO/CP/src/cp_exec.py", line 132, in <module>
+    cp_exec(first_i=args.first, last_i=args.last, solver=args.solver, sym_break=args.sym_break, rotation=args.rotation, plot=args.plot)
+  File "/Users/claminos/Library/Mobile Documents/com~apple~CloudDocs/CDMO/project/VLSI_Design_CDMO/CP/src/cp_exec.py", line 99, in cp_exec
+    output = inst.solve(timeout=timedelta(seconds=301), free_search=True)   # timeout: Optional[timedelta] = None   **da documentazione**
+  File "/Users/claminos/Library/Python/3.9/lib/python/site-packages/minizinc/instance.py", line 186, in solve
+    return asyncio.run(coroutine)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 629, in run_until_complete
+    self.run_forever()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 596, in run_forever
+    self._run_once()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 1854, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/selectors.py", line 562, in select
+    kev_list = self._selector.control(None, max_ev, timeout)
+KeyboardInterrupt
+
+claminos@MacBook-Pro-di-Simona CP % python3 src/cp_exec.py -f 1 -l 40 -s gecode -p
+Instance: 1	Execution time: 0.400s	Best objective value: 8
+Instance: 2	Execution time: 0.416s	Best objective value: 9
+Instance: 3	Execution time: 0.458s	Best objective value: 10
+Instance: 4	Execution time: 0.412s	Best objective value: 11
+Instance: 5	Execution time: 0.414s	Best objective value: 12
+Instance: 6	Execution time: 0.408s	Best objective value: 13
+Instance: 7	Execution time: 0.424s	Best objective value: 14
+Instance: 8	Execution time: 0.440s	Best objective value: 15
+Instance: 9	Execution time: 0.454s	Best objective value: 16
+Instance: 10	Execution time: 0.581s	Best objective value: 17
+Instance: 11	Execution time: 179.681s	Best objective value: 18
+Instance: 12	Execution time: 0.492s	Best objective value: 19
+Instance: 13	Execution time: 0.512s	Best objective value: 20
+Instance: 14	Execution time: 0.467s	Best objective value: 21
+Instance: 15	Execution time: 0.442s	Best objective value: 22
+Instance: 16	Execution time: 202.544s	Best objective value: 23
+Instance: 17	Execution time: 3.433s	Best objective value: 24
+Instance: 18	Execution time: 1.090s	Best objective value: 25
+Instance: 19	Execution time: 173.341s	Best objective value: 26
+Instance: 20	Execution time: 30.279s	Best objective value: 27
+Instance: 21	Execution time: 7.462s	Best objective value: 28
+Instance: 22	Execution time: 290.115s	Best objective value: 29
+Instance: 23	Execution time: 230.986s	Best objective value: 30
+Instance: 24	Execution time: 27.324s	Best objective value: 31
+Instance: 25	Time exceeded	Execution time: 301.110s
+Instance: 26	Execution time: 0.795s	Best objective value: 33
+Instance: 27	Execution time: 31.612s	Best objective value: 34
+Instance: 28	Time exceeded	Execution time: 301.152s
+Traceback (most recent call last):
+  File "/Users/claminos/Library/Mobile Documents/com~apple~CloudDocs/CDMO/project/VLSI_Design_CDMO/CP/src/cp_exec.py", line 132, in <module>
+    cp_exec(first_i=args.first, last_i=args.last, solver=args.solver, sym_break=args.sym_break, rotation=args.rotation, plot=args.plot)
+  File "/Users/claminos/Library/Mobile Documents/com~apple~CloudDocs/CDMO/project/VLSI_Design_CDMO/CP/src/cp_exec.py", line 103, in cp_exec
+    x_coord = output.solution.x_coordinates
+AttributeError: 'NoneType' object has no attribute 'x_coordinates'
+claminos@MacBook-Pro-di-Simona CP % python3 src/cp_exec.py -f 29 -l 40 -s gecode -p
+Instance: 29	No solution found	Execution time: 301.071s
+Instance: 29	Time exceeded	Execution time: 301.071s
+Instance: 30	Time exceeded	Execution time: 301.107s
+Instance: 31	Time exceeded	Execution time: 301.106s
+Instance: 32	Time exceeded	Execution time: 301.111s
+Instance: 33	Time exceeded	Execution time: 301.114s
+Instance: 34	Time exceeded	Execution time: 301.105s
+Instance: 35	Time exceeded	Execution time: 301.106s
+Instance: 36	Time exceeded	Execution time: 301.075s
+Instance: 37	Time exceeded	Execution time: 301.104s
+Instance: 38	Time exceeded	Execution time: 301.107s
+Instance: 39	Time exceeded	Execution time: 301.078s
+Instance: 40	No solution found	Execution time: 301.107s
+Instance: 40	Time exceeded	Execution time: 301.107s
+claminos@MacBook-Pro-di-Simona CP % 
