@@ -51,7 +51,7 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, rotation,time):
     print(f"For instance {instance} the best h value is {h} | execution_time {time}")
         
 def write_log(instance: int, best_h: int , rotation: bool,time):
-    path_sol = "../MIP/out/log_file" if rotation else "../MIP/out/log_file_rotation" 
+    path_sol = "../MIP/out/log_file_rotation" if rotation else "../MIP/out/log_file" 
     out_path = Path(path_sol + ".txt")
     with open(out_path, 'a') as f:
         f.writelines(f'{instance} {best_h} {time}\n')
