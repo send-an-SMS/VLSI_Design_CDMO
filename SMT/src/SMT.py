@@ -34,7 +34,7 @@ def read_instance(instance):
 
 # write the found model in a txt file
 def write_solution(instance, w, h, n, x, y, x_coord, y_coord, sym_break=False, rotation=False):
-    out_path = Path("../CP/out/" + solver + f"{'/w_sym_break/' if sym_break else '/wout_sym_break/'}" + "out-" + str(instance) + f"{'_rotation' if rotation else ''}.txt")
+    out_path = Path("../SMT/out/" + f"{'/w_sym_break/' if sym_break else '/wout_sym_break/'}" + "out-" + str(instance) + f"{'_rotation' if rotation else ''}.txt")
     with open(out_path, 'w') as f:
         f.writelines(f'{w} {h}\n')
         f.writelines(f'{n}\n')
@@ -43,30 +43,27 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, sym_break=False, r
 
 
 # PLOT FUNCTIONS
-
-def plot_solution(instance, w, h, n, x, y, x_coord, y_coord):       # path of the output file, board weight, board height, total number of circuits to place
-    
-    # , solver, sym_break, rotation  DA CAVARE
+def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, sym_break=False, rotation=False):       # path of the output file, board weight, board height, total number of circuits to place
     
     # cast from string to integer
     h = int(h)    
 
     #cast from list of string to list of integer
-    x_coord = [eval(k) for k in x_coord]
-    y_coord = [eval(k) for k in y_coord]
-
+    x_coord_plot = [eval(k) for k in x_coord]
+    y_coord_plot = [eval(k) for k in y_coord]
 
     board = np.empty((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
                                     # w stands for the width of the board and, as a numpy array, it stands for the number of columns
     board.fill(n)
 
     for i in range(n):
-        column = x_coord[i]  # position of the circuit on x-axis
-        row = y_coord[i]     # position of the circuit on y-axis
+        column = x_coord_plot[i]  # position of the circuit on x-axis
+        row = y_coord_plot[i]     # position of the circuit on y-axis
 
         # compute the width and height of the current circuit
         width = x[i]
         height = y[i]
+
         for rows in range(row, row + height):
             for columns in range(column, column + width):
                 board[rows][columns] = i
@@ -76,8 +73,7 @@ def plot_solution(instance, w, h, n, x, y, x_coord, y_coord):       # path of th
     ax = plt.gca()
     ax.invert_yaxis()
 
-    #image_path = Path("../SMT/out_plots/" + solver + f"{'/w_sym_break/' if sym_break else '/wout_sym_break/'}" + "out-" + str(instance) + f"{'_rotation' if rotation else ''}.png")
-    image_path = Path("../SMT/out_plots/out-" + str(instance) + ".png")
+    image_path = Path("../SMT/out_plots/" + f"{'/w_sym_break/' if sym_break else '/wout_sym_break/'}" + "out-" + str(instance) + f"{'_rotation' if rotation else ''}.png")
     plt.savefig(image_path)
     # plt.show()
 
@@ -130,10 +126,10 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
     for instance in range(first_i, last_i+1):
         w, n_circuit, x_dim, y_dim = read_instance(instance)
         
-        ##############
-        ## ROTATION ##
-        ##############
-        if rotation: 
+        #################
+        ## NO ROTATION ##
+        #################
+        if rotation == False: 
             # initialization of coordinate variables
             x_coord = IntVector('x', n_circuit) 
             y_coord = IntVector('y', n_circuit)
@@ -189,7 +185,7 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
             optimizer.minimize(min_height)
 
             # set optimizer timer
-            timeout = 10000 # 10 secondi       #300000 #300.000 millisecondi -> 5 minuti
+            timeout = 300000        #10000 # 10 secondi       #300000 #300.000 millisecondi -> 5 minuti
             optimizer.set('timeout', timeout)
 
             # set printable timer
@@ -212,26 +208,27 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 min_height_sol = model.evaluate(min_height).as_string()
                 
                 # get the model
-                model = optimizer.model()
+                # model = optimizer.model()
+                # print(model)
+
+                print(f'Instance: {instance}\tExecution time: {(end_time):.03f}s\tBest objective value: {min_height_sol}')
                 
                 if sym_break:
-                    #write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord, y_coord)
-                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
+                    write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
+                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
 
                 else:
-                    #write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord, y_coord)
+                    write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
                     plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
 
             # solution not found
             else:
                 end_time = timer() - start_time     # save the execution time
-                print('NO SOLUTION FOUND')
+                print(f'Instance: {instance}\tTime exceeded\tExecution time: {(end_time):.03f}s')
 
-            print('Time: ', end_time)
-
-        #################
-        ## NO ROTATION ##
-        #################
+        ##############
+        ## ROTATION ##
+        ##############
         else:
             True
 
