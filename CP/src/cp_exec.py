@@ -96,8 +96,11 @@ def cp_exec(first_i, last_i, solver, sym_break, rotation, plot):
         inst['chip_height'] = y
 
         start_time = timer()     # start timer
-        output = inst.solve(timeout=timedelta(seconds=301), free_search=True)   # timeout: Optional[timedelta] = None   **da documentazione**
-                                                                                # datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0) Returns : Date
+        if solver == 'chuffed':
+            output = inst.solve(timeout=timedelta(seconds=301), free_search=True)   # timeout: Optional[timedelta] = None   **from documentation**
+                                                                                    # datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0) Returns : Date
+        else:
+            output = inst.solve(timeout=timedelta(seconds=301))                                                                         
         end_time = timer() - start_time     # save the execution time
 
         if output.solution is None:

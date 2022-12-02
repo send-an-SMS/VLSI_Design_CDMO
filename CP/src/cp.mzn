@@ -11,7 +11,7 @@ array[N_CIRCUITS] of int: chip_height;
 int: plate_h_max = sum(chip_height);
 int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞,
                                                                                         %and the nearest integer, respectively.
-var plate_h_min..plate_h_max: h ;% possible values for the plate's height
+var plate_h_min..plate_h_max: h ; % possible values for the plate's height
 % the origin of the plate is the left-bottom corner!
 array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates; % possibili coordinate x in cui è possibile collocare i chip
 array[N_CIRCUITS] of var 0..plate_h_max - min(chip_height): y_coordinates;% possibili coordinate y in cui è possibile collocare i chip
