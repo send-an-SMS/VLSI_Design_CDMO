@@ -5,6 +5,7 @@ from pathlib import Path
 import heapq
 import numpy as np
 from timeit import default_timer as timer
+import datetime
 import gurobipy as gp
 from gurobipy import GRB
 from matplotlib import colors
@@ -54,7 +55,13 @@ def write_log(instance: int, best_h: int , rotation: bool,time):
     path_sol = "../MIP/out/log_file_rotation" if rotation else "../MIP/out/log_file" 
     out_path = Path(path_sol + ".txt")
     with open(out_path, 'a') as f:
-        f.writelines(f'{instance} {best_h} {time}\n')
+        f.writelines(f'{instance} {best_h} {time} {"VALID" if time < 301.00 else "NOT VALID"}\n')
+        
+def write_log_init(rotation: bool):
+    path_sol = "../MIP/out/log_file_rotation" if rotation else "../MIP/out/log_file" 
+    out_path = Path(path_sol + ".txt")
+    with open(out_path, 'a') as f:
+        f.writelines(f'\n- - -\n Test : {datetime.datetime.now()}\n')
     
     
     
@@ -101,9 +108,13 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
     print(f"number of circuits: {n}\n")
     for a in range(n):
         print(f"{a}) chip dimension: {x[a]} X {y[a]}\n")
-        
-    h_Max = sum(y)
+ 
+    #lev = ((sum(x) // w)+1 )*2       
+    #y_sort = sorted(y)
+    h_Max = sum(y) # sum([y_sort[n-1-i] for i in range(min(lev,n))])
     h_min = math.ceil((sum([x[i]*y[i] for i in range(n)]) / w ))
+    area_min = sum((x[i]*y[i]) for i in range(n))
+    area_max = h_Max * w
     
     
     if not rotation:
@@ -122,7 +133,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
 
 
         x_cord = model.addVars(n, lb=0, ub=w-np.amin(x), vtype=GRB.INTEGER, name="x_coordinates")
-        y_cord = model.addVars(n, lb=0, ub=h_Max, vtype=GRB.INTEGER, name="y_coordinates")
+        y_cord = model.addVars(n, lb=0, ub=h_Max-np.amin(y), vtype=GRB.INTEGER, name="y_coordinates")
         h = model.addVar(lb=h_min,ub= h_Max ,vtype=GRB.INTEGER, name="height") # our variable to minimize
         s = model.addVars(n, n, 4, vtype=GRB.BINARY, name="s") # used for big M method
         
@@ -147,6 +158,11 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
 
 
+        area = w * h
+        
+        model.addConstr(area <= area_max ,name = "ub_area")
+        model.addConstr(area >= area_min ,name = "lb_area")
+        
 
         # Objective function
         model.setObjective(h, GRB.MINIMIZE)
@@ -158,7 +174,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         model.optimize()
         solve_time = timer() - start_time
 
-        model.write('MIP.lp')
+
+        model.write(f'file_mip/out-{index_f}.lp')
         
         # Solution
         
@@ -182,7 +199,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
             plot_solution(index_f,  w,  h_sol,  n,  x,  y,  x_sol,  y_sol,  False)
     
     else:
-        model = gp.Model("MIP")
+        model = gp.Model("MIP_rotation")
         model.setParam("TimeLimit", 5*60) # 5 minutes for each instance
         
     # === VARIABLES === #
@@ -197,7 +214,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
 
 
         x_cord = model.addVars(n, lb=0, ub=w-np.amin(x), vtype=GRB.INTEGER, name="x_coordinates")
-        y_cord = model.addVars(n, lb=0, ub=h_Max, vtype=GRB.INTEGER, name="y_coordinates")
+        y_cord = model.addVars(n, lb=0, ub=h_Max-np.amin(y), vtype=GRB.INTEGER, name="y_coordinates")
         h = model.addVar(lb=h_min,ub= h_Max ,vtype=GRB.INTEGER, name="height") # our variable to minimize
         s = model.addVars(n, n, 4, vtype=GRB.BINARY, name="s") # used for big M method
         
@@ -226,12 +243,14 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         
         # 3) constraint that check if a chip is rotated or not:
         neg_rotation = [bool(1 - i) for i in rotation_c]
-        '''
-        model.addConstrs(((w_rotate[i] == y[i]*rotation_c[i] + (1- rotation_c[i])*x[i]) for i in range(n)),"rotation_along_x")
-        model.addConstrs(((h_rotate[i] == x[i]*rotation_c[i] + (1- rotation_c[i])*y[i]) for i in range(n)),"rotation_along_y")
-        '''
         model.addConstrs(((w_rotate[i] == y[i]*rotation_c[i] + x[i]*neg_rotation[i]) for i in range(n)),"rotation_along_x")
         model.addConstrs(((h_rotate[i] == x[i]*rotation_c[i] + y[i]*neg_rotation[i]) for i in range(n)),"rotation_along_y")
+        
+        area = w * h
+        
+        model.addConstr(area <= area_max ,name = "ub_area")
+        model.addConstr(area >= area_min ,name = "lb_area")
+        
         
          # Objective function
         model.setObjective(h, GRB.MINIMIZE)
@@ -243,7 +262,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         model.optimize()
         solve_time = timer() - start_time
 
-        model.write('MIP_rotation.lp')
+        model.write(f'file_mip_rotation/out-{index_f}.lp')
         
         
         
@@ -284,9 +303,12 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--plot', help='Plot solution', action='store_true')
     args = parser.parse_args()
     
+    write_log_init(args.rotation)
+    
     for a in range(args.first,args.last+1,1):
         
-        w, n, x, y=read_input(a)
+        w, n, x, y = read_input(a)
+        
         solver(w,n,x,y,args.rotation,a,args.plot)
         
         
