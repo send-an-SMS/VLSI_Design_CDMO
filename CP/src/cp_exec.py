@@ -112,8 +112,12 @@ def cp_exec(first_i, last_i, solver, sym_break, rotation, plot):
             y_coord = output.solution.y_coordinates
             h = output.solution.h
             if rotation:
-                x = output.solution.w_new
-                y = output.solution.h_new
+                rotations = output.solution.rotation_c
+                for j in range(0, n):
+                    if rotations[j]:    # if rotation is enabled for a chip, then swap width and height
+                        temp = x[j]
+                        x[j] = y[j]
+                        y[j] = temp
             print(f'Instance: {i}\tExecution time: {(end_time):.03f}s\tBest objective value: {h}')
             write_solution(i, w, h, n, x, y, x_coord, y_coord, solver, sym_break, rotation)
             if plot:
