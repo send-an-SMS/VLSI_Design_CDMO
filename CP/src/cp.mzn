@@ -3,10 +3,10 @@ include "cumulative.mzn";
 include "diffn.mzn";
 
 int: w; % width of the silicon plate
-int: n; % amount of circuits to place inside the plate
-set of int: N_CIRCUITS = 1..n;  % range for the circuits
-array[N_CIRCUITS] of int: chip_width;
-array[N_CIRCUITS] of int: chip_height;
+int: n; % number of circuits to place inside the plate
+set of int: N_CIRCUITS = 1..n;  % range of 
+array[N_CIRCUITS] of int: chip_width; % array containing the widths of the circuits
+array[N_CIRCUITS] of int: chip_height; % array containing the heights of the circuits
 
 % Define the range for the height of the plate (0 --> y) in order to minimize y
 int: plate_h_max = sum(chip_height);
@@ -30,9 +30,9 @@ constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_co
 
 % == SOLVE ==
 solve :: seq_search([
-    int_search(y_coordinates, first_fail,indomain_min),
-    int_search(x_coordinates, first_fail,indomain_min),
-    int_search([h], smallest,indomain_min)])
+    int_search([h],smallest,indomain_min),
+    int_search(y_coordinates,first_fail,indomain_min),
+    int_search(x_coordinates,first_fail,indomain_min)])
     minimize h;
 
 

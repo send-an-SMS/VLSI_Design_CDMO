@@ -40,9 +40,9 @@ constraint symmetry_breaking_constraint(
 
 % == SOLVE ==
 solve :: seq_search([
+    int_search([h],smallest,indomain_min),
     int_search(y_coordinates,first_fail,indomain_min),
-    int_search(x_coordinates,first_fail,indomain_min),
-    int_search([h], smallest,indomain_min)])
+    int_search(x_coordinates,first_fail,indomain_min)])
     minimize h;
 
 

@@ -25,7 +25,7 @@ def read_instance(instance):
     for j in range(2, n+2):     # loop on n circuits, the count starts from the third line of the instance file and ends at the n-th line
         txt = text[j].split()  # get a two elements array, xj and yj, representing the horizontal and vertical dimensions of the j-th circuit
         x.append(int(txt[0]))  # put each horizontal dimension into list x
-        y.append(int(txt[1]))  # put each vertical dimension into list x
+        y.append(int(txt[1]))  # put each vertical dimension into list y
 
     f.close()
 
