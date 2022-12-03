@@ -244,7 +244,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         # - name of the constraint
 
         # 1) constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
-        model.addConstrs(((x_cord[i] + check_rotation_w(x[i],y[i],rotation_c[i]) <= w) for i in range(n)), name="inside_plate_x") # it could be not w the ub --> w- min(h)
+        model.addConstrs(((x_cord[i] + check_rotation_w(x[i],y[i],rotation_c[i]) <= w) for i in range(n)), name="inside_plate_x") 
         model.addConstrs(((y_cord[i] + check_rotation_h(x[i],y[i],rotation_c[i])<= h) for i in range(n)), name="inside_plate_y")
         
         
@@ -302,7 +302,10 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         print(f'\nSolution: {h_sol}\n')
         w_new = [int(check_rotation_w(x[i],y[i],rotation_c_sol[i])) for i in range(n)]
         h_new = [int(check_rotation_h(x[i],y[i],rotation_c_sol[i])) for i in range(n)]
-        print(rotation_c_sol)
+        
+        print("x_sol:",x_sol)
+        print("y_sol:",y_sol)
+        print("rotation_c_sol:",rotation_c_sol)
         print("w_new: ",w_new)
         print("h_new: ",h_new)
         # Writing solution
