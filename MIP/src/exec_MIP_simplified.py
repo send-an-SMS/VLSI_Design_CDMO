@@ -135,6 +135,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
     if not rotation:
         model = gp.Model("MIP")
         model.setParam("TimeLimit", 5*60) # 5 minutes for each instance
+        #model.setParam("Symmetry",-1) # -1: auto, 0:off , 1: conservative, 2:aggressive
         
     # === VARIABLES === #
 
@@ -216,6 +217,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
     else:
         model = gp.Model("MIP_rotation")
         model.setParam("TimeLimit", 5*60) # 5 minutes for each instance
+        #model.setParam("Symmetry",-1) # -1: auto, 0:off , 1: conservative, 2:aggressive
         
     # === VARIABLES === #
 
