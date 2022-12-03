@@ -7,10 +7,13 @@ int: n; % amount of circuits to place inside the plate
 set of int: N_CIRCUITS = 1..n;  % range for the circuits
 array[N_CIRCUITS] of int: chip_width;
 array[N_CIRCUITS] of int: chip_height;
+
 % Define the range for the height of the plate (0 --> y) in order to minimize y
 int: plate_h_max = sum(chip_height);
 int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞,
                                                                                         %and the nearest integer, respectively.
+                                                                                        
+% == VARIABLES ==
 var plate_h_min..plate_h_max: h ; % possible values for the plate's height
 % the origin of the plate is the left-bottom corner!
 array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates; % possibili coordinate x in cui è possibile collocare i chip

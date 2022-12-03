@@ -8,12 +8,11 @@ set of int: N_CIRCUITS = 1..n;  % range for the circuits
 array[N_CIRCUITS] of int: chip_width;
 array[N_CIRCUITS] of int: chip_height;
 % Define the range for the height of the plate (0 --> y) in order to minimize y
-% int: plate_h_max = sum(chip_height); % OK: massimo tra base e altezza
-%int: plate_h_max = sum([max(chip_width[i], chip_height[i]) | i in N_CIRCUITS]);
 int: plate_h_max = sum(chip_height);
 int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞, and the nearest integer, respectively.
 
-var plate_h_min..plate_h_max: h ;% possible values for the plate's height
+% == VARIABLES ==
+var plate_h_min..plate_h_max: h ;% possible values for the plate's height (OBJECTIVE FUNTION)
 % the origin of the plate is the left-bottom corner!
 %array[N_CIRCUITS] of var 0..w - min(min(chip_width), min(chip_height)): x_coordinates;
 array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates;
@@ -21,30 +20,10 @@ array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates;
 array[N_CIRCUITS] of var 0..plate_h_max - min(chip_height): y_coordinates;
 array [N_CIRCUITS] of var bool: rotation_c;
 
-%int: area_max = plate_h_max * w;
-%int: area_min = sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]);
 
-% w_new and h_new represent the actual value for the width and height of a circuit
-% ================== array [N_CIRCUITS] of var 1..max(max(chip_width), max(chip_height)): w_new;
-% ================== array [N_CIRCUITS] of var 1..max(max(chip_width), max(chip_height)): h_new;
+%old commented rows were there
 
-
-% == ROTATION == 
-% constraint che controlla che valgano le condizioni che l'altezza e la larghezza siano scambiate se il booleano è settato a true
-
-%constraint forall (i in N_CIRCUITS)(
- % (w_new[i] == chip_width[i] /\ h_new[i] == chip_height[i] /\ rotation_c_c[i] == false) xor
-  %(w_new[i] == chip_height[i] /\ h_new[i] == chip_width[i] /\ rotation_c_c[i] == true)
-%);
-
-
-% ----[if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS] % h_new%---
-%----[if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS] % w_new
-
-
-
-
-
+% == CONSTRAINTS ==
 % constraint che controlla la rotazione per i circuiti che sono quadrati
 constraint forall(i in N_CIRCUITS)(
   (if chip_width[i] == chip_height[i]
@@ -58,7 +37,7 @@ constraint forall(i in N_CIRCUITS)(
 %constraint (h * w ) >= area_min;
 
 
-% == CONSTRAINTS ==
+
 % Check for overlapping circuits
 constraint cumulative(y_coordinates,
                        [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS],% h_new
@@ -90,3 +69,25 @@ solve :: seq_search([
 % == OUTPUT ==
 output ["best h value = \(h)\n"];
 output ["\(x)) chip_width: \([if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS]) chip height: \( [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS][x]) --> starting position (\(x_coordinates[x]),\(y_coordinates[x])) \n" | x in N_CIRCUITS] ;
+
+
+
+%int: area_max = plate_h_max * w;
+%int: area_min = sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]);
+
+% w_new and h_new represent the actual value for the width and height of a circuit
+% ================== array [N_CIRCUITS] of var 1..max(max(chip_width), max(chip_height)): w_new;
+% ================== array [N_CIRCUITS] of var 1..max(max(chip_width), max(chip_height)): h_new;
+
+
+% == ROTATION == 
+% constraint che controlla che valgano le condizioni che l'altezza e la larghezza siano scambiate se il booleano è settato a true
+
+%constraint forall (i in N_CIRCUITS)(
+ % (w_new[i] == chip_width[i] /\ h_new[i] == chip_height[i] /\ rotation_c_c[i] == false) xor
+  %(w_new[i] == chip_height[i] /\ h_new[i] == chip_width[i] /\ rotation_c_c[i] == true)
+%);
+
+
+% ----[if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS] % h_new%---
+%----[if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS] % w_new
