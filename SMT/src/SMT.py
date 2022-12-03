@@ -44,21 +44,14 @@ def write_solution(instance, w, h, n, x, y, x_coord, y_coord, sym_break=False, r
 
 # PLOT FUNCTIONS
 def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, sym_break=False, rotation=False):       # path of the output file, board weight, board height, total number of circuits to place
-    
-    # cast from string to integer
-    h = int(h)    
-
-    #cast from list of string to list of integer
-    x_coord_plot = [eval(k) for k in x_coord]
-    y_coord_plot = [eval(k) for k in y_coord]
 
     board = np.empty((h, w))        # h stands for the height of the board and, as a numpy array, it stands for the number of rows
                                     # w stands for the width of the board and, as a numpy array, it stands for the number of columns
     board.fill(n)
 
     for i in range(n):
-        column = x_coord_plot[i]  # position of the circuit on x-axis
-        row = y_coord_plot[i]     # position of the circuit on y-axis
+        column = x_coord[i]  # position of the circuit on x-axis
+        row = y_coord[i]     # position of the circuit on y-axis
 
         # compute the width and height of the current circuit
         width = x[i]
@@ -181,7 +174,7 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
             # OPTIMIZER -> to solve using objective functions
             x_coord_sol = []
             y_coord_sol = []
-            
+
             optimizer.add(boundary_x + boundary_x + bound_zero_x + bound_zero_y + non_overlap_const + cumulative_x + cumulative_y)
             optimizer.minimize(min_height)
 
@@ -202,11 +195,11 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 
                 # get solution for the coord variable
                 for i in range(n_circuit):
-                    x_coord_sol.append(model.evaluate(x_coord[i]).as_string())
-                    y_coord_sol.append(model.evaluate(y_coord[i]).as_string())
+                    x_coord_sol.append(model.evaluate(x_coord[i]).as_long()) # type z3.IntNumRef -> to int
+                    y_coord_sol.append(model.evaluate(y_coord[i]).as_long())
                 
                 # get minimized height
-                min_height_sol = model.evaluate(min_height).as_string()
+                min_height_sol = model.evaluate(min_height).as_long()
                 
                 # get the model
                 # model = optimizer.model()
@@ -214,10 +207,11 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
 
                 print(f'Instance: {instance}\tExecution time: {(end_time):.03f}s\tBest objective value: {min_height_sol}')
                 
+                # results with sym breaking constraint
                 if sym_break:
                     write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
                     plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
-
+                # results w/o sym breaking constraint
                 else:
                     write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
                     plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
@@ -231,13 +225,13 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
         ## ROTATION ##
         ##############
         else:
-            True
+            print("Wow Roration!!")
 
 
 
 
 
-# il SOLVER, dati una serie di constraints, trova una soluzione per quei constraints
+# il SOLVER, dati una serie di constraints, trova una soluzione per quei constraints -> devi ciclare sull'altezza se vuoi usare il solver
 # l'OPTIMIZER, dati una serie di constraints e una funzione obiettivo, trova una soluzione che soddisfi i constraints in funzione
 # della massimizzazione o della minimizzazione della funzione obiettivo
 
