@@ -244,16 +244,16 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         # - name of the constraint
 
         # 1) constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
-        model.addConstrs(((x_cord[i] + check_rotation_w(x[i],y[i],rotation_c[i]) <= w) for i in range(n)), name="inside_plate_x") 
-        model.addConstrs(((y_cord[i] + check_rotation_h(x[i],y[i],rotation_c[i])<= h) for i in range(n)), name="inside_plate_y")
+        model.addConstrs(((x_cord[i] + (y[i] if rotation_c[i] else x[i]) <= w) for i in range(n)), name="inside_plate_x") 
+        model.addConstrs(((y_cord[i] + (x[i] if rotation_c[i] else y[i])<= h) for i in range(n)), name="inside_plate_y")
         
         
         # 2) constraint no overlap = https://stackoverflow.com/questions/72941147/overlapping-constraint-in-linear-programming
         # BIG M method:
-        model.addConstrs(((x_cord[i] + check_rotation_w(x[i],y[i],rotation_c[i]) <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "n_ov1")
-        model.addConstrs(((y_cord[i] + check_rotation_h(x[i],y[i],rotation_c[i]) <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "n_ov2")
-        model.addConstrs(((x_cord[j] + check_rotation_w(x[j],y[j],rotation_c[j]) <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "n_ov3")
-        model.addConstrs(((y_cord[j] + check_rotation_h(x[j],y[j],rotation_c[j]) <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "n_ov4")
+        model.addConstrs(((x_cord[i] + (y[i] if rotation_c[i] else x[i]) <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "n_ov1")
+        model.addConstrs(((y_cord[i] + (x[i] if rotation_c[i] else y[i]) <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "n_ov2")
+        model.addConstrs(((x_cord[j] + (y[j] if rotation_c[j] else x[j]) <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "n_ov3")
+        model.addConstrs(((y_cord[j] + (x[j] if rotation_c[j] else y[j]) <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "n_ov4")
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
         
         # 3) constraint that check if a chip is rotated or not:
@@ -300,8 +300,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
             
         h_sol = int(model.ObjVal)
         print(f'\nSolution: {h_sol}\n')
-        w_new = [int(check_rotation_w(x[i],y[i],rotation_c_sol[i])) for i in range(n)]
-        h_new = [int(check_rotation_h(x[i],y[i],rotation_c_sol[i])) for i in range(n)]
+        w_new = [int((y[i] if rotation_c[i] else x[i])) for i in range(n)]
+        h_new = [int((x[i] if rotation_c[i] else y[i])) for i in range(n)]
         
         print("x_sol:",x_sol)
         print("y_sol:",y_sol)
