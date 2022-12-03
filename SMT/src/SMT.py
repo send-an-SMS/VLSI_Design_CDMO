@@ -130,6 +130,7 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
         ## NO ROTATION ##
         #################
         if rotation == False: 
+            
             # initialization of coordinate variables
             x_coord = IntVector('x', n_circuit) 
             y_coord = IntVector('y', n_circuit)
