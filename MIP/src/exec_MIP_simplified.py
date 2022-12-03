@@ -257,10 +257,11 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
         
         # 3) constraint that check if a chip is rotated or not:
+        '''
         neg_rotation = [bool(1 - i) for i in rotation_c]
         model.addConstrs(((check_rotation_w(x[i],y[i],rotation_c[i]) == y[i]*rotation_c[i] + x[i]*neg_rotation[i]) for i in range(n)),"rotation_along_x")
         model.addConstrs(((check_rotation_h(x[i],y[i],rotation_c[i]) == x[i]*rotation_c[i] + y[i]*neg_rotation[i]) for i in range(n)),"rotation_along_y")
-        
+        '''
         area = w * h
         
         model.addConstr(area <= area_max ,name = "ub_area")
