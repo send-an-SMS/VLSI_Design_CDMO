@@ -59,3 +59,25 @@ Instance: 15    Execution time: 4.974s  Best objective value: 22
 Instance: 16    Time exceeded   Execution time: 300.020s
 Instance: 17    Execution time: 22.344s Best objective value: 24
 Instance: 18    Execution time: 28.008s Best objective value: 25
+Instance: 19    Time exceeded   Execution time: 300.020s
+Instance: 20    Time exceeded   Execution time: 300.024s
+Instance: 21    Time exceeded   Execution time: 300.029s
+Instance: 22    Time exceeded   Execution time: 300.022s
+Instance: 23    Execution time: 28.521s Best objective value: 30
+Instance: 24    Execution time: 24.739s Best objective value: 31
+Instance: 25    Time exceeded   Execution time: 300.022s
+Instance: 26    Time exceeded   Execution time: 300.024s
+Instance: 27    Execution time: 110.286s Best objective value: 34
+Instance: 28    Execution time: 153.901s Best objective value: 35
+Instance: 29    Execution time: 126.039s Best objective value: 36
+Instance: 30    Time exceeded   Execution time: 300.035s
+Instance: 31    Execution time: 13.678s Best objective value: 38
+Instance: 32    Time exceeded   Execution time: 300.042s
+Instance: 33    Execution time: 31.474s Best objective value: 40
+Instance: 34    Time exceeded   Execution time: 300.017s
+Instance: 35    Time exceeded   Execution time: 300.051s
+Instance: 36    Time exceeded   Execution time: 300.032s
+Instance: 37    Time exceeded   Execution time: 300.041s
+Instance: 38    Time exceeded   Execution time: 300.055s
+Instance: 39    Time exceeded   Execution time: 300.050s
+Instance: 40    Time exceeded   Execution time: 300.017s

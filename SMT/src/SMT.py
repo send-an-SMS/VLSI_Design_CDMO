@@ -56,6 +56,9 @@ def plot_solution(instance, w, h, n, x, y, x_coord, y_coord, sym_break=False, ro
         # compute the width and height of the current circuit
         width = x[i]
         height = y[i]
+        print('siamo quiiiiiiii')
+        print(type(width))
+        print(type(height))
 
         for rows in range(row, row + height):
             for columns in range(column, column + width):
@@ -94,7 +97,7 @@ def max(array):
 
 
 def z3_cumulative(start, duration, resources, total):
-
+# cum_y (x_coord, x_dim, y_dim, sum(y_dim))
     cumulative = []
     
     for u in resources:
@@ -118,7 +121,7 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
     # y = array delle heigths
     for instance in range(first_i, last_i+1):
         w, n_circuit, x_dim, y_dim = read_instance(instance)
-        
+
         #################
         ## NO ROTATION ##
         #################
@@ -244,9 +247,11 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
             x_coord = IntVector('x', n_circuit) 
             y_coord = IntVector('y', n_circuit)
 
-            # height that is going to be minimized from the optimizer
-            min_height = max([ y_dim[i] + y_coord[i] for i in range(n_circuit) ])
+            # array of booleans, each one telling if the corresponding chip is rotated or not
+            rotation_c = BoolVector('r', n_circuit)
 
+            # height that is going to be minimized from the optimizer
+            min_height = max([ If(rotation_c[i], x_dim[i], y_dim[i]) + y_coord[i] for i in range(n_circuit)])
 
             # OPTIMIZER
             optimizer = Optimize()
@@ -265,8 +270,8 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 bound_zero_y.append(y_coord[i] >= 0)
                 
                 # each circuit is positioned inside the limit of the plate (width and height to be minimized)
-                boundary_x.append(x_coord[i] + x_dim[i] <= w)
-                boundary_y.append(y_coord[i] + y_dim[i] <= min_height)
+                boundary_x.append(x_coord[i] + If(rotation_c[i], y_dim[i], x_dim[i]) <= w) #[if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS],
+                boundary_y.append(y_coord[i] + If(rotation_c[i], x_dim[i], y_dim[i]) <= min_height)
                         
             
             # NON OVERLAPPING CONSTRAINT
@@ -274,17 +279,24 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
 
             for i in range(n_circuit):
                 for j in range(i+1, n_circuit): # from i+1 if i and j are the same block the comparison is useless
-                    non_overlap_const.append( Or(x_coord[i] + x_dim[i] <= x_coord[j],   # i to the left of j
-                                                x_coord[j] + x_dim[j] <= x_coord[i],    # i below j
-                                                y_coord[i] + y_dim[i] <= y_coord[j],    # i to the right of j
-                                                y_coord[j] + y_dim[j] <= y_coord[i]))   # i above j
+                    non_overlap_const.append( Or(x_coord[i] + If(rotation_c[i], y_dim[i], x_dim[i]) <= x_coord[j],   # i to the left of j
+                                                 x_coord[j] + If(rotation_c[j], y_dim[j], x_dim[j]) <= x_coord[i],    # i below j
+                                                 y_coord[i] + If(rotation_c[i], x_dim[i], y_dim[i]) <= y_coord[j],    # i to the right of j
+                                                 y_coord[j] + If(rotation_c[j], x_dim[j], y_dim[j]) <= y_coord[i]))   # i above j
 
 
             # CUMULATIVE CONSTRAINT
-            cumulative_x = z3_cumulative(y_coord, y_dim, x_dim, w)
-            cumulative_y = z3_cumulative(x_coord, x_dim, y_dim, sum(y_dim))
+            cumulative_x = z3_cumulative(y_coord,
+                                         [If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)], 
+                                         [If(rotation_c[i], y_dim[i], x_dim[i]) for i in range(n_circuit)], 
+                                         w)
 
-
+            cumulative_y = z3_cumulative(x_coord, 
+                                         [If(rotation_c[i], y_dim[i], x_dim[i]) for i in range(n_circuit)],
+                                         [If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)],
+                                         sum([If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)]) # sum(y_dim)
+                                        )
+        
             # SYMMETRY BREAKING CONSTRAINT
             if sym_break:
                 
@@ -324,7 +336,6 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 
                 # save the execution time
                 end_time = timer() - start_time
-                print(f'Instance: {instance}\tExecution time: {(end_time):.03f}s\tBest objective value: {min_height_sol}')  
 
                 model = optimizer.model()
                 
@@ -336,14 +347,25 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 # get minimized height
                 min_height_sol = model.evaluate(min_height).as_long()
 
+                print(f'Instance: {instance}\tExecution time: {(end_time):.03f}s\tBest objective value: {min_height_sol}')  
+
+                # x_dim_new = [(y_dim[i] if rotation_c[i] else x_dim[i]) for i in range(n_circuit)]
+                # y_dim_new = [(x_dim[i] if rotation_c[i] else y_dim[i]) for i in range(n_circuit)]
+
+                x_dim_new = [Int(If(rotation_c[i], y_dim[i], x_dim[i])) for i in range(n_circuit)]
+                y_dim_new = [Int(If(rotation_c[i], x_dim[i], y_dim[i])) for i in range(n_circuit)]
+
+                # TODO 
+                # x_dim_new | y_dim_new -> convert list of 'z3.z3.ArithRef' into int 
+                
                 # results with sym breaking constraint
                 if sym_break:
-                    write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
-                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
+                    write_solution(instance, w, min_height_sol, n_circuit, x_dim_new, y_dim_new, x_coord_sol, y_coord_sol, sym_break)
+                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim_new, y_dim_new, x_coord_sol, y_coord_sol, sym_break)
                 # results w/o sym breaking constraint
                 else:
-                    write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
-                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
+                    write_solution(instance, w, min_height_sol, n_circuit, x_dim_new, y_dim_new, x_coord_sol, y_coord_sol)
+                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim_new, y_dim_new, x_coord_sol, y_coord_sol)
 
             # solution not found
             else:
