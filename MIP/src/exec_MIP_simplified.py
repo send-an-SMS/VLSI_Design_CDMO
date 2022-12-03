@@ -242,7 +242,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         # model.addConstrs(constraint, name)
         # - constraint 
         # - name of the constraint
-
+        # 0) constraints for avoid square rotations
+        model.addConstrs(((x[i] != rotation_c[i]*y[i]) for i in range(n)), name="no_square_rot")
         # 1) constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
         model.addConstrs(((x_cord[i] + (y[i] if rotation_c[i] else x[i]) <= w) for i in range(n)), name="inside_plate_x") 
         model.addConstrs(((y_cord[i] + (x[i] if rotation_c[i] else y[i])<= h) for i in range(n)), name="inside_plate_y")
@@ -305,7 +306,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         
         print("x_sol:",x_sol)
         print("y_sol:",y_sol)
-        print("rotation_c_sol:",rotation_c_sol)
+        print("rotation_c_sol:",rotation_c)
         print("w_new: ",w_new)
         print("h_new: ",h_new)
         # Writing solution
