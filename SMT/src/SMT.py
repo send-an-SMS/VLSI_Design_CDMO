@@ -131,7 +131,10 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
             # height that is going to be minimized from the optimizer
             min_height = max([ y_dim[i] + y_coord[i] for i in range(n_circuit) ])
 
+
+            # OPTIMIZER
             optimizer = Optimize()
+
 
             # BOUNDS CONSTRAINT - set the boundary of the plate
             boundary_x =[]
@@ -148,13 +151,13 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 # each circuit is positioned inside the limit of the plate (width and height to be minimized)
                 boundary_x.append(x_coord[i] + x_dim[i] <= w)
                 boundary_y.append(y_coord[i] + y_dim[i] <= min_height)
-            
+                        
             
             # NON OVERLAPPING CONSTRAINT
             non_overlap_const = []
-            # parti da i+1 perché i != j (se i=j sono lo stesso blocco ed è inutile il confronto)
+
             for i in range(n_circuit):
-                for j in range(i+1, n_circuit):
+                for j in range(i+1, n_circuit): # from i+1 if i and j are the same block the comparison is useless
                     non_overlap_const.append( Or(x_coord[i] + x_dim[i] <= x_coord[j],   # i to the left of j
                                                 x_coord[j] + x_dim[j] <= x_coord[i],    # i below j
                                                 y_coord[i] + y_dim[i] <= y_coord[j],    # i to the right of j
@@ -165,17 +168,28 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
             cumulative_x = z3_cumulative(y_coord, y_dim, x_dim, w)
             cumulative_y = z3_cumulative(x_coord, x_dim, y_dim, sum(y_dim))
 
-            # SYMMETRY BREAKING CONSTRAINT TODO
+
+            # SYMMETRY BREAKING CONSTRAINT
             if sym_break:
-                symmetry_breaking_1 = []
-                symmetry_breaking_2 = []
-                optimizer.add(symmetry_breaking_1 + symmetry_breaking_2)
+                
+                # find the indexes of the 2 largest pieces
+                circuits_area = [x_dim[i] * y_dim[i] for i in range(n_circuit)]
+                
+                first_max = np.argsort(circuits_area)[-1]
+                second_max = np.argsort(circuits_area)[-2]
+                
+                # the biggest circuit is always placed for first w.r.t. the second biggest one
+                symmetry_breaking = Or(x_coord[first_max] < x_coord[second_max],
+                                        And(x_coord[first_max] == x_coord[second_max], y_coord[first_max] <= y_coord[second_max])
+                                      )
+                # add constraint
+                optimizer.add(symmetry_breaking)
 
-            # OPTIMIZER -> to solve using objective functions
-            x_coord_sol = []
-            y_coord_sol = []
 
+            # assert constraints as background axioms for the optimize solver
             optimizer.add(boundary_x + boundary_x + bound_zero_x + bound_zero_y + non_overlap_const + cumulative_x + cumulative_y)
+            
+            # objective function to minimize
             optimizer.minimize(min_height)
 
             # set optimizer timer
@@ -185,11 +199,16 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
             # set printable timer
             start_time = timer()
             
+            # array for the solution coordinate
+            x_coord_sol = []
+            y_coord_sol = []
+
             # solution found
             if optimizer.check() == sat:
                 
                 # save the execution time
-                end_time = timer() - start_time     
+                end_time = timer() - start_time
+                print(f'Instance: {instance}\tExecution time: {(end_time):.03f}s\tBest objective value: {min_height_sol}')  
 
                 model = optimizer.model()
                 
@@ -200,13 +219,7 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 
                 # get minimized height
                 min_height_sol = model.evaluate(min_height).as_long()
-                
-                # get the model
-                # model = optimizer.model()
-                # print(model)
 
-                print(f'Instance: {instance}\tExecution time: {(end_time):.03f}s\tBest objective value: {min_height_sol}')
-                
                 # results with sym breaking constraint
                 if sym_break:
                     write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
@@ -226,7 +239,116 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
         ##############
         else:
             print("Wow Roration!!")
+                        
+            # initialization of coordinate variables
+            x_coord = IntVector('x', n_circuit) 
+            y_coord = IntVector('y', n_circuit)
 
+            # height that is going to be minimized from the optimizer
+            min_height = max([ y_dim[i] + y_coord[i] for i in range(n_circuit) ])
+
+
+            # OPTIMIZER
+            optimizer = Optimize()
+
+
+            # BOUNDS CONSTRAINT - set the boundary of the plate
+            boundary_x =[]
+            boundary_y =[]
+
+            bound_zero_x = []
+            bound_zero_y = []
+
+            for i in range(n_circuit):
+                # each coord var has the value >= 0
+                bound_zero_x.append(x_coord[i] >= 0)
+                bound_zero_y.append(y_coord[i] >= 0)
+                
+                # each circuit is positioned inside the limit of the plate (width and height to be minimized)
+                boundary_x.append(x_coord[i] + x_dim[i] <= w)
+                boundary_y.append(y_coord[i] + y_dim[i] <= min_height)
+                        
+            
+            # NON OVERLAPPING CONSTRAINT
+            non_overlap_const = []
+
+            for i in range(n_circuit):
+                for j in range(i+1, n_circuit): # from i+1 if i and j are the same block the comparison is useless
+                    non_overlap_const.append( Or(x_coord[i] + x_dim[i] <= x_coord[j],   # i to the left of j
+                                                x_coord[j] + x_dim[j] <= x_coord[i],    # i below j
+                                                y_coord[i] + y_dim[i] <= y_coord[j],    # i to the right of j
+                                                y_coord[j] + y_dim[j] <= y_coord[i]))   # i above j
+
+
+            # CUMULATIVE CONSTRAINT
+            cumulative_x = z3_cumulative(y_coord, y_dim, x_dim, w)
+            cumulative_y = z3_cumulative(x_coord, x_dim, y_dim, sum(y_dim))
+
+
+            # SYMMETRY BREAKING CONSTRAINT
+            if sym_break:
+                
+                # find the indexes of the 2 largest pieces
+                circuits_area = [x_dim[i] * y_dim[i] for i in range(n_circuit)]
+                
+                first_max = np.argsort(circuits_area)[-1]
+                second_max = np.argsort(circuits_area)[-2]
+                
+                # the biggest circuit is always placed for first w.r.t. the second biggest one
+                symmetry_breaking = Or(x_coord[first_max] < x_coord[second_max],
+                                        And(x_coord[first_max] == x_coord[second_max], y_coord[first_max] <= y_coord[second_max])
+                                      )
+                # add constraint
+                optimizer.add(symmetry_breaking)
+
+
+            # assert constraints as background axioms for the optimize solver
+            optimizer.add(boundary_x + boundary_x + bound_zero_x + bound_zero_y + non_overlap_const + cumulative_x + cumulative_y)
+            
+            # objective function to minimize
+            optimizer.minimize(min_height)
+
+            # set optimizer timer
+            timeout = 300000        #10000 # 10 secondi       #300000 #300.000 millisecondi -> 5 minuti
+            optimizer.set('timeout', timeout)
+
+            # set printable timer
+            start_time = timer()
+            
+            # array for the solution coordinate
+            x_coord_sol = []
+            y_coord_sol = []
+
+            # solution found
+            if optimizer.check() == sat:
+                
+                # save the execution time
+                end_time = timer() - start_time
+                print(f'Instance: {instance}\tExecution time: {(end_time):.03f}s\tBest objective value: {min_height_sol}')  
+
+                model = optimizer.model()
+                
+                # get solution for the coord variable
+                for i in range(n_circuit):
+                    x_coord_sol.append(model.evaluate(x_coord[i]).as_long()) # type z3.IntNumRef -> to int
+                    y_coord_sol.append(model.evaluate(y_coord[i]).as_long())
+                
+                # get minimized height
+                min_height_sol = model.evaluate(min_height).as_long()
+
+                # results with sym breaking constraint
+                if sym_break:
+                    write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
+                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol, sym_break)
+                # results w/o sym breaking constraint
+                else:
+                    write_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
+                    plot_solution(instance, w, min_height_sol, n_circuit, x_dim, y_dim, x_coord_sol, y_coord_sol)
+
+            # solution not found
+            else:
+                end_time = timer() - start_time     # save the execution time
+                print(f'Instance: {instance}\tTime exceeded\tExecution time: {(end_time):.03f}s')
 
 
 

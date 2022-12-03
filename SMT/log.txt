@@ -24,3 +24,38 @@ Instance: 22    Time exceeded   Execution time: 300.030s
 Instance: 23    Execution time: 27.994s Best objective value: 30
 Instance: 24    Execution time: 33.180s Best objective value: 31
 Instance: 25    Time exceeded   Execution time: 2095.851s
+Instance: 26    Time exceeded   Execution time: 300.022s
+Instance: 27    Execution time: 146.192s  Best objective value: 34
+Instance: 28    Execution time: 79.995s   Best objective value: 35
+Instance: 29    Execution time: 173.712s  Best objective value: 36
+Instance: 30    Time exceeded   Execution time: 300.044s
+Instance: 31    Time exceeded   Execution time: 300.021s
+Instance: 32    Time exceeded   Execution time: 300.050s
+Instance: 33    Execution time: 29.899s Best objective value: 40
+Instance: 34    Time exceeded   Execution time: 300.046s
+Instance: 35    Time exceeded   Execution time: 300.042s
+Instance: 36    Time exceeded   Execution time: 300.045s
+Instance: 37    Time exceeded   Execution time: 300.033s
+Instance: 38    Time exceeded   Execution time: 300.068s
+Instance: 39    Time exceeded   Execution time: 300.037s
+Instance: 40    Time exceeded   Execution time: 300.034s
+
+= Model with sym break=
+Instance: 1     Execution time: 0.020s  Best objective value: 8
+Instance: 2     Execution time: 0.017s  Best objective value: 9
+Instance: 3     Execution time: 0.037s  Best objective value: 10
+Instance: 4     Execution time: 0.077s  Best objective value: 11
+Instance: 5     Execution time: 0.113s  Best objective value: 12
+Instance: 6     Execution time: 0.201s  Best objective value: 13
+Instance: 7     Execution time: 0.200s  Best objective value: 14
+Instance: 8     Execution time: 0.225s  Best objective value: 15
+Instance: 9     Execution time: 0.242s  Best objective value: 16
+Instance: 10    Execution time: 1.003s  Best objective value: 17
+Instance: 11    Time exceeded   Execution time: 300.010s
+Instance: 12    Execution time: 2.168s  Best objective value: 19
+Instance: 13    Execution time: 2.134s  Best objective value: 20
+Instance: 14    Execution time: 4.967s  Best objective value: 21
+Instance: 15    Execution time: 4.974s  Best objective value: 22
+Instance: 16    Time exceeded   Execution time: 300.020s
+Instance: 17    Execution time: 22.344s Best objective value: 24
+Instance: 18    Execution time: 28.008s Best objective value: 25
