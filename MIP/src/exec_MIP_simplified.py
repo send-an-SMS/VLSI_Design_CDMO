@@ -302,6 +302,8 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         print(f'\nSolution: {h_sol}\n')
         w_new = [check_rotation_w(x[i],y[i],rotation_c_sol[i]) for i in range(n)]
         h_new = [check_rotation_h(x[i],y[i],rotation_c_sol[i]) for i in range(n)]
+        print("w_new: ",w_new)
+        print("h_new: ",h_new)
         # Writing solution
         write_solution(index_f, w, h_sol, n, w_new, h_new, x_sol,y_sol,True,solve_time)
         write_log(index_f,h_sol,True,solve_time)
