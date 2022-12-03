@@ -2,50 +2,47 @@ include "globals.mzn";
 include "cumulative.mzn";
 include "diffn.mzn";
 
-int: w; % width of the silicon plate
-int: n; % amount of circuits to place inside the plate
-set of int: N_CIRCUITS = 1..n;  % range for the circuits
-array[N_CIRCUITS] of int: chip_width;
-array[N_CIRCUITS] of int: chip_height;
-% Define the range for the height of the plate (0 --> y) in order to minimize y
-int: plate_h_max = sum(chip_height);
-int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w); % ceil:  Round a float towards +∞, −∞, and the nearest integer, respectively.
+int: w;  % width of the silicon plate
+int: n;  % amount of circuits to place inside the plate
+set of int: N_CIRCUITS = 1..n;  % range of the number of circuits
+array[N_CIRCUITS] of int: chip_width;  % array of chips widths
+array[N_CIRCUITS] of int: chip_height;  % array of chips heights
+int: plate_h_max = sum([max(chip_width[i], chip_height[i]) | i in N_CIRCUITS]);  % upper bound of the height of the plate
+int: plate_h_min = ceil(sum([(chip_width[x] * chip_height[x]) | x in N_CIRCUITS]) / w);  % lower bound of the height of the plate
+
 
 % == VARIABLES ==
-var plate_h_min..plate_h_max: h ;% possible values for the plate's height (OBJECTIVE FUNTION)
-% the origin of the plate is the left-bottom corner!
-array[N_CIRCUITS] of var 0..w - min(chip_width): x_coordinates;
-array[N_CIRCUITS] of var 0..plate_h_max - min(chip_height): y_coordinates;
-array [N_CIRCUITS] of var bool: rotation_c;
+var plate_h_min..plate_h_max: h;  % the height of the plate, our objective function
+array[N_CIRCUITS] of var 0..w - min(min(chip_width), min(chip_height)): x_coordinates;  % array of coordinates on x-axis
+array[N_CIRCUITS] of var 0..plate_h_max - min(min(chip_width), min(chip_height)): y_coordinates;  % array of coordinates on y-axis
+array [N_CIRCUITS] of var bool: rotation_c;  % array of booleans, each one telling if the corresponding chip is rotated or not
 
-% == CONSTRAINTS ==
-% Check for overlapping circuits
+
+% == GLOBAL CONSTRAINTS ==
 constraint cumulative(y_coordinates,
-                       [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS],% h_new
-                       [if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS],% w_new
-                       w);
+                      [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS],
+                      [if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS],
+                      w);
                        
 constraint diffn(x_coordinates,
                  y_coordinates,
-                 [if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS],% w_new
-                 [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS]);% h_new
+                 [if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS],
+                 [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS]);
                 
-               
-
-% constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
+            
+% == CONSTRAINTS ==
+% check if a chip is out of the plate
 constraint forall(i in N_CIRCUITS)(
-        x_coordinates[i] + (if (rotation_c[i]) then chip_height[i] else chip_width[i] endif ) <= w /\
-        y_coordinates[i] + (if (rotation_c[i]) then chip_width[i] else chip_height[i] endif ) <= h
-        );
+                  x_coordinates[i] + (if (rotation_c[i]) then chip_height[i] else chip_width[i] endif ) <= w /\
+                  y_coordinates[i] + (if (rotation_c[i]) then chip_width[i] else chip_height[i] endif ) <= h);
 
 
-% constraint che controlla la rotazione per i circuiti che sono quadrati
+% squared chips do not have to be rotated
 constraint forall(i in N_CIRCUITS)(
-  (if chip_width[i] == chip_height[i]
-    then rotation_c[i] = false
-    else true
-  endif)
-);
+                 (if chip_width[i] == chip_height[i]
+                 then rotation_c[i] = false
+                 else true
+                 endif));
 
 
 % == SOLVE ==
@@ -58,4 +55,4 @@ solve :: seq_search([
 
 % == OUTPUT ==
 output ["best h value = \(h)\n"];
-output ["\(x)) chip_width: \([if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS]) chip height: \( [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS][x]) --> starting position (\(x_coordinates[x]),\(y_coordinates[x])) \n" | x in N_CIRCUITS] ;
+output ["\(x)) chip_width: \([if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS]) chip height: \([if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS][x]) --> starting position (\(x_coordinates[x]),\(y_coordinates[x])) \n" | x in N_CIRCUITS];

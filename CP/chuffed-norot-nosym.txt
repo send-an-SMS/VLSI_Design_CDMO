@@ -1,0 +1,43 @@
+Last login: Sat Dec  3 15:53:50 on ttys000
+claminos@MacBook-Pro-di-Simona CP % python3 src/cp_exec.py -f 1 -l 40 -p
+Instance: 1	Execution time: 0.317s	Best objective value: 8
+Instance: 2	Execution time: 0.346s	Best objective value: 9
+Instance: 3	Execution time: 0.333s	Best objective value: 10
+Instance: 4	Execution time: 0.341s	Best objective value: 11
+Instance: 5	Execution time: 0.339s	Best objective value: 12
+Instance: 6	Execution time: 0.348s	Best objective value: 13
+Instance: 7	Execution time: 0.342s	Best objective value: 14
+Instance: 8	Execution time: 0.343s	Best objective value: 15
+Instance: 9	Execution time: 0.395s	Best objective value: 16
+Instance: 10	Execution time: 0.354s	Best objective value: 17
+Instance: 11	Execution time: 0.688s	Best objective value: 18
+Instance: 12	Execution time: 0.476s	Best objective value: 19
+Instance: 13	Execution time: 0.357s	Best objective value: 20
+Instance: 14	Execution time: 0.454s	Best objective value: 21
+Instance: 15	Execution time: 0.367s	Best objective value: 22
+Instance: 16	Execution time: 0.962s	Best objective value: 23
+Instance: 17	Execution time: 0.938s	Best objective value: 24
+Instance: 18	Execution time: 0.814s	Best objective value: 25
+Instance: 19	Execution time: 1.656s	Best objective value: 26
+Instance: 20	Execution time: 1.079s	Best objective value: 27
+Instance: 21	Execution time: 1.198s	Best objective value: 28
+Instance: 22	Execution time: 4.706s	Best objective value: 29
+Instance: 23	Execution time: 1.180s	Best objective value: 30
+Instance: 24	Execution time: 0.857s	Best objective value: 31
+Instance: 25	Execution time: 3.024s	Best objective value: 32
+Instance: 26	Execution time: 0.445s	Best objective value: 33
+Instance: 27	Execution time: 2.114s	Best objective value: 34
+Instance: 28	Execution time: 1.369s	Best objective value: 35
+Instance: 29	Execution time: 2.868s	Best objective value: 36
+Instance: 30	Execution time: 78.514s	Best objective value: 37
+Instance: 31	Execution time: 0.845s	Best objective value: 38
+Instance: 32	Execution time: 146.948s	Best objective value: 39
+Instance: 33	Execution time: 1.403s	Best objective value: 40
+Instance: 34	Execution time: 12.123s	Best objective value: 40
+Instance: 35	Execution time: 3.757s	Best objective value: 40
+Instance: 36	Execution time: 1.563s	Best objective value: 40
+Instance: 37	Execution time: 26.228s	Best objective value: 60
+Instance: 38	Time exceeded	Execution time: 301.136s
+Instance: 39	Execution time: 12.882s	Best objective value: 60
+Instance: 40	Time exceeded	Execution time: 301.489s
+claminos@MacBook-Pro-di-Simona CP % 
