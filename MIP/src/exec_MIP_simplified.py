@@ -243,7 +243,7 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         # - constraint 
         # - name of the constraint
         # 0) constraints for avoid square rotations
-        model.addConstrs(((x[i] != rotation_c[i]*y[i]) for i in range(n)), name="no_square_rot")
+        #model.addConstrs(((x[i] != rotation_c[i]*y[i]) for i in range(n)), name="no_square_rot")
         # 1) constraint che controlla se il chip esce dalla plate sia in altezza (h) che in larghezza (w)
         model.addConstrs(((x_cord[i] + (y[i] if rotation_c[i] else x[i]) <= w) for i in range(n)), name="inside_plate_x") 
         model.addConstrs(((y_cord[i] + (x[i] if rotation_c[i] else y[i])<= h) for i in range(n)), name="inside_plate_y")
@@ -257,12 +257,6 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         model.addConstrs(((y_cord[j] + (x[j] if rotation_c[j] else y[j]) <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "n_ov4")
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
         
-        # 3) constraint that check if a chip is rotated or not:
-        '''
-        neg_rotation = [bool(1 - i) for i in rotation_c]
-        model.addConstrs(((check_rotation_w(x[i],y[i],rotation_c[i]) == y[i]*rotation_c[i] + x[i]*neg_rotation[i]) for i in range(n)),"rotation_along_x")
-        model.addConstrs(((check_rotation_h(x[i],y[i],rotation_c[i]) == x[i]*rotation_c[i] + y[i]*neg_rotation[i]) for i in range(n)),"rotation_along_y")
-        '''
         area = w * h
         
         model.addConstr(area <= area_max ,name = "ub_area")
