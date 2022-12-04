@@ -1,0 +1,43 @@
+Last login: Sat Dec  3 18:51:56 on ttys000
+claminos@MacBook-Pro-di-Simona CP % python3 src/cp_exec.py -f 1 -l 40 -p -s gecode -sb
+Instance: 1	Execution time: 0.356s	Best objective value: 8
+Instance: 2	Execution time: 0.378s	Best objective value: 9
+Instance: 3	Execution time: 0.374s	Best objective value: 10
+Instance: 4	Execution time: 0.385s	Best objective value: 11
+Instance: 5	Execution time: 0.379s	Best objective value: 12
+Instance: 6	Execution time: 0.379s	Best objective value: 13
+Instance: 7	Execution time: 0.378s	Best objective value: 14
+Instance: 8	Execution time: 0.374s	Best objective value: 15
+Instance: 9	Execution time: 0.395s	Best objective value: 16
+Instance: 10	Execution time: 0.399s	Best objective value: 17
+Instance: 11	Execution time: 159.541s	Best objective value: 18
+Instance: 12	Execution time: 0.374s	Best objective value: 19
+Instance: 13	Execution time: 0.357s	Best objective value: 20
+Instance: 14	Execution time: 0.380s	Best objective value: 21
+Instance: 15	Execution time: 0.398s	Best objective value: 22
+Instance: 16	Execution time: 176.394s	Best objective value: 23
+Instance: 17	Execution time: 3.029s	Best objective value: 24
+Instance: 18	Execution time: 0.977s	Best objective value: 25
+Instance: 19	Execution time: 150.496s	Best objective value: 26
+Instance: 20	Execution time: 25.794s	Best objective value: 27
+Instance: 21	Execution time: 6.665s	Best objective value: 28
+Instance: 22	Execution time: 249.774s	Best objective value: 29
+Instance: 23	Execution time: 199.147s	Best objective value: 30
+Instance: 24	Execution time: 8.744s	Best objective value: 31
+Instance: 25	No solution found	Execution time: 301.133s
+Instance: 26	Execution time: 0.372s	Best objective value: 33
+Instance: 27	Execution time: 27.316s	Best objective value: 34
+Instance: 28	No solution found	Execution time: 301.106s
+Instance: 29	No solution found	Execution time: 301.111s
+Instance: 30	No solution found	Execution time: 301.105s
+Instance: 31	No solution found	Execution time: 301.107s
+Instance: 32	No solution found	Execution time: 301.107s
+Instance: 33	No solution found	Execution time: 301.108s
+Instance: 34	No solution found	Execution time: 301.119s
+Instance: 35	No solution found	Execution time: 301.107s
+Instance: 36	No solution found	Execution time: 301.107s
+Instance: 37	No solution found	Execution time: 301.115s
+Instance: 38	No solution found	Execution time: 301.111s
+Instance: 39	No solution found	Execution time: 301.108s
+Instance: 40	No solution found	Execution time: 301.110s
+claminos@MacBook-Pro-di-Simona CP % 
