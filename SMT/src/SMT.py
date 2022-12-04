@@ -14,7 +14,7 @@ from timeit import default_timer as timer
 
 # read data from txt instances
 def read_instance(instance):
-    ins_path = Path('..\SMT\instances\ins-' + str(instance) + '.txt') # path of the current instance
+    ins_path = Path('../SMT/instances/ins-' + str(instance) + '.txt') # path of the current instance
     f = open(ins_path, 'r')
     text = f.readlines()
 
