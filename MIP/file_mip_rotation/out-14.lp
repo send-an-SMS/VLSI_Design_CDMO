@@ -1,878 +1,522 @@
 \ Model MIP_rotation
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 Minimize
-  height
+  height + 0 rotation_c[0] + 0 rotation_c[1] + 0 rotation_c[2]
+   + 0 rotation_c[3] + 0 rotation_c[4] + 0 rotation_c[5] + 0 rotation_c[6]
+   + 0 rotation_c[7] + 0 rotation_c[8] + 0 rotation_c[9] + 0 rotation_c[10]
+   + 0 rotation_c[11] + 0 rotation_c[12] + 0 rotation_c[13]
+   + 0 rotation_c[14]
 Subject To
- inside_plate_x[0]: x_coordinates[0] + w_rotate[0] <= 21
- inside_plate_x[1]: x_coordinates[1] + w_rotate[1] <= 21
- inside_plate_x[2]: x_coordinates[2] + w_rotate[2] <= 21
- inside_plate_x[3]: x_coordinates[3] + w_rotate[3] <= 21
- inside_plate_x[4]: x_coordinates[4] + w_rotate[4] <= 21
- inside_plate_x[5]: x_coordinates[5] + w_rotate[5] <= 21
- inside_plate_x[6]: x_coordinates[6] + w_rotate[6] <= 21
- inside_plate_x[7]: x_coordinates[7] + w_rotate[7] <= 21
- inside_plate_x[8]: x_coordinates[8] + w_rotate[8] <= 21
- inside_plate_x[9]: x_coordinates[9] + w_rotate[9] <= 21
- inside_plate_x[10]: x_coordinates[10] + w_rotate[10] <= 21
- inside_plate_x[11]: x_coordinates[11] + w_rotate[11] <= 21
- inside_plate_x[12]: x_coordinates[12] + w_rotate[12] <= 21
- inside_plate_x[13]: x_coordinates[13] + w_rotate[13] <= 21
- inside_plate_x[14]: x_coordinates[14] + w_rotate[14] <= 21
- inside_plate_y[0]: y_coordinates[0] - height + h_rotate[0] <= 0
- inside_plate_y[1]: y_coordinates[1] - height + h_rotate[1] <= 0
- inside_plate_y[2]: y_coordinates[2] - height + h_rotate[2] <= 0
- inside_plate_y[3]: y_coordinates[3] - height + h_rotate[3] <= 0
- inside_plate_y[4]: y_coordinates[4] - height + h_rotate[4] <= 0
- inside_plate_y[5]: y_coordinates[5] - height + h_rotate[5] <= 0
- inside_plate_y[6]: y_coordinates[6] - height + h_rotate[6] <= 0
- inside_plate_y[7]: y_coordinates[7] - height + h_rotate[7] <= 0
- inside_plate_y[8]: y_coordinates[8] - height + h_rotate[8] <= 0
- inside_plate_y[9]: y_coordinates[9] - height + h_rotate[9] <= 0
- inside_plate_y[10]: y_coordinates[10] - height + h_rotate[10] <= 0
- inside_plate_y[11]: y_coordinates[11] - height + h_rotate[11] <= 0
- inside_plate_y[12]: y_coordinates[12] - height + h_rotate[12] <= 0
- inside_plate_y[13]: y_coordinates[13] - height + h_rotate[13] <= 0
- inside_plate_y[14]: y_coordinates[14] - height + h_rotate[14] <= 0
- n_ov1[0,1]: x_coordinates[0] - x_coordinates[1] - 126 s[0,1,0]
-   + w_rotate[0] <= 0
- n_ov1[0,2]: x_coordinates[0] - x_coordinates[2] - 126 s[0,2,0]
-   + w_rotate[0] <= 0
- n_ov1[0,3]: x_coordinates[0] - x_coordinates[3] - 126 s[0,3,0]
-   + w_rotate[0] <= 0
- n_ov1[0,4]: x_coordinates[0] - x_coordinates[4] - 126 s[0,4,0]
-   + w_rotate[0] <= 0
- n_ov1[0,5]: x_coordinates[0] - x_coordinates[5] - 126 s[0,5,0]
-   + w_rotate[0] <= 0
- n_ov1[0,6]: x_coordinates[0] - x_coordinates[6] - 126 s[0,6,0]
-   + w_rotate[0] <= 0
- n_ov1[0,7]: x_coordinates[0] - x_coordinates[7] - 126 s[0,7,0]
-   + w_rotate[0] <= 0
- n_ov1[0,8]: x_coordinates[0] - x_coordinates[8] - 126 s[0,8,0]
-   + w_rotate[0] <= 0
- n_ov1[0,9]: x_coordinates[0] - x_coordinates[9] - 126 s[0,9,0]
-   + w_rotate[0] <= 0
- n_ov1[0,10]: x_coordinates[0] - x_coordinates[10] - 126 s[0,10,0]
-   + w_rotate[0] <= 0
- n_ov1[0,11]: x_coordinates[0] - x_coordinates[11] - 126 s[0,11,0]
-   + w_rotate[0] <= 0
- n_ov1[0,12]: x_coordinates[0] - x_coordinates[12] - 126 s[0,12,0]
-   + w_rotate[0] <= 0
- n_ov1[0,13]: x_coordinates[0] - x_coordinates[13] - 126 s[0,13,0]
-   + w_rotate[0] <= 0
- n_ov1[0,14]: x_coordinates[0] - x_coordinates[14] - 126 s[0,14,0]
-   + w_rotate[0] <= 0
- n_ov1[1,2]: x_coordinates[1] - x_coordinates[2] - 126 s[1,2,0]
-   + w_rotate[1] <= 0
- n_ov1[1,3]: x_coordinates[1] - x_coordinates[3] - 126 s[1,3,0]
-   + w_rotate[1] <= 0
- n_ov1[1,4]: x_coordinates[1] - x_coordinates[4] - 126 s[1,4,0]
-   + w_rotate[1] <= 0
- n_ov1[1,5]: x_coordinates[1] - x_coordinates[5] - 126 s[1,5,0]
-   + w_rotate[1] <= 0
- n_ov1[1,6]: x_coordinates[1] - x_coordinates[6] - 126 s[1,6,0]
-   + w_rotate[1] <= 0
- n_ov1[1,7]: x_coordinates[1] - x_coordinates[7] - 126 s[1,7,0]
-   + w_rotate[1] <= 0
- n_ov1[1,8]: x_coordinates[1] - x_coordinates[8] - 126 s[1,8,0]
-   + w_rotate[1] <= 0
- n_ov1[1,9]: x_coordinates[1] - x_coordinates[9] - 126 s[1,9,0]
-   + w_rotate[1] <= 0
- n_ov1[1,10]: x_coordinates[1] - x_coordinates[10] - 126 s[1,10,0]
-   + w_rotate[1] <= 0
- n_ov1[1,11]: x_coordinates[1] - x_coordinates[11] - 126 s[1,11,0]
-   + w_rotate[1] <= 0
- n_ov1[1,12]: x_coordinates[1] - x_coordinates[12] - 126 s[1,12,0]
-   + w_rotate[1] <= 0
- n_ov1[1,13]: x_coordinates[1] - x_coordinates[13] - 126 s[1,13,0]
-   + w_rotate[1] <= 0
- n_ov1[1,14]: x_coordinates[1] - x_coordinates[14] - 126 s[1,14,0]
-   + w_rotate[1] <= 0
- n_ov1[2,3]: x_coordinates[2] - x_coordinates[3] - 126 s[2,3,0]
-   + w_rotate[2] <= 0
- n_ov1[2,4]: x_coordinates[2] - x_coordinates[4] - 126 s[2,4,0]
-   + w_rotate[2] <= 0
- n_ov1[2,5]: x_coordinates[2] - x_coordinates[5] - 126 s[2,5,0]
-   + w_rotate[2] <= 0
- n_ov1[2,6]: x_coordinates[2] - x_coordinates[6] - 126 s[2,6,0]
-   + w_rotate[2] <= 0
- n_ov1[2,7]: x_coordinates[2] - x_coordinates[7] - 126 s[2,7,0]
-   + w_rotate[2] <= 0
- n_ov1[2,8]: x_coordinates[2] - x_coordinates[8] - 126 s[2,8,0]
-   + w_rotate[2] <= 0
- n_ov1[2,9]: x_coordinates[2] - x_coordinates[9] - 126 s[2,9,0]
-   + w_rotate[2] <= 0
- n_ov1[2,10]: x_coordinates[2] - x_coordinates[10] - 126 s[2,10,0]
-   + w_rotate[2] <= 0
- n_ov1[2,11]: x_coordinates[2] - x_coordinates[11] - 126 s[2,11,0]
-   + w_rotate[2] <= 0
- n_ov1[2,12]: x_coordinates[2] - x_coordinates[12] - 126 s[2,12,0]
-   + w_rotate[2] <= 0
- n_ov1[2,13]: x_coordinates[2] - x_coordinates[13] - 126 s[2,13,0]
-   + w_rotate[2] <= 0
- n_ov1[2,14]: x_coordinates[2] - x_coordinates[14] - 126 s[2,14,0]
-   + w_rotate[2] <= 0
- n_ov1[3,4]: x_coordinates[3] - x_coordinates[4] - 126 s[3,4,0]
-   + w_rotate[3] <= 0
- n_ov1[3,5]: x_coordinates[3] - x_coordinates[5] - 126 s[3,5,0]
-   + w_rotate[3] <= 0
- n_ov1[3,6]: x_coordinates[3] - x_coordinates[6] - 126 s[3,6,0]
-   + w_rotate[3] <= 0
- n_ov1[3,7]: x_coordinates[3] - x_coordinates[7] - 126 s[3,7,0]
-   + w_rotate[3] <= 0
- n_ov1[3,8]: x_coordinates[3] - x_coordinates[8] - 126 s[3,8,0]
-   + w_rotate[3] <= 0
- n_ov1[3,9]: x_coordinates[3] - x_coordinates[9] - 126 s[3,9,0]
-   + w_rotate[3] <= 0
- n_ov1[3,10]: x_coordinates[3] - x_coordinates[10] - 126 s[3,10,0]
-   + w_rotate[3] <= 0
- n_ov1[3,11]: x_coordinates[3] - x_coordinates[11] - 126 s[3,11,0]
-   + w_rotate[3] <= 0
- n_ov1[3,12]: x_coordinates[3] - x_coordinates[12] - 126 s[3,12,0]
-   + w_rotate[3] <= 0
- n_ov1[3,13]: x_coordinates[3] - x_coordinates[13] - 126 s[3,13,0]
-   + w_rotate[3] <= 0
- n_ov1[3,14]: x_coordinates[3] - x_coordinates[14] - 126 s[3,14,0]
-   + w_rotate[3] <= 0
- n_ov1[4,5]: x_coordinates[4] - x_coordinates[5] - 126 s[4,5,0]
-   + w_rotate[4] <= 0
- n_ov1[4,6]: x_coordinates[4] - x_coordinates[6] - 126 s[4,6,0]
-   + w_rotate[4] <= 0
- n_ov1[4,7]: x_coordinates[4] - x_coordinates[7] - 126 s[4,7,0]
-   + w_rotate[4] <= 0
- n_ov1[4,8]: x_coordinates[4] - x_coordinates[8] - 126 s[4,8,0]
-   + w_rotate[4] <= 0
- n_ov1[4,9]: x_coordinates[4] - x_coordinates[9] - 126 s[4,9,0]
-   + w_rotate[4] <= 0
- n_ov1[4,10]: x_coordinates[4] - x_coordinates[10] - 126 s[4,10,0]
-   + w_rotate[4] <= 0
- n_ov1[4,11]: x_coordinates[4] - x_coordinates[11] - 126 s[4,11,0]
-   + w_rotate[4] <= 0
- n_ov1[4,12]: x_coordinates[4] - x_coordinates[12] - 126 s[4,12,0]
-   + w_rotate[4] <= 0
- n_ov1[4,13]: x_coordinates[4] - x_coordinates[13] - 126 s[4,13,0]
-   + w_rotate[4] <= 0
- n_ov1[4,14]: x_coordinates[4] - x_coordinates[14] - 126 s[4,14,0]
-   + w_rotate[4] <= 0
- n_ov1[5,6]: x_coordinates[5] - x_coordinates[6] - 126 s[5,6,0]
-   + w_rotate[5] <= 0
- n_ov1[5,7]: x_coordinates[5] - x_coordinates[7] - 126 s[5,7,0]
-   + w_rotate[5] <= 0
- n_ov1[5,8]: x_coordinates[5] - x_coordinates[8] - 126 s[5,8,0]
-   + w_rotate[5] <= 0
- n_ov1[5,9]: x_coordinates[5] - x_coordinates[9] - 126 s[5,9,0]
-   + w_rotate[5] <= 0
- n_ov1[5,10]: x_coordinates[5] - x_coordinates[10] - 126 s[5,10,0]
-   + w_rotate[5] <= 0
- n_ov1[5,11]: x_coordinates[5] - x_coordinates[11] - 126 s[5,11,0]
-   + w_rotate[5] <= 0
- n_ov1[5,12]: x_coordinates[5] - x_coordinates[12] - 126 s[5,12,0]
-   + w_rotate[5] <= 0
- n_ov1[5,13]: x_coordinates[5] - x_coordinates[13] - 126 s[5,13,0]
-   + w_rotate[5] <= 0
- n_ov1[5,14]: x_coordinates[5] - x_coordinates[14] - 126 s[5,14,0]
-   + w_rotate[5] <= 0
- n_ov1[6,7]: x_coordinates[6] - x_coordinates[7] - 126 s[6,7,0]
-   + w_rotate[6] <= 0
- n_ov1[6,8]: x_coordinates[6] - x_coordinates[8] - 126 s[6,8,0]
-   + w_rotate[6] <= 0
- n_ov1[6,9]: x_coordinates[6] - x_coordinates[9] - 126 s[6,9,0]
-   + w_rotate[6] <= 0
- n_ov1[6,10]: x_coordinates[6] - x_coordinates[10] - 126 s[6,10,0]
-   + w_rotate[6] <= 0
- n_ov1[6,11]: x_coordinates[6] - x_coordinates[11] - 126 s[6,11,0]
-   + w_rotate[6] <= 0
- n_ov1[6,12]: x_coordinates[6] - x_coordinates[12] - 126 s[6,12,0]
-   + w_rotate[6] <= 0
- n_ov1[6,13]: x_coordinates[6] - x_coordinates[13] - 126 s[6,13,0]
-   + w_rotate[6] <= 0
- n_ov1[6,14]: x_coordinates[6] - x_coordinates[14] - 126 s[6,14,0]
-   + w_rotate[6] <= 0
- n_ov1[7,8]: x_coordinates[7] - x_coordinates[8] - 126 s[7,8,0]
-   + w_rotate[7] <= 0
- n_ov1[7,9]: x_coordinates[7] - x_coordinates[9] - 126 s[7,9,0]
-   + w_rotate[7] <= 0
- n_ov1[7,10]: x_coordinates[7] - x_coordinates[10] - 126 s[7,10,0]
-   + w_rotate[7] <= 0
- n_ov1[7,11]: x_coordinates[7] - x_coordinates[11] - 126 s[7,11,0]
-   + w_rotate[7] <= 0
- n_ov1[7,12]: x_coordinates[7] - x_coordinates[12] - 126 s[7,12,0]
-   + w_rotate[7] <= 0
- n_ov1[7,13]: x_coordinates[7] - x_coordinates[13] - 126 s[7,13,0]
-   + w_rotate[7] <= 0
- n_ov1[7,14]: x_coordinates[7] - x_coordinates[14] - 126 s[7,14,0]
-   + w_rotate[7] <= 0
- n_ov1[8,9]: x_coordinates[8] - x_coordinates[9] - 126 s[8,9,0]
-   + w_rotate[8] <= 0
- n_ov1[8,10]: x_coordinates[8] - x_coordinates[10] - 126 s[8,10,0]
-   + w_rotate[8] <= 0
- n_ov1[8,11]: x_coordinates[8] - x_coordinates[11] - 126 s[8,11,0]
-   + w_rotate[8] <= 0
- n_ov1[8,12]: x_coordinates[8] - x_coordinates[12] - 126 s[8,12,0]
-   + w_rotate[8] <= 0
- n_ov1[8,13]: x_coordinates[8] - x_coordinates[13] - 126 s[8,13,0]
-   + w_rotate[8] <= 0
- n_ov1[8,14]: x_coordinates[8] - x_coordinates[14] - 126 s[8,14,0]
-   + w_rotate[8] <= 0
- n_ov1[9,10]: x_coordinates[9] - x_coordinates[10] - 126 s[9,10,0]
-   + w_rotate[9] <= 0
- n_ov1[9,11]: x_coordinates[9] - x_coordinates[11] - 126 s[9,11,0]
-   + w_rotate[9] <= 0
- n_ov1[9,12]: x_coordinates[9] - x_coordinates[12] - 126 s[9,12,0]
-   + w_rotate[9] <= 0
- n_ov1[9,13]: x_coordinates[9] - x_coordinates[13] - 126 s[9,13,0]
-   + w_rotate[9] <= 0
- n_ov1[9,14]: x_coordinates[9] - x_coordinates[14] - 126 s[9,14,0]
-   + w_rotate[9] <= 0
+ inside_plate_x[0]: x_coordinates[0] <= 18
+ inside_plate_x[1]: x_coordinates[1] <= 17
+ inside_plate_x[2]: x_coordinates[2] <= 16
+ inside_plate_x[3]: x_coordinates[3] <= 15
+ inside_plate_x[4]: x_coordinates[4] <= 14
+ inside_plate_x[5]: x_coordinates[5] <= 13
+ inside_plate_x[6]: x_coordinates[6] <= 12
+ inside_plate_x[7]: x_coordinates[7] <= 11
+ inside_plate_x[8]: x_coordinates[8] <= 7
+ inside_plate_x[9]: x_coordinates[9] <= 3
+ inside_plate_x[10]: x_coordinates[10] <= 17
+ inside_plate_x[11]: x_coordinates[11] <= 15
+ inside_plate_x[12]: x_coordinates[12] <= 10
+ inside_plate_x[13]: x_coordinates[13] <= 15
+ inside_plate_x[14]: x_coordinates[14] <= 6
+ inside_plate_y[0]: y_coordinates[0] - height <= -3
+ inside_plate_y[1]: y_coordinates[1] - height <= -3
+ inside_plate_y[2]: y_coordinates[2] - height <= -3
+ inside_plate_y[3]: y_coordinates[3] - height <= -3
+ inside_plate_y[4]: y_coordinates[4] - height <= -3
+ inside_plate_y[5]: y_coordinates[5] - height <= -3
+ inside_plate_y[6]: y_coordinates[6] - height <= -3
+ inside_plate_y[7]: y_coordinates[7] - height <= -3
+ inside_plate_y[8]: y_coordinates[8] - height <= -3
+ inside_plate_y[9]: y_coordinates[9] - height <= -3
+ inside_plate_y[10]: y_coordinates[10] - height <= -4
+ inside_plate_y[11]: y_coordinates[11] - height <= -4
+ inside_plate_y[12]: y_coordinates[12] - height <= -4
+ inside_plate_y[13]: y_coordinates[13] - height <= -5
+ inside_plate_y[14]: y_coordinates[14] - height <= -5
+ n_ov1[0,1]: x_coordinates[0] - x_coordinates[1] - 126 s[0,1,0] <= -3
+ n_ov1[0,2]: x_coordinates[0] - x_coordinates[2] - 126 s[0,2,0] <= -3
+ n_ov1[0,3]: x_coordinates[0] - x_coordinates[3] - 126 s[0,3,0] <= -3
+ n_ov1[0,4]: x_coordinates[0] - x_coordinates[4] - 126 s[0,4,0] <= -3
+ n_ov1[0,5]: x_coordinates[0] - x_coordinates[5] - 126 s[0,5,0] <= -3
+ n_ov1[0,6]: x_coordinates[0] - x_coordinates[6] - 126 s[0,6,0] <= -3
+ n_ov1[0,7]: x_coordinates[0] - x_coordinates[7] - 126 s[0,7,0] <= -3
+ n_ov1[0,8]: x_coordinates[0] - x_coordinates[8] - 126 s[0,8,0] <= -3
+ n_ov1[0,9]: x_coordinates[0] - x_coordinates[9] - 126 s[0,9,0] <= -3
+ n_ov1[0,10]: x_coordinates[0] - x_coordinates[10] - 126 s[0,10,0] <= -3
+ n_ov1[0,11]: x_coordinates[0] - x_coordinates[11] - 126 s[0,11,0] <= -3
+ n_ov1[0,12]: x_coordinates[0] - x_coordinates[12] - 126 s[0,12,0] <= -3
+ n_ov1[0,13]: x_coordinates[0] - x_coordinates[13] - 126 s[0,13,0] <= -3
+ n_ov1[0,14]: x_coordinates[0] - x_coordinates[14] - 126 s[0,14,0] <= -3
+ n_ov1[1,2]: x_coordinates[1] - x_coordinates[2] - 126 s[1,2,0] <= -4
+ n_ov1[1,3]: x_coordinates[1] - x_coordinates[3] - 126 s[1,3,0] <= -4
+ n_ov1[1,4]: x_coordinates[1] - x_coordinates[4] - 126 s[1,4,0] <= -4
+ n_ov1[1,5]: x_coordinates[1] - x_coordinates[5] - 126 s[1,5,0] <= -4
+ n_ov1[1,6]: x_coordinates[1] - x_coordinates[6] - 126 s[1,6,0] <= -4
+ n_ov1[1,7]: x_coordinates[1] - x_coordinates[7] - 126 s[1,7,0] <= -4
+ n_ov1[1,8]: x_coordinates[1] - x_coordinates[8] - 126 s[1,8,0] <= -4
+ n_ov1[1,9]: x_coordinates[1] - x_coordinates[9] - 126 s[1,9,0] <= -4
+ n_ov1[1,10]: x_coordinates[1] - x_coordinates[10] - 126 s[1,10,0] <= -4
+ n_ov1[1,11]: x_coordinates[1] - x_coordinates[11] - 126 s[1,11,0] <= -4
+ n_ov1[1,12]: x_coordinates[1] - x_coordinates[12] - 126 s[1,12,0] <= -4
+ n_ov1[1,13]: x_coordinates[1] - x_coordinates[13] - 126 s[1,13,0] <= -4
+ n_ov1[1,14]: x_coordinates[1] - x_coordinates[14] - 126 s[1,14,0] <= -4
+ n_ov1[2,3]: x_coordinates[2] - x_coordinates[3] - 126 s[2,3,0] <= -5
+ n_ov1[2,4]: x_coordinates[2] - x_coordinates[4] - 126 s[2,4,0] <= -5
+ n_ov1[2,5]: x_coordinates[2] - x_coordinates[5] - 126 s[2,5,0] <= -5
+ n_ov1[2,6]: x_coordinates[2] - x_coordinates[6] - 126 s[2,6,0] <= -5
+ n_ov1[2,7]: x_coordinates[2] - x_coordinates[7] - 126 s[2,7,0] <= -5
+ n_ov1[2,8]: x_coordinates[2] - x_coordinates[8] - 126 s[2,8,0] <= -5
+ n_ov1[2,9]: x_coordinates[2] - x_coordinates[9] - 126 s[2,9,0] <= -5
+ n_ov1[2,10]: x_coordinates[2] - x_coordinates[10] - 126 s[2,10,0] <= -5
+ n_ov1[2,11]: x_coordinates[2] - x_coordinates[11] - 126 s[2,11,0] <= -5
+ n_ov1[2,12]: x_coordinates[2] - x_coordinates[12] - 126 s[2,12,0] <= -5
+ n_ov1[2,13]: x_coordinates[2] - x_coordinates[13] - 126 s[2,13,0] <= -5
+ n_ov1[2,14]: x_coordinates[2] - x_coordinates[14] - 126 s[2,14,0] <= -5
+ n_ov1[3,4]: x_coordinates[3] - x_coordinates[4] - 126 s[3,4,0] <= -6
+ n_ov1[3,5]: x_coordinates[3] - x_coordinates[5] - 126 s[3,5,0] <= -6
+ n_ov1[3,6]: x_coordinates[3] - x_coordinates[6] - 126 s[3,6,0] <= -6
+ n_ov1[3,7]: x_coordinates[3] - x_coordinates[7] - 126 s[3,7,0] <= -6
+ n_ov1[3,8]: x_coordinates[3] - x_coordinates[8] - 126 s[3,8,0] <= -6
+ n_ov1[3,9]: x_coordinates[3] - x_coordinates[9] - 126 s[3,9,0] <= -6
+ n_ov1[3,10]: x_coordinates[3] - x_coordinates[10] - 126 s[3,10,0] <= -6
+ n_ov1[3,11]: x_coordinates[3] - x_coordinates[11] - 126 s[3,11,0] <= -6
+ n_ov1[3,12]: x_coordinates[3] - x_coordinates[12] - 126 s[3,12,0] <= -6
+ n_ov1[3,13]: x_coordinates[3] - x_coordinates[13] - 126 s[3,13,0] <= -6
+ n_ov1[3,14]: x_coordinates[3] - x_coordinates[14] - 126 s[3,14,0] <= -6
+ n_ov1[4,5]: x_coordinates[4] - x_coordinates[5] - 126 s[4,5,0] <= -7
+ n_ov1[4,6]: x_coordinates[4] - x_coordinates[6] - 126 s[4,6,0] <= -7
+ n_ov1[4,7]: x_coordinates[4] - x_coordinates[7] - 126 s[4,7,0] <= -7
+ n_ov1[4,8]: x_coordinates[4] - x_coordinates[8] - 126 s[4,8,0] <= -7
+ n_ov1[4,9]: x_coordinates[4] - x_coordinates[9] - 126 s[4,9,0] <= -7
+ n_ov1[4,10]: x_coordinates[4] - x_coordinates[10] - 126 s[4,10,0] <= -7
+ n_ov1[4,11]: x_coordinates[4] - x_coordinates[11] - 126 s[4,11,0] <= -7
+ n_ov1[4,12]: x_coordinates[4] - x_coordinates[12] - 126 s[4,12,0] <= -7
+ n_ov1[4,13]: x_coordinates[4] - x_coordinates[13] - 126 s[4,13,0] <= -7
+ n_ov1[4,14]: x_coordinates[4] - x_coordinates[14] - 126 s[4,14,0] <= -7
+ n_ov1[5,6]: x_coordinates[5] - x_coordinates[6] - 126 s[5,6,0] <= -8
+ n_ov1[5,7]: x_coordinates[5] - x_coordinates[7] - 126 s[5,7,0] <= -8
+ n_ov1[5,8]: x_coordinates[5] - x_coordinates[8] - 126 s[5,8,0] <= -8
+ n_ov1[5,9]: x_coordinates[5] - x_coordinates[9] - 126 s[5,9,0] <= -8
+ n_ov1[5,10]: x_coordinates[5] - x_coordinates[10] - 126 s[5,10,0] <= -8
+ n_ov1[5,11]: x_coordinates[5] - x_coordinates[11] - 126 s[5,11,0] <= -8
+ n_ov1[5,12]: x_coordinates[5] - x_coordinates[12] - 126 s[5,12,0] <= -8
+ n_ov1[5,13]: x_coordinates[5] - x_coordinates[13] - 126 s[5,13,0] <= -8
+ n_ov1[5,14]: x_coordinates[5] - x_coordinates[14] - 126 s[5,14,0] <= -8
+ n_ov1[6,7]: x_coordinates[6] - x_coordinates[7] - 126 s[6,7,0] <= -9
+ n_ov1[6,8]: x_coordinates[6] - x_coordinates[8] - 126 s[6,8,0] <= -9
+ n_ov1[6,9]: x_coordinates[6] - x_coordinates[9] - 126 s[6,9,0] <= -9
+ n_ov1[6,10]: x_coordinates[6] - x_coordinates[10] - 126 s[6,10,0] <= -9
+ n_ov1[6,11]: x_coordinates[6] - x_coordinates[11] - 126 s[6,11,0] <= -9
+ n_ov1[6,12]: x_coordinates[6] - x_coordinates[12] - 126 s[6,12,0] <= -9
+ n_ov1[6,13]: x_coordinates[6] - x_coordinates[13] - 126 s[6,13,0] <= -9
+ n_ov1[6,14]: x_coordinates[6] - x_coordinates[14] - 126 s[6,14,0] <= -9
+ n_ov1[7,8]: x_coordinates[7] - x_coordinates[8] - 126 s[7,8,0] <= -10
+ n_ov1[7,9]: x_coordinates[7] - x_coordinates[9] - 126 s[7,9,0] <= -10
+ n_ov1[7,10]: x_coordinates[7] - x_coordinates[10] - 126 s[7,10,0] <= -10
+ n_ov1[7,11]: x_coordinates[7] - x_coordinates[11] - 126 s[7,11,0] <= -10
+ n_ov1[7,12]: x_coordinates[7] - x_coordinates[12] - 126 s[7,12,0] <= -10
+ n_ov1[7,13]: x_coordinates[7] - x_coordinates[13] - 126 s[7,13,0] <= -10
+ n_ov1[7,14]: x_coordinates[7] - x_coordinates[14] - 126 s[7,14,0] <= -10
+ n_ov1[8,9]: x_coordinates[8] - x_coordinates[9] - 126 s[8,9,0] <= -14
+ n_ov1[8,10]: x_coordinates[8] - x_coordinates[10] - 126 s[8,10,0] <= -14
+ n_ov1[8,11]: x_coordinates[8] - x_coordinates[11] - 126 s[8,11,0] <= -14
+ n_ov1[8,12]: x_coordinates[8] - x_coordinates[12] - 126 s[8,12,0] <= -14
+ n_ov1[8,13]: x_coordinates[8] - x_coordinates[13] - 126 s[8,13,0] <= -14
+ n_ov1[8,14]: x_coordinates[8] - x_coordinates[14] - 126 s[8,14,0] <= -14
+ n_ov1[9,10]: x_coordinates[9] - x_coordinates[10] - 126 s[9,10,0] <= -18
+ n_ov1[9,11]: x_coordinates[9] - x_coordinates[11] - 126 s[9,11,0] <= -18
+ n_ov1[9,12]: x_coordinates[9] - x_coordinates[12] - 126 s[9,12,0] <= -18
+ n_ov1[9,13]: x_coordinates[9] - x_coordinates[13] - 126 s[9,13,0] <= -18
+ n_ov1[9,14]: x_coordinates[9] - x_coordinates[14] - 126 s[9,14,0] <= -18
  n_ov1[10,11]: x_coordinates[10] - x_coordinates[11] - 126 s[10,11,0]
-   + w_rotate[10] <= 0
+   <= -4
  n_ov1[10,12]: x_coordinates[10] - x_coordinates[12] - 126 s[10,12,0]
-   + w_rotate[10] <= 0
+   <= -4
  n_ov1[10,13]: x_coordinates[10] - x_coordinates[13] - 126 s[10,13,0]
-   + w_rotate[10] <= 0
+   <= -4
  n_ov1[10,14]: x_coordinates[10] - x_coordinates[14] - 126 s[10,14,0]
-   + w_rotate[10] <= 0
+   <= -4
  n_ov1[11,12]: x_coordinates[11] - x_coordinates[12] - 126 s[11,12,0]
-   + w_rotate[11] <= 0
+   <= -6
  n_ov1[11,13]: x_coordinates[11] - x_coordinates[13] - 126 s[11,13,0]
-   + w_rotate[11] <= 0
+   <= -6
  n_ov1[11,14]: x_coordinates[11] - x_coordinates[14] - 126 s[11,14,0]
-   + w_rotate[11] <= 0
+   <= -6
  n_ov1[12,13]: x_coordinates[12] - x_coordinates[13] - 126 s[12,13,0]
-   + w_rotate[12] <= 0
+   <= -11
  n_ov1[12,14]: x_coordinates[12] - x_coordinates[14] - 126 s[12,14,0]
-   + w_rotate[12] <= 0
+   <= -11
  n_ov1[13,14]: x_coordinates[13] - x_coordinates[14] - 126 s[13,14,0]
-   + w_rotate[13] <= 0
- n_ov2[0,1]: y_coordinates[0] - y_coordinates[1] - 126 s[0,1,1]
-   + h_rotate[0] <= 0
- n_ov2[0,2]: y_coordinates[0] - y_coordinates[2] - 126 s[0,2,1]
-   + h_rotate[0] <= 0
- n_ov2[0,3]: y_coordinates[0] - y_coordinates[3] - 126 s[0,3,1]
-   + h_rotate[0] <= 0
- n_ov2[0,4]: y_coordinates[0] - y_coordinates[4] - 126 s[0,4,1]
-   + h_rotate[0] <= 0
- n_ov2[0,5]: y_coordinates[0] - y_coordinates[5] - 126 s[0,5,1]
-   + h_rotate[0] <= 0
- n_ov2[0,6]: y_coordinates[0] - y_coordinates[6] - 126 s[0,6,1]
-   + h_rotate[0] <= 0
- n_ov2[0,7]: y_coordinates[0] - y_coordinates[7] - 126 s[0,7,1]
-   + h_rotate[0] <= 0
- n_ov2[0,8]: y_coordinates[0] - y_coordinates[8] - 126 s[0,8,1]
-   + h_rotate[0] <= 0
- n_ov2[0,9]: y_coordinates[0] - y_coordinates[9] - 126 s[0,9,1]
-   + h_rotate[0] <= 0
- n_ov2[0,10]: y_coordinates[0] - y_coordinates[10] - 126 s[0,10,1]
-   + h_rotate[0] <= 0
- n_ov2[0,11]: y_coordinates[0] - y_coordinates[11] - 126 s[0,11,1]
-   + h_rotate[0] <= 0
- n_ov2[0,12]: y_coordinates[0] - y_coordinates[12] - 126 s[0,12,1]
-   + h_rotate[0] <= 0
- n_ov2[0,13]: y_coordinates[0] - y_coordinates[13] - 126 s[0,13,1]
-   + h_rotate[0] <= 0
- n_ov2[0,14]: y_coordinates[0] - y_coordinates[14] - 126 s[0,14,1]
-   + h_rotate[0] <= 0
- n_ov2[1,2]: y_coordinates[1] - y_coordinates[2] - 126 s[1,2,1]
-   + h_rotate[1] <= 0
- n_ov2[1,3]: y_coordinates[1] - y_coordinates[3] - 126 s[1,3,1]
-   + h_rotate[1] <= 0
- n_ov2[1,4]: y_coordinates[1] - y_coordinates[4] - 126 s[1,4,1]
-   + h_rotate[1] <= 0
- n_ov2[1,5]: y_coordinates[1] - y_coordinates[5] - 126 s[1,5,1]
-   + h_rotate[1] <= 0
- n_ov2[1,6]: y_coordinates[1] - y_coordinates[6] - 126 s[1,6,1]
-   + h_rotate[1] <= 0
- n_ov2[1,7]: y_coordinates[1] - y_coordinates[7] - 126 s[1,7,1]
-   + h_rotate[1] <= 0
- n_ov2[1,8]: y_coordinates[1] - y_coordinates[8] - 126 s[1,8,1]
-   + h_rotate[1] <= 0
- n_ov2[1,9]: y_coordinates[1] - y_coordinates[9] - 126 s[1,9,1]
-   + h_rotate[1] <= 0
- n_ov2[1,10]: y_coordinates[1] - y_coordinates[10] - 126 s[1,10,1]
-   + h_rotate[1] <= 0
- n_ov2[1,11]: y_coordinates[1] - y_coordinates[11] - 126 s[1,11,1]
-   + h_rotate[1] <= 0
- n_ov2[1,12]: y_coordinates[1] - y_coordinates[12] - 126 s[1,12,1]
-   + h_rotate[1] <= 0
- n_ov2[1,13]: y_coordinates[1] - y_coordinates[13] - 126 s[1,13,1]
-   + h_rotate[1] <= 0
- n_ov2[1,14]: y_coordinates[1] - y_coordinates[14] - 126 s[1,14,1]
-   + h_rotate[1] <= 0
- n_ov2[2,3]: y_coordinates[2] - y_coordinates[3] - 126 s[2,3,1]
-   + h_rotate[2] <= 0
- n_ov2[2,4]: y_coordinates[2] - y_coordinates[4] - 126 s[2,4,1]
-   + h_rotate[2] <= 0
- n_ov2[2,5]: y_coordinates[2] - y_coordinates[5] - 126 s[2,5,1]
-   + h_rotate[2] <= 0
- n_ov2[2,6]: y_coordinates[2] - y_coordinates[6] - 126 s[2,6,1]
-   + h_rotate[2] <= 0
- n_ov2[2,7]: y_coordinates[2] - y_coordinates[7] - 126 s[2,7,1]
-   + h_rotate[2] <= 0
- n_ov2[2,8]: y_coordinates[2] - y_coordinates[8] - 126 s[2,8,1]
-   + h_rotate[2] <= 0
- n_ov2[2,9]: y_coordinates[2] - y_coordinates[9] - 126 s[2,9,1]
-   + h_rotate[2] <= 0
- n_ov2[2,10]: y_coordinates[2] - y_coordinates[10] - 126 s[2,10,1]
-   + h_rotate[2] <= 0
- n_ov2[2,11]: y_coordinates[2] - y_coordinates[11] - 126 s[2,11,1]
-   + h_rotate[2] <= 0
- n_ov2[2,12]: y_coordinates[2] - y_coordinates[12] - 126 s[2,12,1]
-   + h_rotate[2] <= 0
- n_ov2[2,13]: y_coordinates[2] - y_coordinates[13] - 126 s[2,13,1]
-   + h_rotate[2] <= 0
- n_ov2[2,14]: y_coordinates[2] - y_coordinates[14] - 126 s[2,14,1]
-   + h_rotate[2] <= 0
- n_ov2[3,4]: y_coordinates[3] - y_coordinates[4] - 126 s[3,4,1]
-   + h_rotate[3] <= 0
- n_ov2[3,5]: y_coordinates[3] - y_coordinates[5] - 126 s[3,5,1]
-   + h_rotate[3] <= 0
- n_ov2[3,6]: y_coordinates[3] - y_coordinates[6] - 126 s[3,6,1]
-   + h_rotate[3] <= 0
- n_ov2[3,7]: y_coordinates[3] - y_coordinates[7] - 126 s[3,7,1]
-   + h_rotate[3] <= 0
- n_ov2[3,8]: y_coordinates[3] - y_coordinates[8] - 126 s[3,8,1]
-   + h_rotate[3] <= 0
- n_ov2[3,9]: y_coordinates[3] - y_coordinates[9] - 126 s[3,9,1]
-   + h_rotate[3] <= 0
- n_ov2[3,10]: y_coordinates[3] - y_coordinates[10] - 126 s[3,10,1]
-   + h_rotate[3] <= 0
- n_ov2[3,11]: y_coordinates[3] - y_coordinates[11] - 126 s[3,11,1]
-   + h_rotate[3] <= 0
- n_ov2[3,12]: y_coordinates[3] - y_coordinates[12] - 126 s[3,12,1]
-   + h_rotate[3] <= 0
- n_ov2[3,13]: y_coordinates[3] - y_coordinates[13] - 126 s[3,13,1]
-   + h_rotate[3] <= 0
- n_ov2[3,14]: y_coordinates[3] - y_coordinates[14] - 126 s[3,14,1]
-   + h_rotate[3] <= 0
- n_ov2[4,5]: y_coordinates[4] - y_coordinates[5] - 126 s[4,5,1]
-   + h_rotate[4] <= 0
- n_ov2[4,6]: y_coordinates[4] - y_coordinates[6] - 126 s[4,6,1]
-   + h_rotate[4] <= 0
- n_ov2[4,7]: y_coordinates[4] - y_coordinates[7] - 126 s[4,7,1]
-   + h_rotate[4] <= 0
- n_ov2[4,8]: y_coordinates[4] - y_coordinates[8] - 126 s[4,8,1]
-   + h_rotate[4] <= 0
- n_ov2[4,9]: y_coordinates[4] - y_coordinates[9] - 126 s[4,9,1]
-   + h_rotate[4] <= 0
- n_ov2[4,10]: y_coordinates[4] - y_coordinates[10] - 126 s[4,10,1]
-   + h_rotate[4] <= 0
- n_ov2[4,11]: y_coordinates[4] - y_coordinates[11] - 126 s[4,11,1]
-   + h_rotate[4] <= 0
- n_ov2[4,12]: y_coordinates[4] - y_coordinates[12] - 126 s[4,12,1]
-   + h_rotate[4] <= 0
- n_ov2[4,13]: y_coordinates[4] - y_coordinates[13] - 126 s[4,13,1]
-   + h_rotate[4] <= 0
- n_ov2[4,14]: y_coordinates[4] - y_coordinates[14] - 126 s[4,14,1]
-   + h_rotate[4] <= 0
- n_ov2[5,6]: y_coordinates[5] - y_coordinates[6] - 126 s[5,6,1]
-   + h_rotate[5] <= 0
- n_ov2[5,7]: y_coordinates[5] - y_coordinates[7] - 126 s[5,7,1]
-   + h_rotate[5] <= 0
- n_ov2[5,8]: y_coordinates[5] - y_coordinates[8] - 126 s[5,8,1]
-   + h_rotate[5] <= 0
- n_ov2[5,9]: y_coordinates[5] - y_coordinates[9] - 126 s[5,9,1]
-   + h_rotate[5] <= 0
- n_ov2[5,10]: y_coordinates[5] - y_coordinates[10] - 126 s[5,10,1]
-   + h_rotate[5] <= 0
- n_ov2[5,11]: y_coordinates[5] - y_coordinates[11] - 126 s[5,11,1]
-   + h_rotate[5] <= 0
- n_ov2[5,12]: y_coordinates[5] - y_coordinates[12] - 126 s[5,12,1]
-   + h_rotate[5] <= 0
- n_ov2[5,13]: y_coordinates[5] - y_coordinates[13] - 126 s[5,13,1]
-   + h_rotate[5] <= 0
- n_ov2[5,14]: y_coordinates[5] - y_coordinates[14] - 126 s[5,14,1]
-   + h_rotate[5] <= 0
- n_ov2[6,7]: y_coordinates[6] - y_coordinates[7] - 126 s[6,7,1]
-   + h_rotate[6] <= 0
- n_ov2[6,8]: y_coordinates[6] - y_coordinates[8] - 126 s[6,8,1]
-   + h_rotate[6] <= 0
- n_ov2[6,9]: y_coordinates[6] - y_coordinates[9] - 126 s[6,9,1]
-   + h_rotate[6] <= 0
- n_ov2[6,10]: y_coordinates[6] - y_coordinates[10] - 126 s[6,10,1]
-   + h_rotate[6] <= 0
- n_ov2[6,11]: y_coordinates[6] - y_coordinates[11] - 126 s[6,11,1]
-   + h_rotate[6] <= 0
- n_ov2[6,12]: y_coordinates[6] - y_coordinates[12] - 126 s[6,12,1]
-   + h_rotate[6] <= 0
- n_ov2[6,13]: y_coordinates[6] - y_coordinates[13] - 126 s[6,13,1]
-   + h_rotate[6] <= 0
- n_ov2[6,14]: y_coordinates[6] - y_coordinates[14] - 126 s[6,14,1]
-   + h_rotate[6] <= 0
- n_ov2[7,8]: y_coordinates[7] - y_coordinates[8] - 126 s[7,8,1]
-   + h_rotate[7] <= 0
- n_ov2[7,9]: y_coordinates[7] - y_coordinates[9] - 126 s[7,9,1]
-   + h_rotate[7] <= 0
- n_ov2[7,10]: y_coordinates[7] - y_coordinates[10] - 126 s[7,10,1]
-   + h_rotate[7] <= 0
- n_ov2[7,11]: y_coordinates[7] - y_coordinates[11] - 126 s[7,11,1]
-   + h_rotate[7] <= 0
- n_ov2[7,12]: y_coordinates[7] - y_coordinates[12] - 126 s[7,12,1]
-   + h_rotate[7] <= 0
- n_ov2[7,13]: y_coordinates[7] - y_coordinates[13] - 126 s[7,13,1]
-   + h_rotate[7] <= 0
- n_ov2[7,14]: y_coordinates[7] - y_coordinates[14] - 126 s[7,14,1]
-   + h_rotate[7] <= 0
- n_ov2[8,9]: y_coordinates[8] - y_coordinates[9] - 126 s[8,9,1]
-   + h_rotate[8] <= 0
- n_ov2[8,10]: y_coordinates[8] - y_coordinates[10] - 126 s[8,10,1]
-   + h_rotate[8] <= 0
- n_ov2[8,11]: y_coordinates[8] - y_coordinates[11] - 126 s[8,11,1]
-   + h_rotate[8] <= 0
- n_ov2[8,12]: y_coordinates[8] - y_coordinates[12] - 126 s[8,12,1]
-   + h_rotate[8] <= 0
- n_ov2[8,13]: y_coordinates[8] - y_coordinates[13] - 126 s[8,13,1]
-   + h_rotate[8] <= 0
- n_ov2[8,14]: y_coordinates[8] - y_coordinates[14] - 126 s[8,14,1]
-   + h_rotate[8] <= 0
- n_ov2[9,10]: y_coordinates[9] - y_coordinates[10] - 126 s[9,10,1]
-   + h_rotate[9] <= 0
- n_ov2[9,11]: y_coordinates[9] - y_coordinates[11] - 126 s[9,11,1]
-   + h_rotate[9] <= 0
- n_ov2[9,12]: y_coordinates[9] - y_coordinates[12] - 126 s[9,12,1]
-   + h_rotate[9] <= 0
- n_ov2[9,13]: y_coordinates[9] - y_coordinates[13] - 126 s[9,13,1]
-   + h_rotate[9] <= 0
- n_ov2[9,14]: y_coordinates[9] - y_coordinates[14] - 126 s[9,14,1]
-   + h_rotate[9] <= 0
+   <= -6
+ n_ov2[0,1]: y_coordinates[0] - y_coordinates[1] - 126 s[0,1,1] <= -3
+ n_ov2[0,2]: y_coordinates[0] - y_coordinates[2] - 126 s[0,2,1] <= -3
+ n_ov2[0,3]: y_coordinates[0] - y_coordinates[3] - 126 s[0,3,1] <= -3
+ n_ov2[0,4]: y_coordinates[0] - y_coordinates[4] - 126 s[0,4,1] <= -3
+ n_ov2[0,5]: y_coordinates[0] - y_coordinates[5] - 126 s[0,5,1] <= -3
+ n_ov2[0,6]: y_coordinates[0] - y_coordinates[6] - 126 s[0,6,1] <= -3
+ n_ov2[0,7]: y_coordinates[0] - y_coordinates[7] - 126 s[0,7,1] <= -3
+ n_ov2[0,8]: y_coordinates[0] - y_coordinates[8] - 126 s[0,8,1] <= -3
+ n_ov2[0,9]: y_coordinates[0] - y_coordinates[9] - 126 s[0,9,1] <= -3
+ n_ov2[0,10]: y_coordinates[0] - y_coordinates[10] - 126 s[0,10,1] <= -3
+ n_ov2[0,11]: y_coordinates[0] - y_coordinates[11] - 126 s[0,11,1] <= -3
+ n_ov2[0,12]: y_coordinates[0] - y_coordinates[12] - 126 s[0,12,1] <= -3
+ n_ov2[0,13]: y_coordinates[0] - y_coordinates[13] - 126 s[0,13,1] <= -3
+ n_ov2[0,14]: y_coordinates[0] - y_coordinates[14] - 126 s[0,14,1] <= -3
+ n_ov2[1,2]: y_coordinates[1] - y_coordinates[2] - 126 s[1,2,1] <= -3
+ n_ov2[1,3]: y_coordinates[1] - y_coordinates[3] - 126 s[1,3,1] <= -3
+ n_ov2[1,4]: y_coordinates[1] - y_coordinates[4] - 126 s[1,4,1] <= -3
+ n_ov2[1,5]: y_coordinates[1] - y_coordinates[5] - 126 s[1,5,1] <= -3
+ n_ov2[1,6]: y_coordinates[1] - y_coordinates[6] - 126 s[1,6,1] <= -3
+ n_ov2[1,7]: y_coordinates[1] - y_coordinates[7] - 126 s[1,7,1] <= -3
+ n_ov2[1,8]: y_coordinates[1] - y_coordinates[8] - 126 s[1,8,1] <= -3
+ n_ov2[1,9]: y_coordinates[1] - y_coordinates[9] - 126 s[1,9,1] <= -3
+ n_ov2[1,10]: y_coordinates[1] - y_coordinates[10] - 126 s[1,10,1] <= -3
+ n_ov2[1,11]: y_coordinates[1] - y_coordinates[11] - 126 s[1,11,1] <= -3
+ n_ov2[1,12]: y_coordinates[1] - y_coordinates[12] - 126 s[1,12,1] <= -3
+ n_ov2[1,13]: y_coordinates[1] - y_coordinates[13] - 126 s[1,13,1] <= -3
+ n_ov2[1,14]: y_coordinates[1] - y_coordinates[14] - 126 s[1,14,1] <= -3
+ n_ov2[2,3]: y_coordinates[2] - y_coordinates[3] - 126 s[2,3,1] <= -3
+ n_ov2[2,4]: y_coordinates[2] - y_coordinates[4] - 126 s[2,4,1] <= -3
+ n_ov2[2,5]: y_coordinates[2] - y_coordinates[5] - 126 s[2,5,1] <= -3
+ n_ov2[2,6]: y_coordinates[2] - y_coordinates[6] - 126 s[2,6,1] <= -3
+ n_ov2[2,7]: y_coordinates[2] - y_coordinates[7] - 126 s[2,7,1] <= -3
+ n_ov2[2,8]: y_coordinates[2] - y_coordinates[8] - 126 s[2,8,1] <= -3
+ n_ov2[2,9]: y_coordinates[2] - y_coordinates[9] - 126 s[2,9,1] <= -3
+ n_ov2[2,10]: y_coordinates[2] - y_coordinates[10] - 126 s[2,10,1] <= -3
+ n_ov2[2,11]: y_coordinates[2] - y_coordinates[11] - 126 s[2,11,1] <= -3
+ n_ov2[2,12]: y_coordinates[2] - y_coordinates[12] - 126 s[2,12,1] <= -3
+ n_ov2[2,13]: y_coordinates[2] - y_coordinates[13] - 126 s[2,13,1] <= -3
+ n_ov2[2,14]: y_coordinates[2] - y_coordinates[14] - 126 s[2,14,1] <= -3
+ n_ov2[3,4]: y_coordinates[3] - y_coordinates[4] - 126 s[3,4,1] <= -3
+ n_ov2[3,5]: y_coordinates[3] - y_coordinates[5] - 126 s[3,5,1] <= -3
+ n_ov2[3,6]: y_coordinates[3] - y_coordinates[6] - 126 s[3,6,1] <= -3
+ n_ov2[3,7]: y_coordinates[3] - y_coordinates[7] - 126 s[3,7,1] <= -3
+ n_ov2[3,8]: y_coordinates[3] - y_coordinates[8] - 126 s[3,8,1] <= -3
+ n_ov2[3,9]: y_coordinates[3] - y_coordinates[9] - 126 s[3,9,1] <= -3
+ n_ov2[3,10]: y_coordinates[3] - y_coordinates[10] - 126 s[3,10,1] <= -3
+ n_ov2[3,11]: y_coordinates[3] - y_coordinates[11] - 126 s[3,11,1] <= -3
+ n_ov2[3,12]: y_coordinates[3] - y_coordinates[12] - 126 s[3,12,1] <= -3
+ n_ov2[3,13]: y_coordinates[3] - y_coordinates[13] - 126 s[3,13,1] <= -3
+ n_ov2[3,14]: y_coordinates[3] - y_coordinates[14] - 126 s[3,14,1] <= -3
+ n_ov2[4,5]: y_coordinates[4] - y_coordinates[5] - 126 s[4,5,1] <= -3
+ n_ov2[4,6]: y_coordinates[4] - y_coordinates[6] - 126 s[4,6,1] <= -3
+ n_ov2[4,7]: y_coordinates[4] - y_coordinates[7] - 126 s[4,7,1] <= -3
+ n_ov2[4,8]: y_coordinates[4] - y_coordinates[8] - 126 s[4,8,1] <= -3
+ n_ov2[4,9]: y_coordinates[4] - y_coordinates[9] - 126 s[4,9,1] <= -3
+ n_ov2[4,10]: y_coordinates[4] - y_coordinates[10] - 126 s[4,10,1] <= -3
+ n_ov2[4,11]: y_coordinates[4] - y_coordinates[11] - 126 s[4,11,1] <= -3
+ n_ov2[4,12]: y_coordinates[4] - y_coordinates[12] - 126 s[4,12,1] <= -3
+ n_ov2[4,13]: y_coordinates[4] - y_coordinates[13] - 126 s[4,13,1] <= -3
+ n_ov2[4,14]: y_coordinates[4] - y_coordinates[14] - 126 s[4,14,1] <= -3
+ n_ov2[5,6]: y_coordinates[5] - y_coordinates[6] - 126 s[5,6,1] <= -3
+ n_ov2[5,7]: y_coordinates[5] - y_coordinates[7] - 126 s[5,7,1] <= -3
+ n_ov2[5,8]: y_coordinates[5] - y_coordinates[8] - 126 s[5,8,1] <= -3
+ n_ov2[5,9]: y_coordinates[5] - y_coordinates[9] - 126 s[5,9,1] <= -3
+ n_ov2[5,10]: y_coordinates[5] - y_coordinates[10] - 126 s[5,10,1] <= -3
+ n_ov2[5,11]: y_coordinates[5] - y_coordinates[11] - 126 s[5,11,1] <= -3
+ n_ov2[5,12]: y_coordinates[5] - y_coordinates[12] - 126 s[5,12,1] <= -3
+ n_ov2[5,13]: y_coordinates[5] - y_coordinates[13] - 126 s[5,13,1] <= -3
+ n_ov2[5,14]: y_coordinates[5] - y_coordinates[14] - 126 s[5,14,1] <= -3
+ n_ov2[6,7]: y_coordinates[6] - y_coordinates[7] - 126 s[6,7,1] <= -3
+ n_ov2[6,8]: y_coordinates[6] - y_coordinates[8] - 126 s[6,8,1] <= -3
+ n_ov2[6,9]: y_coordinates[6] - y_coordinates[9] - 126 s[6,9,1] <= -3
+ n_ov2[6,10]: y_coordinates[6] - y_coordinates[10] - 126 s[6,10,1] <= -3
+ n_ov2[6,11]: y_coordinates[6] - y_coordinates[11] - 126 s[6,11,1] <= -3
+ n_ov2[6,12]: y_coordinates[6] - y_coordinates[12] - 126 s[6,12,1] <= -3
+ n_ov2[6,13]: y_coordinates[6] - y_coordinates[13] - 126 s[6,13,1] <= -3
+ n_ov2[6,14]: y_coordinates[6] - y_coordinates[14] - 126 s[6,14,1] <= -3
+ n_ov2[7,8]: y_coordinates[7] - y_coordinates[8] - 126 s[7,8,1] <= -3
+ n_ov2[7,9]: y_coordinates[7] - y_coordinates[9] - 126 s[7,9,1] <= -3
+ n_ov2[7,10]: y_coordinates[7] - y_coordinates[10] - 126 s[7,10,1] <= -3
+ n_ov2[7,11]: y_coordinates[7] - y_coordinates[11] - 126 s[7,11,1] <= -3
+ n_ov2[7,12]: y_coordinates[7] - y_coordinates[12] - 126 s[7,12,1] <= -3
+ n_ov2[7,13]: y_coordinates[7] - y_coordinates[13] - 126 s[7,13,1] <= -3
+ n_ov2[7,14]: y_coordinates[7] - y_coordinates[14] - 126 s[7,14,1] <= -3
+ n_ov2[8,9]: y_coordinates[8] - y_coordinates[9] - 126 s[8,9,1] <= -3
+ n_ov2[8,10]: y_coordinates[8] - y_coordinates[10] - 126 s[8,10,1] <= -3
+ n_ov2[8,11]: y_coordinates[8] - y_coordinates[11] - 126 s[8,11,1] <= -3
+ n_ov2[8,12]: y_coordinates[8] - y_coordinates[12] - 126 s[8,12,1] <= -3
+ n_ov2[8,13]: y_coordinates[8] - y_coordinates[13] - 126 s[8,13,1] <= -3
+ n_ov2[8,14]: y_coordinates[8] - y_coordinates[14] - 126 s[8,14,1] <= -3
+ n_ov2[9,10]: y_coordinates[9] - y_coordinates[10] - 126 s[9,10,1] <= -3
+ n_ov2[9,11]: y_coordinates[9] - y_coordinates[11] - 126 s[9,11,1] <= -3
+ n_ov2[9,12]: y_coordinates[9] - y_coordinates[12] - 126 s[9,12,1] <= -3
+ n_ov2[9,13]: y_coordinates[9] - y_coordinates[13] - 126 s[9,13,1] <= -3
+ n_ov2[9,14]: y_coordinates[9] - y_coordinates[14] - 126 s[9,14,1] <= -3
  n_ov2[10,11]: y_coordinates[10] - y_coordinates[11] - 126 s[10,11,1]
-   + h_rotate[10] <= 0
+   <= -4
  n_ov2[10,12]: y_coordinates[10] - y_coordinates[12] - 126 s[10,12,1]
-   + h_rotate[10] <= 0
+   <= -4
  n_ov2[10,13]: y_coordinates[10] - y_coordinates[13] - 126 s[10,13,1]
-   + h_rotate[10] <= 0
+   <= -4
  n_ov2[10,14]: y_coordinates[10] - y_coordinates[14] - 126 s[10,14,1]
-   + h_rotate[10] <= 0
+   <= -4
  n_ov2[11,12]: y_coordinates[11] - y_coordinates[12] - 126 s[11,12,1]
-   + h_rotate[11] <= 0
+   <= -4
  n_ov2[11,13]: y_coordinates[11] - y_coordinates[13] - 126 s[11,13,1]
-   + h_rotate[11] <= 0
+   <= -4
  n_ov2[11,14]: y_coordinates[11] - y_coordinates[14] - 126 s[11,14,1]
-   + h_rotate[11] <= 0
+   <= -4
  n_ov2[12,13]: y_coordinates[12] - y_coordinates[13] - 126 s[12,13,1]
-   + h_rotate[12] <= 0
+   <= -4
  n_ov2[12,14]: y_coordinates[12] - y_coordinates[14] - 126 s[12,14,1]
-   + h_rotate[12] <= 0
+   <= -4
  n_ov2[13,14]: y_coordinates[13] - y_coordinates[14] - 126 s[13,14,1]
-   + h_rotate[13] <= 0
- n_ov3[0,1]: - x_coordinates[0] + x_coordinates[1] - 126 s[0,1,2]
-   + w_rotate[1] <= 0
- n_ov3[0,2]: - x_coordinates[0] + x_coordinates[2] - 126 s[0,2,2]
-   + w_rotate[2] <= 0
- n_ov3[0,3]: - x_coordinates[0] + x_coordinates[3] - 126 s[0,3,2]
-   + w_rotate[3] <= 0
- n_ov3[0,4]: - x_coordinates[0] + x_coordinates[4] - 126 s[0,4,2]
-   + w_rotate[4] <= 0
- n_ov3[0,5]: - x_coordinates[0] + x_coordinates[5] - 126 s[0,5,2]
-   + w_rotate[5] <= 0
- n_ov3[0,6]: - x_coordinates[0] + x_coordinates[6] - 126 s[0,6,2]
-   + w_rotate[6] <= 0
- n_ov3[0,7]: - x_coordinates[0] + x_coordinates[7] - 126 s[0,7,2]
-   + w_rotate[7] <= 0
- n_ov3[0,8]: - x_coordinates[0] + x_coordinates[8] - 126 s[0,8,2]
-   + w_rotate[8] <= 0
- n_ov3[0,9]: - x_coordinates[0] + x_coordinates[9] - 126 s[0,9,2]
-   + w_rotate[9] <= 0
- n_ov3[0,10]: - x_coordinates[0] + x_coordinates[10] - 126 s[0,10,2]
-   + w_rotate[10] <= 0
- n_ov3[0,11]: - x_coordinates[0] + x_coordinates[11] - 126 s[0,11,2]
-   + w_rotate[11] <= 0
+   <= -5
+ n_ov3[0,1]: - x_coordinates[0] + x_coordinates[1] - 126 s[0,1,2] <= -4
+ n_ov3[0,2]: - x_coordinates[0] + x_coordinates[2] - 126 s[0,2,2] <= -5
+ n_ov3[0,3]: - x_coordinates[0] + x_coordinates[3] - 126 s[0,3,2] <= -6
+ n_ov3[0,4]: - x_coordinates[0] + x_coordinates[4] - 126 s[0,4,2] <= -7
+ n_ov3[0,5]: - x_coordinates[0] + x_coordinates[5] - 126 s[0,5,2] <= -8
+ n_ov3[0,6]: - x_coordinates[0] + x_coordinates[6] - 126 s[0,6,2] <= -9
+ n_ov3[0,7]: - x_coordinates[0] + x_coordinates[7] - 126 s[0,7,2] <= -10
+ n_ov3[0,8]: - x_coordinates[0] + x_coordinates[8] - 126 s[0,8,2] <= -14
+ n_ov3[0,9]: - x_coordinates[0] + x_coordinates[9] - 126 s[0,9,2] <= -18
+ n_ov3[0,10]: - x_coordinates[0] + x_coordinates[10] - 126 s[0,10,2] <= -4
+ n_ov3[0,11]: - x_coordinates[0] + x_coordinates[11] - 126 s[0,11,2] <= -6
  n_ov3[0,12]: - x_coordinates[0] + x_coordinates[12] - 126 s[0,12,2]
-   + w_rotate[12] <= 0
- n_ov3[0,13]: - x_coordinates[0] + x_coordinates[13] - 126 s[0,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[0,13]: - x_coordinates[0] + x_coordinates[13] - 126 s[0,13,2] <= -6
  n_ov3[0,14]: - x_coordinates[0] + x_coordinates[14] - 126 s[0,14,2]
-   + w_rotate[14] <= 0
- n_ov3[1,2]: - x_coordinates[1] + x_coordinates[2] - 126 s[1,2,2]
-   + w_rotate[2] <= 0
- n_ov3[1,3]: - x_coordinates[1] + x_coordinates[3] - 126 s[1,3,2]
-   + w_rotate[3] <= 0
- n_ov3[1,4]: - x_coordinates[1] + x_coordinates[4] - 126 s[1,4,2]
-   + w_rotate[4] <= 0
- n_ov3[1,5]: - x_coordinates[1] + x_coordinates[5] - 126 s[1,5,2]
-   + w_rotate[5] <= 0
- n_ov3[1,6]: - x_coordinates[1] + x_coordinates[6] - 126 s[1,6,2]
-   + w_rotate[6] <= 0
- n_ov3[1,7]: - x_coordinates[1] + x_coordinates[7] - 126 s[1,7,2]
-   + w_rotate[7] <= 0
- n_ov3[1,8]: - x_coordinates[1] + x_coordinates[8] - 126 s[1,8,2]
-   + w_rotate[8] <= 0
- n_ov3[1,9]: - x_coordinates[1] + x_coordinates[9] - 126 s[1,9,2]
-   + w_rotate[9] <= 0
- n_ov3[1,10]: - x_coordinates[1] + x_coordinates[10] - 126 s[1,10,2]
-   + w_rotate[10] <= 0
- n_ov3[1,11]: - x_coordinates[1] + x_coordinates[11] - 126 s[1,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[1,2]: - x_coordinates[1] + x_coordinates[2] - 126 s[1,2,2] <= -5
+ n_ov3[1,3]: - x_coordinates[1] + x_coordinates[3] - 126 s[1,3,2] <= -6
+ n_ov3[1,4]: - x_coordinates[1] + x_coordinates[4] - 126 s[1,4,2] <= -7
+ n_ov3[1,5]: - x_coordinates[1] + x_coordinates[5] - 126 s[1,5,2] <= -8
+ n_ov3[1,6]: - x_coordinates[1] + x_coordinates[6] - 126 s[1,6,2] <= -9
+ n_ov3[1,7]: - x_coordinates[1] + x_coordinates[7] - 126 s[1,7,2] <= -10
+ n_ov3[1,8]: - x_coordinates[1] + x_coordinates[8] - 126 s[1,8,2] <= -14
+ n_ov3[1,9]: - x_coordinates[1] + x_coordinates[9] - 126 s[1,9,2] <= -18
+ n_ov3[1,10]: - x_coordinates[1] + x_coordinates[10] - 126 s[1,10,2] <= -4
+ n_ov3[1,11]: - x_coordinates[1] + x_coordinates[11] - 126 s[1,11,2] <= -6
  n_ov3[1,12]: - x_coordinates[1] + x_coordinates[12] - 126 s[1,12,2]
-   + w_rotate[12] <= 0
- n_ov3[1,13]: - x_coordinates[1] + x_coordinates[13] - 126 s[1,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[1,13]: - x_coordinates[1] + x_coordinates[13] - 126 s[1,13,2] <= -6
  n_ov3[1,14]: - x_coordinates[1] + x_coordinates[14] - 126 s[1,14,2]
-   + w_rotate[14] <= 0
- n_ov3[2,3]: - x_coordinates[2] + x_coordinates[3] - 126 s[2,3,2]
-   + w_rotate[3] <= 0
- n_ov3[2,4]: - x_coordinates[2] + x_coordinates[4] - 126 s[2,4,2]
-   + w_rotate[4] <= 0
- n_ov3[2,5]: - x_coordinates[2] + x_coordinates[5] - 126 s[2,5,2]
-   + w_rotate[5] <= 0
- n_ov3[2,6]: - x_coordinates[2] + x_coordinates[6] - 126 s[2,6,2]
-   + w_rotate[6] <= 0
- n_ov3[2,7]: - x_coordinates[2] + x_coordinates[7] - 126 s[2,7,2]
-   + w_rotate[7] <= 0
- n_ov3[2,8]: - x_coordinates[2] + x_coordinates[8] - 126 s[2,8,2]
-   + w_rotate[8] <= 0
- n_ov3[2,9]: - x_coordinates[2] + x_coordinates[9] - 126 s[2,9,2]
-   + w_rotate[9] <= 0
- n_ov3[2,10]: - x_coordinates[2] + x_coordinates[10] - 126 s[2,10,2]
-   + w_rotate[10] <= 0
- n_ov3[2,11]: - x_coordinates[2] + x_coordinates[11] - 126 s[2,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[2,3]: - x_coordinates[2] + x_coordinates[3] - 126 s[2,3,2] <= -6
+ n_ov3[2,4]: - x_coordinates[2] + x_coordinates[4] - 126 s[2,4,2] <= -7
+ n_ov3[2,5]: - x_coordinates[2] + x_coordinates[5] - 126 s[2,5,2] <= -8
+ n_ov3[2,6]: - x_coordinates[2] + x_coordinates[6] - 126 s[2,6,2] <= -9
+ n_ov3[2,7]: - x_coordinates[2] + x_coordinates[7] - 126 s[2,7,2] <= -10
+ n_ov3[2,8]: - x_coordinates[2] + x_coordinates[8] - 126 s[2,8,2] <= -14
+ n_ov3[2,9]: - x_coordinates[2] + x_coordinates[9] - 126 s[2,9,2] <= -18
+ n_ov3[2,10]: - x_coordinates[2] + x_coordinates[10] - 126 s[2,10,2] <= -4
+ n_ov3[2,11]: - x_coordinates[2] + x_coordinates[11] - 126 s[2,11,2] <= -6
  n_ov3[2,12]: - x_coordinates[2] + x_coordinates[12] - 126 s[2,12,2]
-   + w_rotate[12] <= 0
- n_ov3[2,13]: - x_coordinates[2] + x_coordinates[13] - 126 s[2,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[2,13]: - x_coordinates[2] + x_coordinates[13] - 126 s[2,13,2] <= -6
  n_ov3[2,14]: - x_coordinates[2] + x_coordinates[14] - 126 s[2,14,2]
-   + w_rotate[14] <= 0
- n_ov3[3,4]: - x_coordinates[3] + x_coordinates[4] - 126 s[3,4,2]
-   + w_rotate[4] <= 0
- n_ov3[3,5]: - x_coordinates[3] + x_coordinates[5] - 126 s[3,5,2]
-   + w_rotate[5] <= 0
- n_ov3[3,6]: - x_coordinates[3] + x_coordinates[6] - 126 s[3,6,2]
-   + w_rotate[6] <= 0
- n_ov3[3,7]: - x_coordinates[3] + x_coordinates[7] - 126 s[3,7,2]
-   + w_rotate[7] <= 0
- n_ov3[3,8]: - x_coordinates[3] + x_coordinates[8] - 126 s[3,8,2]
-   + w_rotate[8] <= 0
- n_ov3[3,9]: - x_coordinates[3] + x_coordinates[9] - 126 s[3,9,2]
-   + w_rotate[9] <= 0
- n_ov3[3,10]: - x_coordinates[3] + x_coordinates[10] - 126 s[3,10,2]
-   + w_rotate[10] <= 0
- n_ov3[3,11]: - x_coordinates[3] + x_coordinates[11] - 126 s[3,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[3,4]: - x_coordinates[3] + x_coordinates[4] - 126 s[3,4,2] <= -7
+ n_ov3[3,5]: - x_coordinates[3] + x_coordinates[5] - 126 s[3,5,2] <= -8
+ n_ov3[3,6]: - x_coordinates[3] + x_coordinates[6] - 126 s[3,6,2] <= -9
+ n_ov3[3,7]: - x_coordinates[3] + x_coordinates[7] - 126 s[3,7,2] <= -10
+ n_ov3[3,8]: - x_coordinates[3] + x_coordinates[8] - 126 s[3,8,2] <= -14
+ n_ov3[3,9]: - x_coordinates[3] + x_coordinates[9] - 126 s[3,9,2] <= -18
+ n_ov3[3,10]: - x_coordinates[3] + x_coordinates[10] - 126 s[3,10,2] <= -4
+ n_ov3[3,11]: - x_coordinates[3] + x_coordinates[11] - 126 s[3,11,2] <= -6
  n_ov3[3,12]: - x_coordinates[3] + x_coordinates[12] - 126 s[3,12,2]
-   + w_rotate[12] <= 0
- n_ov3[3,13]: - x_coordinates[3] + x_coordinates[13] - 126 s[3,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[3,13]: - x_coordinates[3] + x_coordinates[13] - 126 s[3,13,2] <= -6
  n_ov3[3,14]: - x_coordinates[3] + x_coordinates[14] - 126 s[3,14,2]
-   + w_rotate[14] <= 0
- n_ov3[4,5]: - x_coordinates[4] + x_coordinates[5] - 126 s[4,5,2]
-   + w_rotate[5] <= 0
- n_ov3[4,6]: - x_coordinates[4] + x_coordinates[6] - 126 s[4,6,2]
-   + w_rotate[6] <= 0
- n_ov3[4,7]: - x_coordinates[4] + x_coordinates[7] - 126 s[4,7,2]
-   + w_rotate[7] <= 0
- n_ov3[4,8]: - x_coordinates[4] + x_coordinates[8] - 126 s[4,8,2]
-   + w_rotate[8] <= 0
- n_ov3[4,9]: - x_coordinates[4] + x_coordinates[9] - 126 s[4,9,2]
-   + w_rotate[9] <= 0
- n_ov3[4,10]: - x_coordinates[4] + x_coordinates[10] - 126 s[4,10,2]
-   + w_rotate[10] <= 0
- n_ov3[4,11]: - x_coordinates[4] + x_coordinates[11] - 126 s[4,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[4,5]: - x_coordinates[4] + x_coordinates[5] - 126 s[4,5,2] <= -8
+ n_ov3[4,6]: - x_coordinates[4] + x_coordinates[6] - 126 s[4,6,2] <= -9
+ n_ov3[4,7]: - x_coordinates[4] + x_coordinates[7] - 126 s[4,7,2] <= -10
+ n_ov3[4,8]: - x_coordinates[4] + x_coordinates[8] - 126 s[4,8,2] <= -14
+ n_ov3[4,9]: - x_coordinates[4] + x_coordinates[9] - 126 s[4,9,2] <= -18
+ n_ov3[4,10]: - x_coordinates[4] + x_coordinates[10] - 126 s[4,10,2] <= -4
+ n_ov3[4,11]: - x_coordinates[4] + x_coordinates[11] - 126 s[4,11,2] <= -6
  n_ov3[4,12]: - x_coordinates[4] + x_coordinates[12] - 126 s[4,12,2]
-   + w_rotate[12] <= 0
- n_ov3[4,13]: - x_coordinates[4] + x_coordinates[13] - 126 s[4,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[4,13]: - x_coordinates[4] + x_coordinates[13] - 126 s[4,13,2] <= -6
  n_ov3[4,14]: - x_coordinates[4] + x_coordinates[14] - 126 s[4,14,2]
-   + w_rotate[14] <= 0
- n_ov3[5,6]: - x_coordinates[5] + x_coordinates[6] - 126 s[5,6,2]
-   + w_rotate[6] <= 0
- n_ov3[5,7]: - x_coordinates[5] + x_coordinates[7] - 126 s[5,7,2]
-   + w_rotate[7] <= 0
- n_ov3[5,8]: - x_coordinates[5] + x_coordinates[8] - 126 s[5,8,2]
-   + w_rotate[8] <= 0
- n_ov3[5,9]: - x_coordinates[5] + x_coordinates[9] - 126 s[5,9,2]
-   + w_rotate[9] <= 0
- n_ov3[5,10]: - x_coordinates[5] + x_coordinates[10] - 126 s[5,10,2]
-   + w_rotate[10] <= 0
- n_ov3[5,11]: - x_coordinates[5] + x_coordinates[11] - 126 s[5,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[5,6]: - x_coordinates[5] + x_coordinates[6] - 126 s[5,6,2] <= -9
+ n_ov3[5,7]: - x_coordinates[5] + x_coordinates[7] - 126 s[5,7,2] <= -10
+ n_ov3[5,8]: - x_coordinates[5] + x_coordinates[8] - 126 s[5,8,2] <= -14
+ n_ov3[5,9]: - x_coordinates[5] + x_coordinates[9] - 126 s[5,9,2] <= -18
+ n_ov3[5,10]: - x_coordinates[5] + x_coordinates[10] - 126 s[5,10,2] <= -4
+ n_ov3[5,11]: - x_coordinates[5] + x_coordinates[11] - 126 s[5,11,2] <= -6
  n_ov3[5,12]: - x_coordinates[5] + x_coordinates[12] - 126 s[5,12,2]
-   + w_rotate[12] <= 0
- n_ov3[5,13]: - x_coordinates[5] + x_coordinates[13] - 126 s[5,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[5,13]: - x_coordinates[5] + x_coordinates[13] - 126 s[5,13,2] <= -6
  n_ov3[5,14]: - x_coordinates[5] + x_coordinates[14] - 126 s[5,14,2]
-   + w_rotate[14] <= 0
- n_ov3[6,7]: - x_coordinates[6] + x_coordinates[7] - 126 s[6,7,2]
-   + w_rotate[7] <= 0
- n_ov3[6,8]: - x_coordinates[6] + x_coordinates[8] - 126 s[6,8,2]
-   + w_rotate[8] <= 0
- n_ov3[6,9]: - x_coordinates[6] + x_coordinates[9] - 126 s[6,9,2]
-   + w_rotate[9] <= 0
- n_ov3[6,10]: - x_coordinates[6] + x_coordinates[10] - 126 s[6,10,2]
-   + w_rotate[10] <= 0
- n_ov3[6,11]: - x_coordinates[6] + x_coordinates[11] - 126 s[6,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[6,7]: - x_coordinates[6] + x_coordinates[7] - 126 s[6,7,2] <= -10
+ n_ov3[6,8]: - x_coordinates[6] + x_coordinates[8] - 126 s[6,8,2] <= -14
+ n_ov3[6,9]: - x_coordinates[6] + x_coordinates[9] - 126 s[6,9,2] <= -18
+ n_ov3[6,10]: - x_coordinates[6] + x_coordinates[10] - 126 s[6,10,2] <= -4
+ n_ov3[6,11]: - x_coordinates[6] + x_coordinates[11] - 126 s[6,11,2] <= -6
  n_ov3[6,12]: - x_coordinates[6] + x_coordinates[12] - 126 s[6,12,2]
-   + w_rotate[12] <= 0
- n_ov3[6,13]: - x_coordinates[6] + x_coordinates[13] - 126 s[6,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[6,13]: - x_coordinates[6] + x_coordinates[13] - 126 s[6,13,2] <= -6
  n_ov3[6,14]: - x_coordinates[6] + x_coordinates[14] - 126 s[6,14,2]
-   + w_rotate[14] <= 0
- n_ov3[7,8]: - x_coordinates[7] + x_coordinates[8] - 126 s[7,8,2]
-   + w_rotate[8] <= 0
- n_ov3[7,9]: - x_coordinates[7] + x_coordinates[9] - 126 s[7,9,2]
-   + w_rotate[9] <= 0
- n_ov3[7,10]: - x_coordinates[7] + x_coordinates[10] - 126 s[7,10,2]
-   + w_rotate[10] <= 0
- n_ov3[7,11]: - x_coordinates[7] + x_coordinates[11] - 126 s[7,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[7,8]: - x_coordinates[7] + x_coordinates[8] - 126 s[7,8,2] <= -14
+ n_ov3[7,9]: - x_coordinates[7] + x_coordinates[9] - 126 s[7,9,2] <= -18
+ n_ov3[7,10]: - x_coordinates[7] + x_coordinates[10] - 126 s[7,10,2] <= -4
+ n_ov3[7,11]: - x_coordinates[7] + x_coordinates[11] - 126 s[7,11,2] <= -6
  n_ov3[7,12]: - x_coordinates[7] + x_coordinates[12] - 126 s[7,12,2]
-   + w_rotate[12] <= 0
- n_ov3[7,13]: - x_coordinates[7] + x_coordinates[13] - 126 s[7,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[7,13]: - x_coordinates[7] + x_coordinates[13] - 126 s[7,13,2] <= -6
  n_ov3[7,14]: - x_coordinates[7] + x_coordinates[14] - 126 s[7,14,2]
-   + w_rotate[14] <= 0
- n_ov3[8,9]: - x_coordinates[8] + x_coordinates[9] - 126 s[8,9,2]
-   + w_rotate[9] <= 0
- n_ov3[8,10]: - x_coordinates[8] + x_coordinates[10] - 126 s[8,10,2]
-   + w_rotate[10] <= 0
- n_ov3[8,11]: - x_coordinates[8] + x_coordinates[11] - 126 s[8,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[8,9]: - x_coordinates[8] + x_coordinates[9] - 126 s[8,9,2] <= -18
+ n_ov3[8,10]: - x_coordinates[8] + x_coordinates[10] - 126 s[8,10,2] <= -4
+ n_ov3[8,11]: - x_coordinates[8] + x_coordinates[11] - 126 s[8,11,2] <= -6
  n_ov3[8,12]: - x_coordinates[8] + x_coordinates[12] - 126 s[8,12,2]
-   + w_rotate[12] <= 0
- n_ov3[8,13]: - x_coordinates[8] + x_coordinates[13] - 126 s[8,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[8,13]: - x_coordinates[8] + x_coordinates[13] - 126 s[8,13,2] <= -6
  n_ov3[8,14]: - x_coordinates[8] + x_coordinates[14] - 126 s[8,14,2]
-   + w_rotate[14] <= 0
- n_ov3[9,10]: - x_coordinates[9] + x_coordinates[10] - 126 s[9,10,2]
-   + w_rotate[10] <= 0
- n_ov3[9,11]: - x_coordinates[9] + x_coordinates[11] - 126 s[9,11,2]
-   + w_rotate[11] <= 0
+   <= -15
+ n_ov3[9,10]: - x_coordinates[9] + x_coordinates[10] - 126 s[9,10,2] <= -4
+ n_ov3[9,11]: - x_coordinates[9] + x_coordinates[11] - 126 s[9,11,2] <= -6
  n_ov3[9,12]: - x_coordinates[9] + x_coordinates[12] - 126 s[9,12,2]
-   + w_rotate[12] <= 0
- n_ov3[9,13]: - x_coordinates[9] + x_coordinates[13] - 126 s[9,13,2]
-   + w_rotate[13] <= 0
+   <= -11
+ n_ov3[9,13]: - x_coordinates[9] + x_coordinates[13] - 126 s[9,13,2] <= -6
  n_ov3[9,14]: - x_coordinates[9] + x_coordinates[14] - 126 s[9,14,2]
-   + w_rotate[14] <= 0
+   <= -15
  n_ov3[10,11]: - x_coordinates[10] + x_coordinates[11] - 126 s[10,11,2]
-   + w_rotate[11] <= 0
+   <= -6
  n_ov3[10,12]: - x_coordinates[10] + x_coordinates[12] - 126 s[10,12,2]
-   + w_rotate[12] <= 0
+   <= -11
  n_ov3[10,13]: - x_coordinates[10] + x_coordinates[13] - 126 s[10,13,2]
-   + w_rotate[13] <= 0
+   <= -6
  n_ov3[10,14]: - x_coordinates[10] + x_coordinates[14] - 126 s[10,14,2]
-   + w_rotate[14] <= 0
+   <= -15
  n_ov3[11,12]: - x_coordinates[11] + x_coordinates[12] - 126 s[11,12,2]
-   + w_rotate[12] <= 0
+   <= -11
  n_ov3[11,13]: - x_coordinates[11] + x_coordinates[13] - 126 s[11,13,2]
-   + w_rotate[13] <= 0
+   <= -6
  n_ov3[11,14]: - x_coordinates[11] + x_coordinates[14] - 126 s[11,14,2]
-   + w_rotate[14] <= 0
+   <= -15
  n_ov3[12,13]: - x_coordinates[12] + x_coordinates[13] - 126 s[12,13,2]
-   + w_rotate[13] <= 0
+   <= -6
  n_ov3[12,14]: - x_coordinates[12] + x_coordinates[14] - 126 s[12,14,2]
-   + w_rotate[14] <= 0
+   <= -15
  n_ov3[13,14]: - x_coordinates[13] + x_coordinates[14] - 126 s[13,14,2]
-   + w_rotate[14] <= 0
- n_ov4[0,1]: - y_coordinates[0] + y_coordinates[1] - 126 s[0,1,3]
-   + h_rotate[1] <= 0
- n_ov4[0,2]: - y_coordinates[0] + y_coordinates[2] - 126 s[0,2,3]
-   + h_rotate[2] <= 0
- n_ov4[0,3]: - y_coordinates[0] + y_coordinates[3] - 126 s[0,3,3]
-   + h_rotate[3] <= 0
- n_ov4[0,4]: - y_coordinates[0] + y_coordinates[4] - 126 s[0,4,3]
-   + h_rotate[4] <= 0
- n_ov4[0,5]: - y_coordinates[0] + y_coordinates[5] - 126 s[0,5,3]
-   + h_rotate[5] <= 0
- n_ov4[0,6]: - y_coordinates[0] + y_coordinates[6] - 126 s[0,6,3]
-   + h_rotate[6] <= 0
- n_ov4[0,7]: - y_coordinates[0] + y_coordinates[7] - 126 s[0,7,3]
-   + h_rotate[7] <= 0
- n_ov4[0,8]: - y_coordinates[0] + y_coordinates[8] - 126 s[0,8,3]
-   + h_rotate[8] <= 0
- n_ov4[0,9]: - y_coordinates[0] + y_coordinates[9] - 126 s[0,9,3]
-   + h_rotate[9] <= 0
- n_ov4[0,10]: - y_coordinates[0] + y_coordinates[10] - 126 s[0,10,3]
-   + h_rotate[10] <= 0
- n_ov4[0,11]: - y_coordinates[0] + y_coordinates[11] - 126 s[0,11,3]
-   + h_rotate[11] <= 0
- n_ov4[0,12]: - y_coordinates[0] + y_coordinates[12] - 126 s[0,12,3]
-   + h_rotate[12] <= 0
- n_ov4[0,13]: - y_coordinates[0] + y_coordinates[13] - 126 s[0,13,3]
-   + h_rotate[13] <= 0
- n_ov4[0,14]: - y_coordinates[0] + y_coordinates[14] - 126 s[0,14,3]
-   + h_rotate[14] <= 0
- n_ov4[1,2]: - y_coordinates[1] + y_coordinates[2] - 126 s[1,2,3]
-   + h_rotate[2] <= 0
- n_ov4[1,3]: - y_coordinates[1] + y_coordinates[3] - 126 s[1,3,3]
-   + h_rotate[3] <= 0
- n_ov4[1,4]: - y_coordinates[1] + y_coordinates[4] - 126 s[1,4,3]
-   + h_rotate[4] <= 0
- n_ov4[1,5]: - y_coordinates[1] + y_coordinates[5] - 126 s[1,5,3]
-   + h_rotate[5] <= 0
- n_ov4[1,6]: - y_coordinates[1] + y_coordinates[6] - 126 s[1,6,3]
-   + h_rotate[6] <= 0
- n_ov4[1,7]: - y_coordinates[1] + y_coordinates[7] - 126 s[1,7,3]
-   + h_rotate[7] <= 0
- n_ov4[1,8]: - y_coordinates[1] + y_coordinates[8] - 126 s[1,8,3]
-   + h_rotate[8] <= 0
- n_ov4[1,9]: - y_coordinates[1] + y_coordinates[9] - 126 s[1,9,3]
-   + h_rotate[9] <= 0
- n_ov4[1,10]: - y_coordinates[1] + y_coordinates[10] - 126 s[1,10,3]
-   + h_rotate[10] <= 0
- n_ov4[1,11]: - y_coordinates[1] + y_coordinates[11] - 126 s[1,11,3]
-   + h_rotate[11] <= 0
- n_ov4[1,12]: - y_coordinates[1] + y_coordinates[12] - 126 s[1,12,3]
-   + h_rotate[12] <= 0
- n_ov4[1,13]: - y_coordinates[1] + y_coordinates[13] - 126 s[1,13,3]
-   + h_rotate[13] <= 0
- n_ov4[1,14]: - y_coordinates[1] + y_coordinates[14] - 126 s[1,14,3]
-   + h_rotate[14] <= 0
- n_ov4[2,3]: - y_coordinates[2] + y_coordinates[3] - 126 s[2,3,3]
-   + h_rotate[3] <= 0
- n_ov4[2,4]: - y_coordinates[2] + y_coordinates[4] - 126 s[2,4,3]
-   + h_rotate[4] <= 0
- n_ov4[2,5]: - y_coordinates[2] + y_coordinates[5] - 126 s[2,5,3]
-   + h_rotate[5] <= 0
- n_ov4[2,6]: - y_coordinates[2] + y_coordinates[6] - 126 s[2,6,3]
-   + h_rotate[6] <= 0
- n_ov4[2,7]: - y_coordinates[2] + y_coordinates[7] - 126 s[2,7,3]
-   + h_rotate[7] <= 0
- n_ov4[2,8]: - y_coordinates[2] + y_coordinates[8] - 126 s[2,8,3]
-   + h_rotate[8] <= 0
- n_ov4[2,9]: - y_coordinates[2] + y_coordinates[9] - 126 s[2,9,3]
-   + h_rotate[9] <= 0
- n_ov4[2,10]: - y_coordinates[2] + y_coordinates[10] - 126 s[2,10,3]
-   + h_rotate[10] <= 0
- n_ov4[2,11]: - y_coordinates[2] + y_coordinates[11] - 126 s[2,11,3]
-   + h_rotate[11] <= 0
- n_ov4[2,12]: - y_coordinates[2] + y_coordinates[12] - 126 s[2,12,3]
-   + h_rotate[12] <= 0
- n_ov4[2,13]: - y_coordinates[2] + y_coordinates[13] - 126 s[2,13,3]
-   + h_rotate[13] <= 0
- n_ov4[2,14]: - y_coordinates[2] + y_coordinates[14] - 126 s[2,14,3]
-   + h_rotate[14] <= 0
- n_ov4[3,4]: - y_coordinates[3] + y_coordinates[4] - 126 s[3,4,3]
-   + h_rotate[4] <= 0
- n_ov4[3,5]: - y_coordinates[3] + y_coordinates[5] - 126 s[3,5,3]
-   + h_rotate[5] <= 0
- n_ov4[3,6]: - y_coordinates[3] + y_coordinates[6] - 126 s[3,6,3]
-   + h_rotate[6] <= 0
- n_ov4[3,7]: - y_coordinates[3] + y_coordinates[7] - 126 s[3,7,3]
-   + h_rotate[7] <= 0
- n_ov4[3,8]: - y_coordinates[3] + y_coordinates[8] - 126 s[3,8,3]
-   + h_rotate[8] <= 0
- n_ov4[3,9]: - y_coordinates[3] + y_coordinates[9] - 126 s[3,9,3]
-   + h_rotate[9] <= 0
- n_ov4[3,10]: - y_coordinates[3] + y_coordinates[10] - 126 s[3,10,3]
-   + h_rotate[10] <= 0
- n_ov4[3,11]: - y_coordinates[3] + y_coordinates[11] - 126 s[3,11,3]
-   + h_rotate[11] <= 0
- n_ov4[3,12]: - y_coordinates[3] + y_coordinates[12] - 126 s[3,12,3]
-   + h_rotate[12] <= 0
- n_ov4[3,13]: - y_coordinates[3] + y_coordinates[13] - 126 s[3,13,3]
-   + h_rotate[13] <= 0
- n_ov4[3,14]: - y_coordinates[3] + y_coordinates[14] - 126 s[3,14,3]
-   + h_rotate[14] <= 0
- n_ov4[4,5]: - y_coordinates[4] + y_coordinates[5] - 126 s[4,5,3]
-   + h_rotate[5] <= 0
- n_ov4[4,6]: - y_coordinates[4] + y_coordinates[6] - 126 s[4,6,3]
-   + h_rotate[6] <= 0
- n_ov4[4,7]: - y_coordinates[4] + y_coordinates[7] - 126 s[4,7,3]
-   + h_rotate[7] <= 0
- n_ov4[4,8]: - y_coordinates[4] + y_coordinates[8] - 126 s[4,8,3]
-   + h_rotate[8] <= 0
- n_ov4[4,9]: - y_coordinates[4] + y_coordinates[9] - 126 s[4,9,3]
-   + h_rotate[9] <= 0
- n_ov4[4,10]: - y_coordinates[4] + y_coordinates[10] - 126 s[4,10,3]
-   + h_rotate[10] <= 0
- n_ov4[4,11]: - y_coordinates[4] + y_coordinates[11] - 126 s[4,11,3]
-   + h_rotate[11] <= 0
- n_ov4[4,12]: - y_coordinates[4] + y_coordinates[12] - 126 s[4,12,3]
-   + h_rotate[12] <= 0
- n_ov4[4,13]: - y_coordinates[4] + y_coordinates[13] - 126 s[4,13,3]
-   + h_rotate[13] <= 0
- n_ov4[4,14]: - y_coordinates[4] + y_coordinates[14] - 126 s[4,14,3]
-   + h_rotate[14] <= 0
- n_ov4[5,6]: - y_coordinates[5] + y_coordinates[6] - 126 s[5,6,3]
-   + h_rotate[6] <= 0
- n_ov4[5,7]: - y_coordinates[5] + y_coordinates[7] - 126 s[5,7,3]
-   + h_rotate[7] <= 0
- n_ov4[5,8]: - y_coordinates[5] + y_coordinates[8] - 126 s[5,8,3]
-   + h_rotate[8] <= 0
- n_ov4[5,9]: - y_coordinates[5] + y_coordinates[9] - 126 s[5,9,3]
-   + h_rotate[9] <= 0
- n_ov4[5,10]: - y_coordinates[5] + y_coordinates[10] - 126 s[5,10,3]
-   + h_rotate[10] <= 0
- n_ov4[5,11]: - y_coordinates[5] + y_coordinates[11] - 126 s[5,11,3]
-   + h_rotate[11] <= 0
- n_ov4[5,12]: - y_coordinates[5] + y_coordinates[12] - 126 s[5,12,3]
-   + h_rotate[12] <= 0
- n_ov4[5,13]: - y_coordinates[5] + y_coordinates[13] - 126 s[5,13,3]
-   + h_rotate[13] <= 0
- n_ov4[5,14]: - y_coordinates[5] + y_coordinates[14] - 126 s[5,14,3]
-   + h_rotate[14] <= 0
- n_ov4[6,7]: - y_coordinates[6] + y_coordinates[7] - 126 s[6,7,3]
-   + h_rotate[7] <= 0
- n_ov4[6,8]: - y_coordinates[6] + y_coordinates[8] - 126 s[6,8,3]
-   + h_rotate[8] <= 0
- n_ov4[6,9]: - y_coordinates[6] + y_coordinates[9] - 126 s[6,9,3]
-   + h_rotate[9] <= 0
- n_ov4[6,10]: - y_coordinates[6] + y_coordinates[10] - 126 s[6,10,3]
-   + h_rotate[10] <= 0
- n_ov4[6,11]: - y_coordinates[6] + y_coordinates[11] - 126 s[6,11,3]
-   + h_rotate[11] <= 0
- n_ov4[6,12]: - y_coordinates[6] + y_coordinates[12] - 126 s[6,12,3]
-   + h_rotate[12] <= 0
- n_ov4[6,13]: - y_coordinates[6] + y_coordinates[13] - 126 s[6,13,3]
-   + h_rotate[13] <= 0
- n_ov4[6,14]: - y_coordinates[6] + y_coordinates[14] - 126 s[6,14,3]
-   + h_rotate[14] <= 0
- n_ov4[7,8]: - y_coordinates[7] + y_coordinates[8] - 126 s[7,8,3]
-   + h_rotate[8] <= 0
- n_ov4[7,9]: - y_coordinates[7] + y_coordinates[9] - 126 s[7,9,3]
-   + h_rotate[9] <= 0
- n_ov4[7,10]: - y_coordinates[7] + y_coordinates[10] - 126 s[7,10,3]
-   + h_rotate[10] <= 0
- n_ov4[7,11]: - y_coordinates[7] + y_coordinates[11] - 126 s[7,11,3]
-   + h_rotate[11] <= 0
- n_ov4[7,12]: - y_coordinates[7] + y_coordinates[12] - 126 s[7,12,3]
-   + h_rotate[12] <= 0
- n_ov4[7,13]: - y_coordinates[7] + y_coordinates[13] - 126 s[7,13,3]
-   + h_rotate[13] <= 0
- n_ov4[7,14]: - y_coordinates[7] + y_coordinates[14] - 126 s[7,14,3]
-   + h_rotate[14] <= 0
- n_ov4[8,9]: - y_coordinates[8] + y_coordinates[9] - 126 s[8,9,3]
-   + h_rotate[9] <= 0
- n_ov4[8,10]: - y_coordinates[8] + y_coordinates[10] - 126 s[8,10,3]
-   + h_rotate[10] <= 0
- n_ov4[8,11]: - y_coordinates[8] + y_coordinates[11] - 126 s[8,11,3]
-   + h_rotate[11] <= 0
- n_ov4[8,12]: - y_coordinates[8] + y_coordinates[12] - 126 s[8,12,3]
-   + h_rotate[12] <= 0
- n_ov4[8,13]: - y_coordinates[8] + y_coordinates[13] - 126 s[8,13,3]
-   + h_rotate[13] <= 0
- n_ov4[8,14]: - y_coordinates[8] + y_coordinates[14] - 126 s[8,14,3]
-   + h_rotate[14] <= 0
- n_ov4[9,10]: - y_coordinates[9] + y_coordinates[10] - 126 s[9,10,3]
-   + h_rotate[10] <= 0
- n_ov4[9,11]: - y_coordinates[9] + y_coordinates[11] - 126 s[9,11,3]
-   + h_rotate[11] <= 0
- n_ov4[9,12]: - y_coordinates[9] + y_coordinates[12] - 126 s[9,12,3]
-   + h_rotate[12] <= 0
- n_ov4[9,13]: - y_coordinates[9] + y_coordinates[13] - 126 s[9,13,3]
-   + h_rotate[13] <= 0
- n_ov4[9,14]: - y_coordinates[9] + y_coordinates[14] - 126 s[9,14,3]
-   + h_rotate[14] <= 0
+   <= -15
+ n_ov4[0,1]: - y_coordinates[0] + y_coordinates[1] - 126 s[0,1,3] <= -3
+ n_ov4[0,2]: - y_coordinates[0] + y_coordinates[2] - 126 s[0,2,3] <= -3
+ n_ov4[0,3]: - y_coordinates[0] + y_coordinates[3] - 126 s[0,3,3] <= -3
+ n_ov4[0,4]: - y_coordinates[0] + y_coordinates[4] - 126 s[0,4,3] <= -3
+ n_ov4[0,5]: - y_coordinates[0] + y_coordinates[5] - 126 s[0,5,3] <= -3
+ n_ov4[0,6]: - y_coordinates[0] + y_coordinates[6] - 126 s[0,6,3] <= -3
+ n_ov4[0,7]: - y_coordinates[0] + y_coordinates[7] - 126 s[0,7,3] <= -3
+ n_ov4[0,8]: - y_coordinates[0] + y_coordinates[8] - 126 s[0,8,3] <= -3
+ n_ov4[0,9]: - y_coordinates[0] + y_coordinates[9] - 126 s[0,9,3] <= -3
+ n_ov4[0,10]: - y_coordinates[0] + y_coordinates[10] - 126 s[0,10,3] <= -4
+ n_ov4[0,11]: - y_coordinates[0] + y_coordinates[11] - 126 s[0,11,3] <= -4
+ n_ov4[0,12]: - y_coordinates[0] + y_coordinates[12] - 126 s[0,12,3] <= -4
+ n_ov4[0,13]: - y_coordinates[0] + y_coordinates[13] - 126 s[0,13,3] <= -5
+ n_ov4[0,14]: - y_coordinates[0] + y_coordinates[14] - 126 s[0,14,3] <= -5
+ n_ov4[1,2]: - y_coordinates[1] + y_coordinates[2] - 126 s[1,2,3] <= -3
+ n_ov4[1,3]: - y_coordinates[1] + y_coordinates[3] - 126 s[1,3,3] <= -3
+ n_ov4[1,4]: - y_coordinates[1] + y_coordinates[4] - 126 s[1,4,3] <= -3
+ n_ov4[1,5]: - y_coordinates[1] + y_coordinates[5] - 126 s[1,5,3] <= -3
+ n_ov4[1,6]: - y_coordinates[1] + y_coordinates[6] - 126 s[1,6,3] <= -3
+ n_ov4[1,7]: - y_coordinates[1] + y_coordinates[7] - 126 s[1,7,3] <= -3
+ n_ov4[1,8]: - y_coordinates[1] + y_coordinates[8] - 126 s[1,8,3] <= -3
+ n_ov4[1,9]: - y_coordinates[1] + y_coordinates[9] - 126 s[1,9,3] <= -3
+ n_ov4[1,10]: - y_coordinates[1] + y_coordinates[10] - 126 s[1,10,3] <= -4
+ n_ov4[1,11]: - y_coordinates[1] + y_coordinates[11] - 126 s[1,11,3] <= -4
+ n_ov4[1,12]: - y_coordinates[1] + y_coordinates[12] - 126 s[1,12,3] <= -4
+ n_ov4[1,13]: - y_coordinates[1] + y_coordinates[13] - 126 s[1,13,3] <= -5
+ n_ov4[1,14]: - y_coordinates[1] + y_coordinates[14] - 126 s[1,14,3] <= -5
+ n_ov4[2,3]: - y_coordinates[2] + y_coordinates[3] - 126 s[2,3,3] <= -3
+ n_ov4[2,4]: - y_coordinates[2] + y_coordinates[4] - 126 s[2,4,3] <= -3
+ n_ov4[2,5]: - y_coordinates[2] + y_coordinates[5] - 126 s[2,5,3] <= -3
+ n_ov4[2,6]: - y_coordinates[2] + y_coordinates[6] - 126 s[2,6,3] <= -3
+ n_ov4[2,7]: - y_coordinates[2] + y_coordinates[7] - 126 s[2,7,3] <= -3
+ n_ov4[2,8]: - y_coordinates[2] + y_coordinates[8] - 126 s[2,8,3] <= -3
+ n_ov4[2,9]: - y_coordinates[2] + y_coordinates[9] - 126 s[2,9,3] <= -3
+ n_ov4[2,10]: - y_coordinates[2] + y_coordinates[10] - 126 s[2,10,3] <= -4
+ n_ov4[2,11]: - y_coordinates[2] + y_coordinates[11] - 126 s[2,11,3] <= -4
+ n_ov4[2,12]: - y_coordinates[2] + y_coordinates[12] - 126 s[2,12,3] <= -4
+ n_ov4[2,13]: - y_coordinates[2] + y_coordinates[13] - 126 s[2,13,3] <= -5
+ n_ov4[2,14]: - y_coordinates[2] + y_coordinates[14] - 126 s[2,14,3] <= -5
+ n_ov4[3,4]: - y_coordinates[3] + y_coordinates[4] - 126 s[3,4,3] <= -3
+ n_ov4[3,5]: - y_coordinates[3] + y_coordinates[5] - 126 s[3,5,3] <= -3
+ n_ov4[3,6]: - y_coordinates[3] + y_coordinates[6] - 126 s[3,6,3] <= -3
+ n_ov4[3,7]: - y_coordinates[3] + y_coordinates[7] - 126 s[3,7,3] <= -3
+ n_ov4[3,8]: - y_coordinates[3] + y_coordinates[8] - 126 s[3,8,3] <= -3
+ n_ov4[3,9]: - y_coordinates[3] + y_coordinates[9] - 126 s[3,9,3] <= -3
+ n_ov4[3,10]: - y_coordinates[3] + y_coordinates[10] - 126 s[3,10,3] <= -4
+ n_ov4[3,11]: - y_coordinates[3] + y_coordinates[11] - 126 s[3,11,3] <= -4
+ n_ov4[3,12]: - y_coordinates[3] + y_coordinates[12] - 126 s[3,12,3] <= -4
+ n_ov4[3,13]: - y_coordinates[3] + y_coordinates[13] - 126 s[3,13,3] <= -5
+ n_ov4[3,14]: - y_coordinates[3] + y_coordinates[14] - 126 s[3,14,3] <= -5
+ n_ov4[4,5]: - y_coordinates[4] + y_coordinates[5] - 126 s[4,5,3] <= -3
+ n_ov4[4,6]: - y_coordinates[4] + y_coordinates[6] - 126 s[4,6,3] <= -3
+ n_ov4[4,7]: - y_coordinates[4] + y_coordinates[7] - 126 s[4,7,3] <= -3
+ n_ov4[4,8]: - y_coordinates[4] + y_coordinates[8] - 126 s[4,8,3] <= -3
+ n_ov4[4,9]: - y_coordinates[4] + y_coordinates[9] - 126 s[4,9,3] <= -3
+ n_ov4[4,10]: - y_coordinates[4] + y_coordinates[10] - 126 s[4,10,3] <= -4
+ n_ov4[4,11]: - y_coordinates[4] + y_coordinates[11] - 126 s[4,11,3] <= -4
+ n_ov4[4,12]: - y_coordinates[4] + y_coordinates[12] - 126 s[4,12,3] <= -4
+ n_ov4[4,13]: - y_coordinates[4] + y_coordinates[13] - 126 s[4,13,3] <= -5
+ n_ov4[4,14]: - y_coordinates[4] + y_coordinates[14] - 126 s[4,14,3] <= -5
+ n_ov4[5,6]: - y_coordinates[5] + y_coordinates[6] - 126 s[5,6,3] <= -3
+ n_ov4[5,7]: - y_coordinates[5] + y_coordinates[7] - 126 s[5,7,3] <= -3
+ n_ov4[5,8]: - y_coordinates[5] + y_coordinates[8] - 126 s[5,8,3] <= -3
+ n_ov4[5,9]: - y_coordinates[5] + y_coordinates[9] - 126 s[5,9,3] <= -3
+ n_ov4[5,10]: - y_coordinates[5] + y_coordinates[10] - 126 s[5,10,3] <= -4
+ n_ov4[5,11]: - y_coordinates[5] + y_coordinates[11] - 126 s[5,11,3] <= -4
+ n_ov4[5,12]: - y_coordinates[5] + y_coordinates[12] - 126 s[5,12,3] <= -4
+ n_ov4[5,13]: - y_coordinates[5] + y_coordinates[13] - 126 s[5,13,3] <= -5
+ n_ov4[5,14]: - y_coordinates[5] + y_coordinates[14] - 126 s[5,14,3] <= -5
+ n_ov4[6,7]: - y_coordinates[6] + y_coordinates[7] - 126 s[6,7,3] <= -3
+ n_ov4[6,8]: - y_coordinates[6] + y_coordinates[8] - 126 s[6,8,3] <= -3
+ n_ov4[6,9]: - y_coordinates[6] + y_coordinates[9] - 126 s[6,9,3] <= -3
+ n_ov4[6,10]: - y_coordinates[6] + y_coordinates[10] - 126 s[6,10,3] <= -4
+ n_ov4[6,11]: - y_coordinates[6] + y_coordinates[11] - 126 s[6,11,3] <= -4
+ n_ov4[6,12]: - y_coordinates[6] + y_coordinates[12] - 126 s[6,12,3] <= -4
+ n_ov4[6,13]: - y_coordinates[6] + y_coordinates[13] - 126 s[6,13,3] <= -5
+ n_ov4[6,14]: - y_coordinates[6] + y_coordinates[14] - 126 s[6,14,3] <= -5
+ n_ov4[7,8]: - y_coordinates[7] + y_coordinates[8] - 126 s[7,8,3] <= -3
+ n_ov4[7,9]: - y_coordinates[7] + y_coordinates[9] - 126 s[7,9,3] <= -3
+ n_ov4[7,10]: - y_coordinates[7] + y_coordinates[10] - 126 s[7,10,3] <= -4
+ n_ov4[7,11]: - y_coordinates[7] + y_coordinates[11] - 126 s[7,11,3] <= -4
+ n_ov4[7,12]: - y_coordinates[7] + y_coordinates[12] - 126 s[7,12,3] <= -4
+ n_ov4[7,13]: - y_coordinates[7] + y_coordinates[13] - 126 s[7,13,3] <= -5
+ n_ov4[7,14]: - y_coordinates[7] + y_coordinates[14] - 126 s[7,14,3] <= -5
+ n_ov4[8,9]: - y_coordinates[8] + y_coordinates[9] - 126 s[8,9,3] <= -3
+ n_ov4[8,10]: - y_coordinates[8] + y_coordinates[10] - 126 s[8,10,3] <= -4
+ n_ov4[8,11]: - y_coordinates[8] + y_coordinates[11] - 126 s[8,11,3] <= -4
+ n_ov4[8,12]: - y_coordinates[8] + y_coordinates[12] - 126 s[8,12,3] <= -4
+ n_ov4[8,13]: - y_coordinates[8] + y_coordinates[13] - 126 s[8,13,3] <= -5
+ n_ov4[8,14]: - y_coordinates[8] + y_coordinates[14] - 126 s[8,14,3] <= -5
+ n_ov4[9,10]: - y_coordinates[9] + y_coordinates[10] - 126 s[9,10,3] <= -4
+ n_ov4[9,11]: - y_coordinates[9] + y_coordinates[11] - 126 s[9,11,3] <= -4
+ n_ov4[9,12]: - y_coordinates[9] + y_coordinates[12] - 126 s[9,12,3] <= -4
+ n_ov4[9,13]: - y_coordinates[9] + y_coordinates[13] - 126 s[9,13,3] <= -5
+ n_ov4[9,14]: - y_coordinates[9] + y_coordinates[14] - 126 s[9,14,3] <= -5
  n_ov4[10,11]: - y_coordinates[10] + y_coordinates[11] - 126 s[10,11,3]
-   + h_rotate[11] <= 0
+   <= -4
  n_ov4[10,12]: - y_coordinates[10] + y_coordinates[12] - 126 s[10,12,3]
-   + h_rotate[12] <= 0
+   <= -4
  n_ov4[10,13]: - y_coordinates[10] + y_coordinates[13] - 126 s[10,13,3]
-   + h_rotate[13] <= 0
+   <= -5
  n_ov4[10,14]: - y_coordinates[10] + y_coordinates[14] - 126 s[10,14,3]
-   + h_rotate[14] <= 0
+   <= -5
  n_ov4[11,12]: - y_coordinates[11] + y_coordinates[12] - 126 s[11,12,3]
-   + h_rotate[12] <= 0
+   <= -4
  n_ov4[11,13]: - y_coordinates[11] + y_coordinates[13] - 126 s[11,13,3]
-   + h_rotate[13] <= 0
+   <= -5
  n_ov4[11,14]: - y_coordinates[11] + y_coordinates[14] - 126 s[11,14,3]
-   + h_rotate[14] <= 0
+   <= -5
  n_ov4[12,13]: - y_coordinates[12] + y_coordinates[13] - 126 s[12,13,3]
-   + h_rotate[13] <= 0
+   <= -5
  n_ov4[12,14]: - y_coordinates[12] + y_coordinates[14] - 126 s[12,14,3]
-   + h_rotate[14] <= 0
+   <= -5
  n_ov4[13,14]: - y_coordinates[13] + y_coordinates[14] - 126 s[13,14,3]
-   + h_rotate[14] <= 0
+   <= -5
  no_overlap[0,0]: s[0,0,0] + s[0,0,1] + s[0,0,2] + s[0,0,3] <= 3
  no_overlap[0,1]: s[0,1,0] + s[0,1,1] + s[0,1,2] + s[0,1,3] <= 3
  no_overlap[0,2]: s[0,2,0] + s[0,2,1] + s[0,2,2] + s[0,2,3] <= 3
@@ -1098,36 +742,6 @@ Subject To
  no_overlap[14,12]: s[14,12,0] + s[14,12,1] + s[14,12,2] + s[14,12,3] <= 3
  no_overlap[14,13]: s[14,13,0] + s[14,13,1] + s[14,13,2] + s[14,13,3] <= 3
  no_overlap[14,14]: s[14,14,0] + s[14,14,1] + s[14,14,2] + s[14,14,3] <= 3
- rotation_along_x[0]: w_rotate[0] - 3 rotation_c[0] = 3
- rotation_along_x[1]: w_rotate[1] - 4 rotation_c[1] = 0
- rotation_along_x[2]: w_rotate[2] - 5 rotation_c[2] = 3
- rotation_along_x[3]: w_rotate[3] - 6 rotation_c[3] = 3
- rotation_along_x[4]: w_rotate[4] - 7 rotation_c[4] = 3
- rotation_along_x[5]: w_rotate[5] - 8 rotation_c[5] = 3
- rotation_along_x[6]: w_rotate[6] - 9 rotation_c[6] = 3
- rotation_along_x[7]: w_rotate[7] - 10 rotation_c[7] = 3
- rotation_along_x[8]: w_rotate[8] - 14 rotation_c[8] = 3
- rotation_along_x[9]: w_rotate[9] - 18 rotation_c[9] = 3
- rotation_along_x[10]: w_rotate[10] - 4 rotation_c[10] = 4
- rotation_along_x[11]: w_rotate[11] - 6 rotation_c[11] = 4
- rotation_along_x[12]: w_rotate[12] - 11 rotation_c[12] = 4
- rotation_along_x[13]: w_rotate[13] - 6 rotation_c[13] = 5
- rotation_along_x[14]: w_rotate[14] - 15 rotation_c[14] = 5
- rotation_along_y[0]: h_rotate[0] - 3 rotation_c[0] = 3
- rotation_along_y[1]: h_rotate[1] - 3 rotation_c[1] = 0
- rotation_along_y[2]: h_rotate[2] - 3 rotation_c[2] = 5
- rotation_along_y[3]: h_rotate[3] - 3 rotation_c[3] = 6
- rotation_along_y[4]: h_rotate[4] - 3 rotation_c[4] = 7
- rotation_along_y[5]: h_rotate[5] - 3 rotation_c[5] = 8
- rotation_along_y[6]: h_rotate[6] - 3 rotation_c[6] = 9
- rotation_along_y[7]: h_rotate[7] - 3 rotation_c[7] = 10
- rotation_along_y[8]: h_rotate[8] - 3 rotation_c[8] = 14
- rotation_along_y[9]: h_rotate[9] - 3 rotation_c[9] = 18
- rotation_along_y[10]: h_rotate[10] - 4 rotation_c[10] = 4
- rotation_along_y[11]: h_rotate[11] - 4 rotation_c[11] = 6
- rotation_along_y[12]: h_rotate[12] - 4 rotation_c[12] = 11
- rotation_along_y[13]: h_rotate[13] - 5 rotation_c[13] = 6
- rotation_along_y[14]: h_rotate[14] - 5 rotation_c[14] = 15
  ub_area: 21 height <= 2646
  lb_area: 21 height >= 441
 Bounds
@@ -1162,36 +776,6 @@ Bounds
  y_coordinates[13] <= 123
  y_coordinates[14] <= 123
  21 <= height <= 126
- 1 <= w_rotate[0] <= 18
- 1 <= w_rotate[1] <= 18
- 1 <= w_rotate[2] <= 18
- 1 <= w_rotate[3] <= 18
- 1 <= w_rotate[4] <= 18
- 1 <= w_rotate[5] <= 18
- 1 <= w_rotate[6] <= 18
- 1 <= w_rotate[7] <= 18
- 1 <= w_rotate[8] <= 18
- 1 <= w_rotate[9] <= 18
- 1 <= w_rotate[10] <= 18
- 1 <= w_rotate[11] <= 18
- 1 <= w_rotate[12] <= 18
- 1 <= w_rotate[13] <= 18
- 1 <= w_rotate[14] <= 18
- 1 <= h_rotate[0] <= 18
- 1 <= h_rotate[1] <= 18
- 1 <= h_rotate[2] <= 18
- 1 <= h_rotate[3] <= 18
- 1 <= h_rotate[4] <= 18
- 1 <= h_rotate[5] <= 18
- 1 <= h_rotate[6] <= 18
- 1 <= h_rotate[7] <= 18
- 1 <= h_rotate[8] <= 18
- 1 <= h_rotate[9] <= 18
- 1 <= h_rotate[10] <= 18
- 1 <= h_rotate[11] <= 18
- 1 <= h_rotate[12] <= 18
- 1 <= h_rotate[13] <= 18
- 1 <= h_rotate[14] <= 18
 Binaries
  s[0,0,0] s[0,0,1] s[0,0,2] s[0,0,3] s[0,1,0] s[0,1,1] s[0,1,2] s[0,1,3]
  s[0,2,0] s[0,2,1] s[0,2,2] s[0,2,3] s[0,3,0] s[0,3,1] s[0,3,2] s[0,3,3]
@@ -1328,10 +912,5 @@ Generals
  y_coordinates[1] y_coordinates[2] y_coordinates[3] y_coordinates[4]
  y_coordinates[5] y_coordinates[6] y_coordinates[7] y_coordinates[8]
  y_coordinates[9] y_coordinates[10] y_coordinates[11] y_coordinates[12]
- y_coordinates[13] y_coordinates[14] height w_rotate[0] w_rotate[1]
- w_rotate[2] w_rotate[3] w_rotate[4] w_rotate[5] w_rotate[6] w_rotate[7]
- w_rotate[8] w_rotate[9] w_rotate[10] w_rotate[11] w_rotate[12]
- w_rotate[13] w_rotate[14] h_rotate[0] h_rotate[1] h_rotate[2] h_rotate[3]
- h_rotate[4] h_rotate[5] h_rotate[6] h_rotate[7] h_rotate[8] h_rotate[9]
- h_rotate[10] h_rotate[11] h_rotate[12] h_rotate[13] h_rotate[14]
+ y_coordinates[13] y_coordinates[14] height
 End
