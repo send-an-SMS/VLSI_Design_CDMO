@@ -7,8 +7,6 @@ from random import randint
 from matplotlib import colors
 from timeit import default_timer as timer
 
-## TO EXEC ##
-#  python .\src\SMT.py -f 1 -l 1
 
 # EXTERNAL FUNCTIONS
 
@@ -81,9 +79,9 @@ def build_cmap(n):
 
 
 
-# FUNZIONI DI SUPPORTO
+# SUPPORT FUNCTIONS
 
-# Return maximum of an array - error if empty
+# return maximum of an array - error if empty
 def max(array):
     max_val = array[0]
     for i in array[1:]:
@@ -91,16 +89,11 @@ def max(array):
     return max_val
 
 
-def z3_cumulative(start, duration, resources, total):
-# cum_y (x_coord, x_dim, y_dim, sum(y_dim))
+def cumulative_const(start, duration, resources, total):
     cumulative = []
-    
     for u in resources:
         cumulative.append(
-            
-            sum([If(And(start[i] <= u, u < start[i] + duration[i]), resources[i], 0)
-                
-                for i in range(len(start))]) <= total
+            sum([If(And(start[i] <= u, u < start[i] + duration[i]), resources[i], 0) for i in range(len(start))]) <= total
         )
     return cumulative
 
@@ -163,8 +156,8 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
 
 
             # CUMULATIVE CONSTRAINT
-            cumulative_x = z3_cumulative(y_coord, y_dim, x_dim, w)
-            cumulative_y = z3_cumulative(x_coord, x_dim, y_dim, sum(y_dim))
+            cumulative_x = cumulative_const(y_coord, y_dim, x_dim, w)
+            cumulative_y = cumulative_const(x_coord, x_dim, y_dim, sum(y_dim))
 
 
             # SYMMETRY BREAKING CONSTRAINT
@@ -280,16 +273,17 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
 
 
             # CUMULATIVE CONSTRAINT
-            cumulative_x = z3_cumulative(y_coord,
-                                         [If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)], 
-                                         [If(rotation_c[i], y_dim[i], x_dim[i]) for i in range(n_circuit)], 
-                                         w)
+            cumulative_x = cumulative_const(y_coord,
+                                            [If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)], 
+                                            [If(rotation_c[i], y_dim[i], x_dim[i]) for i in range(n_circuit)], 
+                                            w
+                                           )
 
-            cumulative_y = z3_cumulative(x_coord, 
-                                         [If(rotation_c[i], y_dim[i], x_dim[i]) for i in range(n_circuit)],
-                                         [If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)],
-                                         sum([If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)]) # sum(y_dim)
-                                        )
+            cumulative_y = cumulative_const(x_coord, 
+                                            [If(rotation_c[i], y_dim[i], x_dim[i]) for i in range(n_circuit)],
+                                            [If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)],
+                                            sum([If(rotation_c[i], x_dim[i], y_dim[i]) for i in range(n_circuit)]) # sum(y_dim)
+                                           )
             
             # SQUARE CONSTRAINT -  squared circuits do not need to rotate
             square_check = [Implies(x_dim[i]==y_dim[i], rotation_c[i]==False) for i in range(n_circuit)]

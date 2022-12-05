@@ -1,4 +1,4 @@
-= Model basic =
+= Model basic  FINAL RUN=
 PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT> python .\src\SMT.py
 Instance: 1     Execution time: 0.012s  Best objective value: 8
 Instance: 2     Execution time: 0.016s  Best objective value: 9
@@ -43,7 +43,51 @@ Instance: 40    Time exceeded   Execution time: 300.012s
 PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT>
 
 
-= Model with sym break=
+= Model with sym break FINAL RUN =
+PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT> python .\src\SMT.py -sb
+Instance: 1     Execution time: 0.018s  Best objective value: 8
+Instance: 2     Execution time: 0.017s  Best objective value: 9
+Instance: 3     Execution time: 0.034s  Best objective value: 10
+Instance: 4     Execution time: 0.069s  Best objective value: 11
+Instance: 5     Execution time: 0.105s  Best objective value: 12
+Instance: 6     Execution time: 0.187s  Best objective value: 13
+Instance: 7     Execution time: 0.187s  Best objective value: 14
+Instance: 8     Execution time: 0.212s  Best objective value: 15
+Instance: 9     Execution time: 0.225s  Best objective value: 16
+Instance: 10    Execution time: 0.931s  Best objective value: 17
+Instance: 11    Time exceeded   Execution time: 300.008s
+Instance: 12    Execution time: 1.802s  Best objective value: 19
+Instance: 13    Execution time: 1.849s  Best objective value: 20
+Instance: 14    Execution time: 4.497s  Best objective value: 21
+Instance: 15    Execution time: 3.532s  Best objective value: 22
+Instance: 16    Time exceeded   Execution time: 300.020s
+Instance: 17    Execution time: 18.695s Best objective value: 24
+Instance: 18    Execution time: 22.251s Best objective value: 25
+Instance: 19    Time exceeded   Execution time: 300.021s
+Instance: 20    Time exceeded   Execution time: 300.034s
+Instance: 21    Time exceeded   Execution time: 300.029s
+Instance: 22    Time exceeded   Execution time: 300.014s
+Instance: 23    Execution time: 26.818s Best objective value: 30
+Instance: 24    Execution time: 20.595s Best objective value: 31
+Instance: 25    Time exceeded   Execution time: 300.028s
+Instance: 26    Execution time: 289.702s Best objective value: 33
+Instance: 27    Execution time: 56.029s Best objective value: 34
+Instance: 28    Time exceeded   Execution time: 300.033s
+Instance: 29    Execution time: 35.031s Best objective value: 36
+Instance: 30    Time exceeded   Execution time: 300.041s
+Instance: 31    Execution time: 11.117s Best objective value: 38
+Instance: 32    Time exceeded   Execution time: 300.057s
+Instance: 33    Execution time: 32.360s Best objective value: 40
+Instance: 34    Time exceeded   Execution time: 300.023s
+Instance: 35    Time exceeded   Execution time: 300.038s
+Instance: 36    Time exceeded   Execution time: 300.043s
+Instance: 37    Time exceeded   Execution time: 300.034s
+Instance: 38    Time exceeded   Execution time: 300.053s
+Instance: 39    Time exceeded   Execution time: 300.031s
+Instance: 40    Time exceeded   Execution time: 300.008s
+PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT>
+
+# OLD RUN
 Instance: 1     Execution time: 0.020s  Best objective value: 8
 Instance: 2     Execution time: 0.017s  Best objective value: 9
 Instance: 3     Execution time: 0.037s  Best objective value: 10
@@ -71,7 +115,7 @@ Instance: 24    Execution time: 24.739s Best objective value: 31
 Instance: 25    Time exceeded   Execution time: 300.022s
 Instance: 26    Time exceeded   Execution time: 300.024s
 Instance: 27    Execution time: 110.286s Best objective value: 34
-Instance: 28    Execution time: 153.901s Best objective value: 35
+Instance: 28    Execution time: 153.901s Best objective value: 35 ######
 Instance: 29    Execution time: 126.039s Best objective value: 36
 Instance: 30    Time exceeded   Execution time: 300.035s
 Instance: 31    Execution time: 13.678s Best objective value: 38
@@ -84,3 +128,51 @@ Instance: 37    Time exceeded   Execution time: 300.041s
 Instance: 38    Time exceeded   Execution time: 300.055s
 Instance: 39    Time exceeded   Execution time: 300.050s
 Instance: 40    Time exceeded   Execution time: 300.017s
+
+
+= Model with rotation =
+PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT> python .\src\SMT.py -r
+Instance: 1     Execution time: 0.054s  Best objective value: 8
+Instance: 2     Execution time: 0.116s  Best objective value: 9
+Instance: 3     Execution time: 0.123s  Best objective value: 10
+Instance: 4     Execution time: 0.558s  Best objective value: 11
+Instance: 5     Execution time: 2.722s  Best objective value: 12
+Instance: 6     Execution time: 6.788s  Best objective value: 13
+Instance: 7     Execution time: 5.888s  Best objective value: 14
+Instance: 8     Execution time: 6.683s  Best objective value: 15
+Instance: 9     Execution time: 16.385s Best objective value: 16
+Instance: 10    Time exceeded   Execution time: 300.029s
+Instance: 11    Time exceeded   Execution time: 300.020s
+Instance: 12    Time exceeded   Execution time: 300.044s
+Instance: 13    Time exceeded   Execution time: 300.027s
+Instance: 14    Time exceeded   Execution time: 300.039s
+Instance: 15    Time exceeded   Execution time: 300.046s
+Instance: 16    Time exceeded   Execution time: 300.031s
+Instance: 17    Time exceeded   Execution time: 300.046s
+Instance: 18    Time exceeded   Execution time: 300.055s
+Instance: 19    Time exceeded   Execution time: 300.057s
+Instance: 20    Time exceeded   Execution time: 300.041s
+Instance: 21    Time exceeded   Execution time: 300.072s
+Instance: 22    Time exceeded   Execution time: 300.063s
+Instance: 23    Time exceeded   Execution time: 300.041s
+Instance: 24    Time exceeded   Execution time: 300.055s
+Instance: 25    Time exceeded   Execution time: 300.062s
+Instance: 26    Time exceeded   Execution time: 300.064s
+Instance: 27    Time exceeded   Execution time: 300.061s
+Instance: 28    Time exceeded   Execution time: 300.056s
+Instance: 29    Time exceeded   Execution time: 300.059s
+Instance: 30    Time exceeded   Execution time: 300.062s
+Instance: 31    Time exceeded   Execution time: 300.056s
+Instance: 32    Time exceeded   Execution time: 300.063s
+Instance: 33    Time exceeded   Execution time: 300.047s
+Instance: 34    Time exceeded   Execution time: 300.068s
+Instance: 35    Time exceeded   Execution time: 300.047s
+Instance: 36    Time exceeded   Execution time: 300.064s
+Instance: 37    Time exceeded   Execution time: 300.073s
+Instance: 38    Time exceeded   Execution time: 300.056s
+Instance: 39    Time exceeded   Execution time: 300.049s
+Instance: 40    Time exceeded   Execution time: 300.006s
+PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT>
+
+= Model with rotation with sym break =
+
