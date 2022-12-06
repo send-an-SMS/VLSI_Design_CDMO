@@ -15,7 +15,7 @@ https://www.gurobi.com/features/academic-named-user-license/
 
 
 ### Execution
-Open the terminal in this directory and execute the command below.
+Open the terminal in the parent directory and execute the command below.
 ```
 python src/exec_MIP.py [-f {int}] [-l {int}] [-r {True, False}] [-p {True, False}]
 ```
