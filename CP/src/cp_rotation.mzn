@@ -19,17 +19,17 @@ array [N_CIRCUITS] of var bool: rotation_c;  % array of booleans, each one telli
 
 
 % == GLOBAL CONSTRAINTS ==
-constraint cumulative(y_coordinates,
-                      [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS],
-                      [if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS],
-                      w);
-                       
 constraint diffn(x_coordinates,
                  y_coordinates,
                  [if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS],
                  [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS]);
-                
-            
+
+constraint cumulative(y_coordinates,
+                      [if (rotation_c[i]) then chip_width[i] else chip_height[i] endif | i in N_CIRCUITS],
+                      [if (rotation_c[i]) then chip_height[i] else chip_width[i] endif | i in N_CIRCUITS],
+                      w);
+
+
 % == CONSTRAINTS ==
 % check if a chip is out of the plate
 constraint forall(i in N_CIRCUITS)(
@@ -48,8 +48,8 @@ constraint forall(i in N_CIRCUITS)(
 % == SOLVE ==
 solve :: seq_search([
     int_search([h],smallest,indomain_min),
-    int_search(y_coordinates,first_fail,indomain_min),
-    int_search(x_coordinates,first_fail,indomain_min)])
+    int_search(x_coordinates,first_fail,indomain_min),
+    int_search(y_coordinates,first_fail,indomain_min)])
     minimize h;
 
 

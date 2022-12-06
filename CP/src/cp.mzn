@@ -31,8 +31,8 @@ constraint forall(i in N_CIRCUITS)(x_coordinates[i] + chip_width[i] <= w /\ y_co
 % == SOLVE ==
 solve :: seq_search([
     int_search([h],smallest,indomain_min),
-    int_search(y_coordinates,first_fail,indomain_min),
-    int_search(x_coordinates,first_fail,indomain_min)])
+    int_search(x_coordinates,first_fail,indomain_min),
+    int_search(y_coordinates,first_fail,indomain_min)])
     minimize h;
 
 
