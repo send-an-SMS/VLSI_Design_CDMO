@@ -1,5 +1,9 @@
 # VLSI_Design_CDMO
 
+pip3 install z3-solver
+
+python ./src/SMT.py 
+
 ## In ordine di usefulness
 
 REAL Z3 Documentation
