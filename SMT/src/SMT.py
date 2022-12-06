@@ -171,7 +171,7 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
                 # the biggest circuit is always placed for first w.r.t. the second biggest one
                 sb_biggest_lex_less = Or(x_coord[first_max] < x_coord[second_max],
                                         And(x_coord[first_max] == x_coord[second_max], y_coord[first_max] <= y_coord[second_max])
-                                      )
+                                        )
                 
                 # width maggiore -> coord y < h/2
                 # height maggiore -> coord x < w/2
