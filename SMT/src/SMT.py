@@ -318,7 +318,7 @@ def smt_exec(first_i, last_i, sym_break, rotation, plot):
 
 
             # assert constraints as background axioms for the optimize solver
-            optimizer.add(boundary_x + boundary_x + bound_zero_x + bound_zero_y + non_overlap_const + cumulative_x + cumulative_y + square_check)
+            optimizer.add(boundary_x + boundary_x + bound_zero_x + bound_zero_y + non_overlap_const + cumulative_x + square_check)
             
             # objective function to minimize
             optimizer.minimize(min_height)
