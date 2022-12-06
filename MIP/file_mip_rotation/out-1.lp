@@ -12,30 +12,18 @@ Subject To
  inside_plate_y[1]: y_coordinates[1] - height <= -3
  inside_plate_y[2]: y_coordinates[2] - height <= -5
  inside_plate_y[3]: y_coordinates[3] - height <= -5
- n_ov1[0,1]: x_coordinates[0] - x_coordinates[1] - 16 s[0,1,0] <= -3
- n_ov1[0,2]: x_coordinates[0] - x_coordinates[2] - 16 s[0,2,0] <= -3
- n_ov1[0,3]: x_coordinates[0] - x_coordinates[3] - 16 s[0,3,0] <= -3
- n_ov1[1,2]: x_coordinates[1] - x_coordinates[2] - 16 s[1,2,0] <= -5
- n_ov1[1,3]: x_coordinates[1] - x_coordinates[3] - 16 s[1,3,0] <= -5
- n_ov1[2,3]: x_coordinates[2] - x_coordinates[3] - 16 s[2,3,0] <= -3
- n_ov2[0,1]: y_coordinates[0] - y_coordinates[1] - 16 s[0,1,1] <= -3
- n_ov2[0,2]: y_coordinates[0] - y_coordinates[2] - 16 s[0,2,1] <= -3
- n_ov2[0,3]: y_coordinates[0] - y_coordinates[3] - 16 s[0,3,1] <= -3
- n_ov2[1,2]: y_coordinates[1] - y_coordinates[2] - 16 s[1,2,1] <= -3
- n_ov2[1,3]: y_coordinates[1] - y_coordinates[3] - 16 s[1,3,1] <= -3
- n_ov2[2,3]: y_coordinates[2] - y_coordinates[3] - 16 s[2,3,1] <= -5
- n_ov3[0,1]: - x_coordinates[0] + x_coordinates[1] - 16 s[0,1,2] <= -5
- n_ov3[0,2]: - x_coordinates[0] + x_coordinates[2] - 16 s[0,2,2] <= -3
- n_ov3[0,3]: - x_coordinates[0] + x_coordinates[3] - 16 s[0,3,2] <= -5
- n_ov3[1,2]: - x_coordinates[1] + x_coordinates[2] - 16 s[1,2,2] <= -3
- n_ov3[1,3]: - x_coordinates[1] + x_coordinates[3] - 16 s[1,3,2] <= -5
- n_ov3[2,3]: - x_coordinates[2] + x_coordinates[3] - 16 s[2,3,2] <= -5
- n_ov4[0,1]: - y_coordinates[0] + y_coordinates[1] - 16 s[0,1,3] <= -3
- n_ov4[0,2]: - y_coordinates[0] + y_coordinates[2] - 16 s[0,2,3] <= -5
- n_ov4[0,3]: - y_coordinates[0] + y_coordinates[3] - 16 s[0,3,3] <= -5
- n_ov4[1,2]: - y_coordinates[1] + y_coordinates[2] - 16 s[1,2,3] <= -5
- n_ov4[1,3]: - y_coordinates[1] + y_coordinates[3] - 16 s[1,3,3] <= -5
- n_ov4[2,3]: - y_coordinates[2] + y_coordinates[3] - 16 s[2,3,3] <= -5
+ n_ov1[0,1]: x_coordinates[0] - x_coordinates[1] - 8 s[0,1,0] <= -3
+ n_ov1[0,2]: x_coordinates[0] - x_coordinates[2] - 8 s[0,2,0] <= -3
+ n_ov1[0,3]: x_coordinates[0] - x_coordinates[3] - 8 s[0,3,0] <= -3
+ n_ov1[1,2]: x_coordinates[1] - x_coordinates[2] - 8 s[1,2,0] <= -5
+ n_ov1[1,3]: x_coordinates[1] - x_coordinates[3] - 8 s[1,3,0] <= -5
+ n_ov1[2,3]: x_coordinates[2] - x_coordinates[3] - 8 s[2,3,0] <= -3
+ n_ov3[0,1]: - x_coordinates[0] + x_coordinates[1] - 8 s[0,1,2] <= -5
+ n_ov3[0,2]: - x_coordinates[0] + x_coordinates[2] - 8 s[0,2,2] <= -3
+ n_ov3[0,3]: - x_coordinates[0] + x_coordinates[3] - 8 s[0,3,2] <= -5
+ n_ov3[1,2]: - x_coordinates[1] + x_coordinates[2] - 8 s[1,2,2] <= -3
+ n_ov3[1,3]: - x_coordinates[1] + x_coordinates[3] - 8 s[1,3,2] <= -5
+ n_ov3[2,3]: - x_coordinates[2] + x_coordinates[3] - 8 s[2,3,2] <= -5
  no_overlap[0,0]: s[0,0,0] + s[0,0,1] + s[0,0,2] + s[0,0,3] <= 3
  no_overlap[0,1]: s[0,1,0] + s[0,1,1] + s[0,1,2] + s[0,1,3] <= 3
  no_overlap[0,2]: s[0,2,0] + s[0,2,1] + s[0,2,2] + s[0,2,3] <= 3
@@ -54,6 +42,30 @@ Subject To
  no_overlap[3,3]: s[3,3,0] + s[3,3,1] + s[3,3,2] + s[3,3,3] <= 3
  ub_area: 8 height <= 128
  lb_area: 8 height >= 64
+ n_ov2[0,1]: y_coordinates[0] - y_coordinates[1] + [ - height * s[0,1,1] ]
+   <= -3
+ n_ov2[0,2]: y_coordinates[0] - y_coordinates[2] + [ - height * s[0,2,1] ]
+   <= -3
+ n_ov2[0,3]: y_coordinates[0] - y_coordinates[3] + [ - height * s[0,3,1] ]
+   <= -3
+ n_ov2[1,2]: y_coordinates[1] - y_coordinates[2] + [ - height * s[1,2,1] ]
+   <= -3
+ n_ov2[1,3]: y_coordinates[1] - y_coordinates[3] + [ - height * s[1,3,1] ]
+   <= -3
+ n_ov2[2,3]: y_coordinates[2] - y_coordinates[3] + [ - height * s[2,3,1] ]
+   <= -5
+ n_ov4[0,1]: - y_coordinates[0] + y_coordinates[1] + [ - height * s[0,1,3]
+   ] <= -3
+ n_ov4[0,2]: - y_coordinates[0] + y_coordinates[2] + [ - height * s[0,2,3]
+   ] <= -5
+ n_ov4[0,3]: - y_coordinates[0] + y_coordinates[3] + [ - height * s[0,3,3]
+   ] <= -5
+ n_ov4[1,2]: - y_coordinates[1] + y_coordinates[2] + [ - height * s[1,2,3]
+   ] <= -5
+ n_ov4[1,3]: - y_coordinates[1] + y_coordinates[3] + [ - height * s[1,3,3]
+   ] <= -5
+ n_ov4[2,3]: - y_coordinates[2] + y_coordinates[3] + [ - height * s[2,3,3]
+   ] <= -5
 Bounds
  x_coordinates[0] <= 5
  x_coordinates[1] <= 5

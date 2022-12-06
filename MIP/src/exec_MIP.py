@@ -248,10 +248,10 @@ def solver(w,n,x,y, rotation: bool, index_f, plot: bool):
         
         # 2) constraint no overlap = https://stackoverflow.com/questions/72941147/overlapping-constraint-in-linear-programming
         # BIG M method:
-        model.addConstrs(((x_cord[i] + (y[i] if rotation_c[i] else x[i]) <= x_cord[j] + h_Max*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "n_ov1")
-        model.addConstrs(((y_cord[i] + (x[i] if rotation_c[i] else y[i]) <= y_cord[j] + h_Max*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "n_ov2")
-        model.addConstrs(((x_cord[j] + (y[j] if rotation_c[j] else x[j]) <= x_cord[i] + h_Max*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "n_ov3")
-        model.addConstrs(((y_cord[j] + (x[j] if rotation_c[j] else y[j]) <= y_cord[i] + h_Max*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "n_ov4")
+        model.addConstrs(((x_cord[i] + (y[i] if rotation_c[i] else x[i]) <= x_cord[j] + w*s[i,j,0]) for i in range(n) for j in range(i+1,n)), "n_ov1")
+        model.addConstrs(((y_cord[i] + (x[i] if rotation_c[i] else y[i]) <= y_cord[j] + h*s[i,j,1]) for i in range(n) for j in range(i+1,n)), "n_ov2")
+        model.addConstrs(((x_cord[j] + (y[j] if rotation_c[j] else x[j]) <= x_cord[i] + w*s[i,j,2]) for i in range(n) for j in range(i+1,n)), "n_ov3")
+        model.addConstrs(((y_cord[j] + (x[j] if rotation_c[j] else y[j]) <= y_cord[i] + h*s[i,j,3]) for i in range(n) for j in range(i+1,n)), "n_ov4")
         model.addConstrs((gp.quicksum(s[i,j,k] for k in range(4))<=3 for i in range(n) for j in range(n)), "no_overlap")
         
         area = w * h
