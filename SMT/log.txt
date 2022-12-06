@@ -70,7 +70,7 @@ Instance: 22    Time exceeded   Execution time: 300.026s
 Instance: 23    Execution time: 27.670s                 Best objective value: 30
 Instance: 24    Execution time: 17.438s                 Best objective value: 31
 Instance: 25    Time exceeded   Execution time: 300.040s
-Instance: 26    Execution time: 123.834s                        Best objective value: 33
+Instance: 26    Execution time: 123.834s                Best objective value: 33
 Instance: 27    Execution time: 94.088s                 Best objective value: 34
 Instance: 28    Time exceeded   Execution time: 300.024s
 Instance: 29    Execution time: 83.861s                 Best objective value: 36
@@ -90,6 +90,35 @@ PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT>
 
 
 
+PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT> python .\src\SMT.py -r
+Instance: 1     Execution time: 0.026s                  Best objective value: 8
+Instance: 2     Execution time: 0.093s                  Best objective value: 9
+Instance: 3     Execution time: 0.170s                  Best objective value: 10
+Instance: 4     Execution time: 0.532s                  Best objective value: 11
+Instance: 5     Execution time: 3.863s                  Best objective value: 12
+Instance: 6     Execution time: 3.754s                  Best objective value: 13
+Instance: 7     Execution time: 9.213s                  Best objective value: 14
+Instance: 8     Execution time: 9.634s                  Best objective value: 15
+Instance: 9     Execution time: 11.411s                 Best objective value: 16
+Instance: 10    Time exceeded   Execution time: 300.029s
+Instance: 11    Time exceeded   Execution time: 300.036s
+Instance: 12    Time exceeded   Execution time: 300.022s
+Instance: 13    Time exceeded   Execution time: 300.036s
+Instance: 14    Time exceeded   Execution time: 300.042s
+Instance: 15    Time exceeded   Execution time: 300.027s
+Instance: 16    Time exceeded   Execution time: 300.039s
+
+
+PS C:\Users\sarav\Documents\VLSI_Design_CDMO\SMT> python .\src\SMT.py -r -sb
+Instance: 1     Execution time: 0.030s                  Best objective value: 8
+Instance: 2     Execution time: 0.110s                  Best objective value: 9
+Instance: 3     Execution time: 0.133s                  Best objective value: 10
+Instance: 4     Execution time: 0.372s                  Best objective value: 11
+Instance: 5     Execution time: 3.724s                  Best objective value: 12
+Instance: 6     Execution time: 2.956s                  Best objective value: 13
+Instance: 7     Execution time: 4.682s                  Best objective value: 14
+Instance: 8     Execution time: 6.293s                  Best objective value: 15
+Instance: 9     Execution time: 12.089s                 Best objective value: 16
 
 
 
