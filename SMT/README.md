@@ -1,26 +1,24 @@
-# VLSI_Design_CDMO
+# VLSI - Very large scale integration
+###### Master of Artificial Intelligence - Combinatorial Decision Making and Optimization
 
+
+### Prerequisites
+Install Z3 Python package that allows the usage of the Satisfiability Modulo Theories Solver
+```
 pip3 install z3-solver
-
-python ./src/SMT.py 
-
-## In ordine di usefulness
-
-REAL Z3 Documentation
-https://z3prover.github.io/api/html/namespacez3py.html
-
-Min - max function
-https://stackoverflow.com/questions/67043494/max-and-min-of-a-set-of-variables-in-z3py
-
-Tutorial to understand how z3 works -> real example - very useful
-https://infosecadalid.com/2021/08/27/my-introduction-to-z3-and-solving-satisfiability-problems/
-
-Generic tutorial, not very useful. Only for the beginning
-http://theory.stanford.edu/~nikolaj/programmingz3.html#sec-bit-vectors
-http://www.hakank.org/z3/
-https://bellmar.medium.com/programming-in-z3-by-learning-to-think-like-a-compiler-401fd46828d5
+```
 
 
+### Execution
+Open the terminal in this directory and execute the command below.
+```
+python src/SMT.py [-f {int}] [-l {int}] [-sb {True, False}] [-r {True, False}] [-p {True, False}]
+```
+* `-f` specifies the number of the first instance
+* `-l` specifies the number of the last instance
+* `-sb` allows symmetry breaking constraints
+* `-r` allows rotation
+* `-p` plot the results
 
 
 
