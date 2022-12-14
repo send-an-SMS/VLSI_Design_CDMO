@@ -2,7 +2,7 @@
 ###### Master of Artificial Intelligence - Combinatorial Decision Making and Optimization
 
 
-**Teams Components**
+**Team Components**
 
 Matteo Nestola - matteo.nestola@studio.unibo.it
 
